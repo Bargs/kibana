@@ -262,3 +262,38 @@ filebeat-wizard {
 .install-filebeat {
   padding-bottom: 1em;
 }
+
+.upload-wizard-file-upload-container {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .upload-instructions {
+    text-align: center;
+  }
+
+  button {
+    width: inherit;
+  }
+
+  button.upload {
+    align-self: center;
+  }
+
+  .preview {
+    overflow: auto;
+    max-height: 200px;
+    margin-bottom: .5em;
+
+    table {
+      background-color: @kibanaGray6;
+      margin-bottom: 0;
+    }
+  }
+
+  .delimiter-input {
+    width:2em;
+    text-align: center;
+  }
+}
