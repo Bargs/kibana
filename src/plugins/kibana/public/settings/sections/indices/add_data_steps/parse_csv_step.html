@@ -1,0 +1,44 @@
+<file-upload on-locate="wizard.file = file">
+  <div class="upload-wizard-file-upload-container">
+    <div ng-hide="wizard.file" class="upload-instructions">Drag your files here or click the button below</div>
+    <button ng-hide="wizard.file" class="btn btn-default controls upload" ng-click>
+      <i aria-hidden="true" class="fa fa-upload"></i> Upload
+    </button>
+
+    <div ng-if="!!wizard.formattedErrors.length" class="alert alert-warning parse-error">
+      <ul>
+        <li ng-repeat="error in wizard.formattedErrors">{{ error }}</li>
+      </ul>
+    </div>
+
+    <div ng-if="wizard.file">
+      <p>Please review the sample below to ensure we've parsed your file correctly. Click next if it looks good.</p>
+
+      <div class="advanced-options">
+        <label>Delimiter</label><br/>
+        <select ng-model="wizard.parseOptions.delimiter"
+                ng-options="option.value as option.label for option in wizard.delimiterOptions">
+        </select>
+      </div>
+
+      {{ wizard.file.name }}
+      <div class="preview">
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th ng-repeat="col in wizard.columns track by $index">
+              <span ng-bind="col"></span>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="row in wizard.rows">
+            <td ng-repeat="cell in row track by $index">{{ cell }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</file-upload>

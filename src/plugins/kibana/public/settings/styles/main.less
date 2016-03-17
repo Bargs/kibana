@@ -206,6 +206,14 @@ kbn-settings-indices {
   .time-and-pattern > div {}
 }
 
+.wizard-container {
+  padding: 0 10px;
+
+  .nav-buttons {
+    text-align: center;
+  }
+}
+
 filebeat-wizard {
   .nav-buttons {
     float: right;
@@ -213,7 +221,7 @@ filebeat-wizard {
 }
 
 .wizard-step-headings{
-  margin-top: 1em;
+  margin: 1em 0;
 
   .wizard-step-heading {
     font-size: 1.5em;
@@ -261,4 +269,42 @@ filebeat-wizard {
 
 .install-filebeat {
   padding-bottom: 1em;
+}
+
+.upload-wizard-file-upload-container {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .upload-instructions {
+    text-align: center;
+  }
+
+  button {
+    width: inherit;
+  }
+
+  button.upload {
+    align-self: center;
+  }
+
+  .preview {
+    overflow: auto;
+    max-height: 400px;
+    margin-bottom: .5em;
+
+    table {
+      background-color: @kibanaGray6;
+      margin-bottom: 0;
+    }
+  }
+
+  .parse-error {
+    margin-top: 2em;
+  }
+
+  .advanced-options {
+    margin-bottom: 1em;
+  }
 }

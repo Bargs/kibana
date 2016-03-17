@@ -26,7 +26,7 @@ describe('Ingest Service', function () {
 
     it('Sets the default index if there isn\'t one already', function () {
       $httpBackend
-      .when('POST', '../api/kibana/ingest')
+      .when('POST', '/api/kibana/ingest')
       .respond('ok');
 
       expect(config.get('defaultIndex')).to.be(null);
@@ -38,7 +38,7 @@ describe('Ingest Service', function () {
 
     it('Returns error from ingest API if there is one', function (done) {
       $httpBackend
-      .expectPOST('../api/kibana/ingest')
+      .expectPOST('/api/kibana/ingest')
       .respond(400);
 
       ingest.save({id: 'foo'})
@@ -57,7 +57,7 @@ describe('Ingest Service', function () {
 
     it('Broadcasts an ingest:updated event on the rootScope upon succesful save', function () {
       $httpBackend
-      .when('POST', '../api/kibana/ingest')
+      .when('POST', '/api/kibana/ingest')
       .respond('ok');
 
       ingest.save({id: 'foo'});
@@ -75,7 +75,7 @@ describe('Ingest Service', function () {
 
     it('Calls the DELETE endpoint of the ingest API with the given id', function () {
       $httpBackend
-      .expectDELETE('../api/kibana/ingest/foo')
+      .expectDELETE('/api/kibana/ingest/foo')
       .respond('ok');
 
       ingest.delete('foo');
@@ -84,7 +84,7 @@ describe('Ingest Service', function () {
 
     it('Returns error from ingest API if there is one', function (done) {
       $httpBackend
-      .expectDELETE('../api/kibana/ingest/foo')
+      .expectDELETE('/api/kibana/ingest/foo')
       .respond(404);
 
       ingest.delete('foo')
@@ -103,7 +103,7 @@ describe('Ingest Service', function () {
 
     it('Broadcasts an ingest:updated event on the rootScope upon succesful save', function () {
       $httpBackend
-      .when('DELETE', '../api/kibana/ingest/foo')
+      .when('DELETE', '/api/kibana/ingest/foo')
       .respond('ok');
 
       ingest.delete('foo');
@@ -111,6 +111,48 @@ describe('Ingest Service', function () {
 
       expect($rootScope.$broadcast.calledOnce);
       expect($rootScope.$broadcast.calledWith('ingest:updated')).to.be.ok();
+    });
+  });
+
+  describe.only('bulk', function () {
+    it('throws an error if file and index pattern are not provided', function () {
+      expect(ingest.bulk).to.throwException(/file is required/);
+      expect(ingest.bulk).withArgs('foo').to.throwException(/index pattern is required/);
+    });
+
+    it('POSTs to the kibana _bulk endpoint with the given params in a multipart/form-data request', function () {
+      $httpBackend
+      .expectPOST('/api/kibana/foo/_bulk', function (data) {
+        // The assertions we can do here are limited because of poor browser support for FormData methods
+        return data instanceof FormData;
+      })
+      .respond('ok');
+
+      const file = new Blob(['foo,bar'], {type : 'text/csv'});
+
+      ingest.bulk(file, 'foo', ';', true);
+      $httpBackend.flush();
+    });
+
+    it('Returns error from the bulk API if there is one', function (done) {
+      $httpBackend
+      .expectPOST('/api/kibana/foo/_bulk')
+      .respond(404);
+
+      const file = new Blob(['foo,bar'], {type : 'text/csv'});
+
+      ingest.bulk(file, 'foo', ';', true)
+      .then(
+        () => {
+          throw new Error('expected an error response');
+        },
+        (error) => {
+          expect(error.status).to.be(404);
+          done();
+        }
+      );
+
+      $httpBackend.flush();
     });
   });
 });
