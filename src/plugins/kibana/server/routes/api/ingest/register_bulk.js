@@ -2,6 +2,7 @@ import { Promise } from 'bluebird';
 import { parse, transform } from 'csv';
 import _ from 'lodash';
 import hi from 'highland';
+import { patternToIngest } from '../../../../common/lib/convert_pattern_and_ingest_name';
 
 export function registerBulk(server) {
   server.route({
@@ -15,6 +16,8 @@ export function registerBulk(server) {
     },
     handler: function (req, reply) {
       const boundCallWithRequest = _.partial(server.plugins.elasticsearch.callWithRequest, req);
+      const indexPattern = req.params.id;
+      const usePipeline = req.payload.pipeline;
       const csv = req.payload.csv;
       const fileName = csv.hapi.filename;
       const parser = parse({columns: true, auto_parse: true});
@@ -45,11 +48,17 @@ export function registerBulk(server) {
       })
       .batch(10000)
       .map((bulkBody) => {
-        return hi(boundCallWithRequest('bulk', {
-          index: req.params.id,
+        const bulkParams = {
+          index: indexPattern,
           type: 'default',
           body: bulkBody
-        }));
+        };
+        
+        if (usePipeline) {
+          bulkParams.pipeline = patternToIngest(indexPattern);
+        }
+        
+        return hi(boundCallWithRequest('bulk', bulkParams));
       })
       .parallel(2)
       .flatMap(response => response.items)
