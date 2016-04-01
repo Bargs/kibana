@@ -1,1 +1,23 @@
-{{uploadStep.progress}}
+<div class="wizard-step-title">
+  <h3>Upload and index documents</h3>
+  Sit back, relax, we'll take it from here.
+</div>
+
+<div class="well">
+  <div ng-if="!uploadStep.bulkResults" class="loading-message">
+    We're loading your data now. This may take some time if you selected a large file.
+  </div>
+
+
+  <div ng-if="uploadStep.bulkResults" class="bulk-results">
+    <div ng-if="uploadStep.bulkResults.created" class="alert alert-success">
+      Created <strong>{{ uploadStep.bulkResults.created }}</strong> documents!<br/>
+    </div>
+    <div class="alert alert-warning" ng-if="uploadStep.bulkResults.errors">
+      We encountered errors while indexing your data
+      <ul>
+        <li ng-repeat="error in uploadStep.formattedErrors">{{ error }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -26,7 +26,13 @@ modules.get('apps/settings')
         })
         .then(
           (res) => {
-            this.progress = 'DONE!';
+            this.bulkResults = res.data;
+            this.formattedErrors = _.map(res.data.indexErrors, (doc) => {
+              return `${doc._id.split('-', 1)[0].replace('L', 'Line ').trim()}: ${doc.error.type} - ${doc.error.reason}`;
+            });
+            if (!_.isEmpty(res.data.parseErrors)) {
+              this.formattedErrors = this.formattedErrors.concat(res.data.parseErrors);
+            }
           },
           (err) => {
             notify.error(err);
