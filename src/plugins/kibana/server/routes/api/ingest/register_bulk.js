@@ -19,7 +19,7 @@ export function registerBulk(server) {
       const fileName = csv.hapi.filename;
       const parser = parse({columns: true, auto_parse: true});
       const parseErrors = [];
-      let currentLine = 1;
+      let currentLine = 2; // Starts at 2 since we parse the header separately
 
       csv.pipe(parser);
 
