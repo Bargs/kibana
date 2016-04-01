@@ -5,6 +5,12 @@
       <i aria-hidden="true" class="fa fa-upload"></i> Upload
     </button>
 
+    <div ng-if="!!wizard.formattedErrors.length" class="alert alert-warning parse-error">
+      <ul>
+        <li ng-repeat="error in wizard.formattedErrors">{{ error }}</li>
+      </ul>
+    </div>
+
     <div ng-if="wizard.file">
       <h3>Preview</h3>
       {{ wizard.file.name }}

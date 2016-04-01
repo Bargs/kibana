@@ -27,6 +27,9 @@ modules.get('apps/settings')
               dynamicTyping: true,
               step: (results) => {
                 $scope.$apply(() => {
+                  this.formattedErrors = _.map(results.errors, (error) => {
+                    return `${error.type} at row ${error.row} - ${error.message}`;
+                  });
                   this.columns = results.meta.fields;
                   this.rows = _.map(results.data, _.values);
                   this.samples = results.data;
@@ -41,7 +44,10 @@ modules.get('apps/settings')
         };
 
         $scope.$watch('wizard.parseOptions', this.parse, true);
-        $scope.$watch('wizard.file', this.parse);
+        $scope.$watch('wizard.file', () => {
+          delete this.formattedErrors;
+          this.parse();
+        });
 
         this.parse();
       }
