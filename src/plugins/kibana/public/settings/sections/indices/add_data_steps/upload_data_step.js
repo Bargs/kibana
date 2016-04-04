@@ -27,13 +27,17 @@ modules.get('apps/settings')
         })
         .then(
           (res) => {
-            this.bulkResults = res.data;
-            this.formattedErrors = _.map(res.data.indexErrors, (doc) => {
-              return `${doc._id.split('-', 1)[0].replace('L', 'Line ').trim()}: ${doc.error.type} - ${doc.error.reason}`;
+            this.created = 0;
+            this.formattedErrors = [];
+            _.forEach(res.data, (bulkResponse) => {
+              this.created += bulkResponse.created;
+              this.formattedErrors = this.formattedErrors.concat(_.map(bulkResponse.indexErrors, (doc) => {
+                return `${doc._id.split('-', 1)[0].replace('L', 'Line ').trim()}: ${doc.error.type} - ${doc.error.reason}`;
+              }));
+              if (!_.isEmpty(bulkResponse.parseErrors)) {
+                this.formattedErrors = this.formattedErrors.concat(bulkResponse.parseErrors);
+              }
             });
-            if (!_.isEmpty(res.data.parseErrors)) {
-              this.formattedErrors = this.formattedErrors.concat(res.data.parseErrors);
-            }
           },
           (err) => {
             notify.error(err);
