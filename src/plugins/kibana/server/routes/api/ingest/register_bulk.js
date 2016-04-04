@@ -3,6 +3,7 @@ import { parse, transform } from 'csv';
 import _ from 'lodash';
 import hi from 'highland';
 import { patternToIngest } from '../../../../common/lib/convert_pattern_and_ingest_name';
+import { PassThrough } from 'stream';
 
 export function registerBulk(server) {
   server.route({
@@ -26,7 +27,7 @@ export function registerBulk(server) {
 
       csv.pipe(parser);
 
-      hi(parser)
+      const stream = hi(parser)
       .stopOnError((err) => {
         parseErrors.push(err.message)
       })
@@ -53,37 +54,39 @@ export function registerBulk(server) {
           type: 'default',
           body: bulkBody
         };
-        
+
         if (usePipeline) {
           bulkParams.pipeline = patternToIngest(indexPattern);
         }
-        
+
         return hi(boundCallWithRequest('bulk', bulkParams));
       })
       .parallel(2)
-      .flatMap(response => response.items)
-      .map(docResponse => docResponse.index)
-      .reduce({created: 0, errors: false}, (memo, docResponse) => {
-        if (docResponse.error) {
-          if (_.isUndefined(memo.indexErrors)) {
-            memo.indexErrors = [];
+      .map((response) => {
+        return JSON.stringify(_.reduce(response.items, (memo, docResponse) => {
+          const indexResult = docResponse.index;
+          if (indexResult.error) {
+            if (_.isUndefined(memo.indexErrors)) {
+              memo.indexErrors = [];
+            }
+            memo.indexErrors.push(_.pick(indexResult, ['_id', 'error']));
+            memo.errors = true;
           }
-          memo.indexErrors.push(_.pick(docResponse, ['_id', 'error']));
-          memo.errors = true;
-        }
-        else {
-          memo.created++;
-        }
+          else {
+            memo.created++;
+          }
 
-        return memo;
+          return memo;
+        }, {created: 0, errors: false}));
       })
-      .apply((results) => {
-        if (!_.isEmpty(parseErrors)) {
-          results.errors = true;
-          results.parseErrors = parseErrors;
-        }
-        reply(results);
-      });
+      .intersperse(',')
+      .append(']');
+
+      const responseStream = new PassThrough();
+      responseStream.write('[');
+      stream.pipe(responseStream);
+
+      reply(responseStream);
     }
   });
 }
