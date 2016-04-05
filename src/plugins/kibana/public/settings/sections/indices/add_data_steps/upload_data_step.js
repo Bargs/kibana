@@ -32,11 +32,11 @@ modules.get('apps/settings')
             this.formattedErrors = [];
             _.forEach(res.data, (bulkResponse) => {
               this.created += bulkResponse.created;
-              this.formattedErrors = this.formattedErrors.concat(_.map(bulkResponse.indexErrors, (doc) => {
+              this.formattedErrors = this.formattedErrors.concat(_.map(_.get(bulkResponse, 'errors.index'), (doc) => {
                 return `${doc._id.split('-', 1)[0].replace('L', 'Line ').trim()}: ${doc.error.type} - ${doc.error.reason}`;
               }));
-              if (!_.isEmpty(bulkResponse.parseErrors)) {
-                this.formattedErrors = this.formattedErrors.concat(bulkResponse.parseErrors);
+              if (!_.isEmpty(_.get(bulkResponse, 'errors.parse'))) {
+                this.formattedErrors = this.formattedErrors.concat(bulkResponse.errors.parse);
               }
             });
           },
