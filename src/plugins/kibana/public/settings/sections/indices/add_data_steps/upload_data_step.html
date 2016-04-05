@@ -4,12 +4,12 @@
 </div>
 
 <div class="well">
-  <div ng-if="!uploadStep.created" class="loading-message">
+  <div ng-if="!uploadStep.created && !uploadStep.formattedErrors.length" class="loading-message">
     We're loading your data now. This may take some time if you selected a large file.
   </div>
 
 
-  <div ng-if="uploadStep.created" class="bulk-results">
+  <div ng-if="uploadStep.created || !!uploadStep.formattedErrors.length" class="bulk-results">
     <div ng-if="uploadStep.created" class="alert alert-success">
       Created <strong>{{ uploadStep.created }}</strong> documents!<br/>
     </div>

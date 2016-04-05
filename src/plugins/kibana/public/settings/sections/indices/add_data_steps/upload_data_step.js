@@ -35,8 +35,8 @@ modules.get('apps/settings')
               this.formattedErrors = this.formattedErrors.concat(_.map(_.get(bulkResponse, 'errors.index'), (doc) => {
                 return `${doc._id.split('-', 1)[0].replace('L', 'Line ').trim()}: ${doc.error.type} - ${doc.error.reason}`;
               }));
-              if (!_.isEmpty(_.get(bulkResponse, 'errors.parse'))) {
-                this.formattedErrors = this.formattedErrors.concat(bulkResponse.errors.parse);
+              if (!_.isEmpty(_.get(bulkResponse, 'errors.other'))) {
+                this.formattedErrors = this.formattedErrors.concat(bulkResponse.errors.other);
               }
             });
           },
