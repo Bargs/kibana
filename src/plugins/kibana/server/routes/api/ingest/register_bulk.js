@@ -71,18 +71,17 @@ export function registerBulk(server) {
         return JSON.stringify(_.reduce(response.items, (memo, docResponse) => {
           const indexResult = docResponse.index;
           if (indexResult.error) {
-            if (_.isUndefined(memo.indexErrors)) {
-              memo.indexErrors = [];
+            if (_.isUndefined(_.get(memo, 'errors.index'))) {
+              _.set(memo, 'errors.index', []);
             }
-            memo.indexErrors.push(_.pick(indexResult, ['_id', 'error']));
-            memo.errors = true;
+            memo.errors.index.push(_.pick(indexResult, ['_id', 'error']));
           }
           else {
             memo.created++;
           }
 
           return memo;
-        }, {created: 0, errors: false}));
+        }, {created: 0}));
       })
       .intersperse(',')
       .append(']');
