@@ -20,6 +20,7 @@ modules.get('apps/settings')
         const formData = new FormData();
         formData.append('csv', this.results.file);
         formData.append('pipeline', true);
+        formData.append('delimiter', this.results.parseOptions.delimiter);
 
         $http.post(`../api/kibana/${this.results.indexPattern.id}/_bulk`, formData, {
           transformRequest: angular.identity,
