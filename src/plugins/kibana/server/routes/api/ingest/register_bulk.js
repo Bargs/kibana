@@ -33,9 +33,6 @@ export function registerBulk(server) {
       csv.pipe(parser);
 
       const stream = hi(parser)
-      .stopOnError((err) => {
-        parseErrors.push(err.message)
-      })
       .consume((err, doc, push, next) => {
         if (err) {
           push(err, null);
@@ -82,6 +79,9 @@ export function registerBulk(server) {
 
           return memo;
         }, {created: 0}));
+      })
+      .stopOnError((err, push) => {
+        push(null, JSON.stringify({created: 0, errors: {other: [err.message]}}));
       })
       .intersperse(',')
       .append(']');
