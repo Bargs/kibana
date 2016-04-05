@@ -21,9 +21,14 @@ export function registerBulk(server) {
       const usePipeline = req.payload.pipeline;
       const csv = req.payload.csv;
       const fileName = csv.hapi.filename;
-      const parser = parse({columns: true, auto_parse: true});
       const parseErrors = [];
       let currentLine = 2; // Starts at 2 since we parse the header separately
+
+      const parser = parse({
+        columns: true,
+        auto_parse: true,
+        delimiter: _.get(req.payload, 'delimiter', ',')
+      });
 
       csv.pipe(parser);
 
