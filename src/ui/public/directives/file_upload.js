@@ -60,7 +60,7 @@ module.directive('fileUpload', function () {
       });
 
       if ($button) {
-        const $fileInput = $('<input type="file" style="opacity: 0; position:absolute; left: -999999999px" id="testfile" />');
+        const $fileInput = $('<input type="file" style="opacity: 0; position:absolute; right: -999999999px" id="testfile" />');
         $elem.append($fileInput);
 
         $fileInput.on('change', function (e) {
