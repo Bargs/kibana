@@ -1,0 +1,50 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+.settings-row() {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.kbn-settings-indices {
+
+  h2 {
+    .settings-row;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+
+    em {
+      font-style: normal;
+      color: @kibanaPink1;
+    }
+  }
+
+  .settings-container {
+    display: flex;
+    flex-direction: row;
+
+    .settings-panel {
+      background-color: @settings-filebeat-wizard-panel-bg;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+      padding-bottom: 10px;
+
+      h3 {
+        .settings-row;
+
+        margin: 10px 0;
+      }
+    }
+
+    .index-patterns {
+      margin-left: 5px;
+    }
+
+    .add-data-options {
+      .settings-row;
+    }
+  }
+
+}

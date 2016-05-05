@@ -1,9 +1,9 @@
 @import (reference) "~ui/styles/variables";
 @import (reference) "~ui/styles/mixins";
 @import (reference) "~ui/styles/theme";
+@import (reference) "./main";
 
 .wizard-container {
-  padding: 0 10px;
 
   .btn-primary.collapser {
     background-color: transparent;
@@ -23,16 +23,6 @@
       i {
         color: @kibanaBlue1;
       }
-    }
-  }
-
-  h2 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-
-    em {
-      font-style: normal;
-      color: @kibanaPink1;
     }
   }
 
@@ -65,6 +55,7 @@
 }
 
 .wizard-step-headings{
+  .settings-row;
   padding-top: 14px;
 
   .wizard-step-heading {
@@ -98,6 +89,8 @@
 }
 
 .wizard-nav-buttons {
+  .settings-row;
+
   display: flex;
   float: none;
   margin-top: 14px;

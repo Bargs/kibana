@@ -1,25 +1,36 @@
 <kbn-settings-app section="indices">
-  <kbn-settings-indices>
+  <div class="kbn-settings-indices">
     <div data-test-subj="addData">
-      <div class="page-header">
-        <h1>Add Data</h1>
-        Before we can get to the fun stuff, we'll have to get some data into your Elasticsearch cluster.
-        Pick the option that best suits your use case below, and we'll guide you through the process!
-      </div>
+      <h2><em>Connecting Kibana to Data in Elasticsearch</em>
+        In order to use Kibana you must configure at least one index pattern or add new data to Elasticsearch. Index
+        patterns are used to identify the Elasticsearch index to run search and analytics against.
+      </h2>
 
-      <h4>
-        <a href="#/settings/indices/create/existing" data-test-subj="existingIndices">Existing Indices</a>
-      </h4>
-      <div>
-        Pick this option if you already have data in Elasticsearch.
-      </div>
+      <div class="settings-container">
+        <div class="settings-panel">
+          <h3>Add Data to Elasticsearch</h3>
 
-      <h4>
-        <a href="#/settings/indices/create/filebeat">Tail a File</a>
-      </h4>
-      <div>
-        Pick this option if you have log file data you'd like to send to Elasticsearch.
+          <div class="add-data-options">
+            <h4>
+              <a href="#/settings/indices/create/existing" data-test-subj="existingIndices">Existing Indices</a>
+            </h4>
+            <div>
+              Pick this option if you already have data in Elasticsearch.
+            </div>
+
+            <h4>
+              <a href="#/settings/indices/create/filebeat">Tail a File</a>
+            </h4>
+            <div>
+              Pick this option if you have log file data you'd like to send to Elasticsearch.
+            </div>
+          </div>
+        </div>
+        <div class="settings-panel index-patterns">
+          <h3>Index Patterns</h3>
+
+        </div>
       </div>
     </div>
-  </kbn-settings-indices>
+  </div>
 </kbn-settings-app>

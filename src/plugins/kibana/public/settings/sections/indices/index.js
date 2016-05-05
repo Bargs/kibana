@@ -8,6 +8,7 @@ import 'plugins/kibana/settings/sections/indices/filebeat/index';
 import uiRoutes from 'ui/routes';
 import uiModules from 'ui/modules';
 import indexTemplate from 'plugins/kibana/settings/sections/indices/index.html';
+import './styles/main';
 
 
 // add a dependency to all of the subsection routes

@@ -1,9 +1,11 @@
 @import (reference) "../../../styles/_add_data_wizard";
+@import (reference) "../../../styles/main";
 
 pattern-review-step {
   margin-bottom: 14px;
 
   .pattern-review {
+    .settings-row;
     margin-bottom: 15px;
 
     label {
@@ -34,6 +36,7 @@ pattern-review-step {
       }
 
       th {
+        .settings-row;
         border-bottom: 0;
         padding-top: 10px;
         padding-bottom: 10px;
@@ -42,6 +45,7 @@ pattern-review-step {
       }
 
       td {
+        .settings-row;
         border-top: 3px solid @settings-filebeat-wizard-panel-bg;
         vertical-align: middle;
         padding-right: 14px;
@@ -64,7 +68,7 @@ pattern-review-step {
 
       form.pagination-size {
         position: absolute;
-        right: 0;
+        right: 10px;
       }
     }
   }
