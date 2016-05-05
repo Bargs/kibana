@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import registry from 'ui/registry/settings_sections';
-import 'plugins/kibana/settings/sections/indices/directives/kbn_settings_indices';
+import './directives/index_pattern_list/index_pattern_list';
 import 'plugins/kibana/settings/sections/indices/_create';
 import 'plugins/kibana/settings/sections/indices/_edit';
 import 'plugins/kibana/settings/sections/indices/_field_editor';

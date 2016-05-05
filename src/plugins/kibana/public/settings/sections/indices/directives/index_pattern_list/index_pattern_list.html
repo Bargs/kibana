@@ -1,0 +1,19 @@
+<div class="index-patterns-list">
+  <h5>
+    <a
+      href="#/settings/indices"
+      class="btn btn-primary"
+      aria-label="Add New">
+      Add New
+    </a>
+    Pick this option if you have data in Elasticsearch.
+  </h5>
+
+  <paginated-selectable-list
+    ng-if="indexPatternIds.length"
+    per-page="20"
+    user-make-url="makeUrl"
+    list="indexPatternIds">
+  </paginated-selectable-list>
+</div>
+
