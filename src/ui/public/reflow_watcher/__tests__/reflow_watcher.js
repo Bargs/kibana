@@ -4,8 +4,8 @@ import _ from 'lodash';
 import expect from 'expect.js';
 import sinon from 'auto-release-sinon';
 import ngMock from 'ng_mock';
-import EventsProvider from 'ui/events';
-import ReflowWatcherProvider from 'ui/reflow_watcher';
+import EventsProvider from '../../events';
+import ReflowWatcherProvider from '../../reflow_watcher';
 describe('Reflow watcher', function () {
 
   let $body = $(document.body);

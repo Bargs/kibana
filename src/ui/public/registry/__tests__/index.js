@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import sinon from 'auto-release-sinon';
-import registry from 'ui/registry/_registry';
+import registry from '../../registry/_registry';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
 describe('Registry', function () {

@@ -2,11 +2,11 @@ import _ from 'lodash';
 import sinon from 'auto-release-sinon';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import AggResponseTabifyResponseWriterProvider from 'ui/agg_response/tabify/_response_writer';
-import AggResponseTabifyTableGroupProvider from 'ui/agg_response/tabify/_table_group';
-import AggResponseTabifyBucketsProvider from 'ui/agg_response/tabify/_buckets';
-import AggResponseTabifyTableProvider from 'ui/agg_response/tabify/_table';
-import VisProvider from 'ui/vis';
+import AggResponseTabifyResponseWriterProvider from '../../../agg_response/tabify/_response_writer';
+import AggResponseTabifyTableGroupProvider from '../../../agg_response/tabify/_table_group';
+import AggResponseTabifyBucketsProvider from '../../../agg_response/tabify/_buckets';
+import AggResponseTabifyTableProvider from '../../../agg_response/tabify/_table';
+import VisProvider from '../../../vis';
 import FixturesStubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
 describe('ResponseWriter class', function () {
 

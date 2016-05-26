@@ -1,5 +1,5 @@
-import collectKeys from 'ui/agg_response/hierarchical/_collect_keys';
-import AggResponseHierarchicalTransformAggregationProvider from 'ui/agg_response/hierarchical/_transform_aggregation';
+import collectKeys from '../../agg_response/hierarchical/_collect_keys';
+import AggResponseHierarchicalTransformAggregationProvider from '../../agg_response/hierarchical/_transform_aggregation';
 export default function biuldSplitProvider(Private) {
   let transformer = Private(AggResponseHierarchicalTransformAggregationProvider);
   return function (agg, metric, aggData) {

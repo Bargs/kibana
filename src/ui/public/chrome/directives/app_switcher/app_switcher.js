@@ -1,8 +1,8 @@
-import DomLocationProvider from 'ui/dom_location';
+import DomLocationProvider from '../../../dom_location';
 import { parse } from 'url';
 import { bindKey } from 'lodash';
 import '../app_switcher/app_switcher.less';
-import uiModules from 'ui/modules';
+import uiModules from '../../../modules';
 import appSwitcherTemplate from './app_switcher.html';
 
 uiModules

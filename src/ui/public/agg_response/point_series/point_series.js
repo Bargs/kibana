@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import AggResponsePointSeriesGetSeriesProvider from 'ui/agg_response/point_series/_get_series';
-import AggResponsePointSeriesGetAspectsProvider from 'ui/agg_response/point_series/_get_aspects';
-import AggResponsePointSeriesInitYAxisProvider from 'ui/agg_response/point_series/_init_y_axis';
-import AggResponsePointSeriesInitXAxisProvider from 'ui/agg_response/point_series/_init_x_axis';
-import AggResponsePointSeriesOrderedDateAxisProvider from 'ui/agg_response/point_series/_ordered_date_axis';
-import AggResponsePointSeriesTooltipFormatterProvider from 'ui/agg_response/point_series/_tooltip_formatter';
+import AggResponsePointSeriesGetSeriesProvider from '../../agg_response/point_series/_get_series';
+import AggResponsePointSeriesGetAspectsProvider from '../../agg_response/point_series/_get_aspects';
+import AggResponsePointSeriesInitYAxisProvider from '../../agg_response/point_series/_init_y_axis';
+import AggResponsePointSeriesInitXAxisProvider from '../../agg_response/point_series/_init_x_axis';
+import AggResponsePointSeriesOrderedDateAxisProvider from '../../agg_response/point_series/_ordered_date_axis';
+import AggResponsePointSeriesTooltipFormatterProvider from '../../agg_response/point_series/_tooltip_formatter';
 export default function PointSeriesProvider(Private) {
 
   let getSeries = Private(AggResponsePointSeriesGetSeriesProvider);

@@ -2,7 +2,7 @@ import angular from 'angular';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
 import $ from 'jquery';
-import 'ui/directives/input_focus';
+import '../../directives/input_focus';
 
 describe('Input focus directive', function () {
   let $compile;

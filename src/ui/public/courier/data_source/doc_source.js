@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import 'ui/es';
-import 'ui/storage';
+import '../../es';
+import '../../storage';
 
 import DocSendToEsProvider from './_doc_send_to_es';
 import AbstractDataSourceProvider from './_abstract';

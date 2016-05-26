@@ -1,15 +1,15 @@
-import html from 'ui/timepicker/timepicker.html';
+import html from '../timepicker/timepicker.html';
 import _ from 'lodash';
 import dateMath from '@elastic/datemath';
 import moment from 'moment';
-import Notifier from 'ui/notify/notifier';
-import 'ui/directives/input_datetime';
-import 'ui/directives/inequality';
-import 'ui/timepicker/quick_ranges';
-import 'ui/timepicker/refresh_intervals';
-import 'ui/timepicker/time_units';
-import 'ui/timepicker/kbn_global_timepicker';
-import uiModules from 'ui/modules';
+import Notifier from '../notify/notifier';
+import '../directives/input_datetime';
+import '../directives/inequality';
+import '../timepicker/quick_ranges';
+import '../timepicker/refresh_intervals';
+import '../timepicker/time_units';
+import '../timepicker/kbn_global_timepicker';
+import uiModules from '../modules';
 let module = uiModules.get('ui/timepicker');
 let notify = new Notifier({
   location: 'timepicker',

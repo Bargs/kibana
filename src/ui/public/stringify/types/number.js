@@ -1,4 +1,4 @@
-import StringifyTypesNumeralProvider from 'ui/stringify/types/_numeral';
+import StringifyTypesNumeralProvider from '../../stringify/types/_numeral';
 
 export default function NumberFormatProvider(Private) {
   let Numeral = Private(StringifyTypesNumeralProvider);

@@ -3,9 +3,9 @@ import d3 from 'd3';
 import ngMock from 'ng_mock';
 import expect from 'expect.js';
 import $ from 'jquery';
-import VislibLibDataProvider from 'ui/vislib/lib/data';
-import PersistedStatePersistedStateProvider from 'ui/persisted_state/persisted_state';
-import VislibLibYAxisProvider from 'ui/vislib/lib/y_axis';
+import VislibLibDataProvider from '../../../vislib/lib/data';
+import PersistedStatePersistedStateProvider from '../../../persisted_state/persisted_state';
+import VislibLibYAxisProvider from '../../../vislib/lib/y_axis';
 
 let YAxis;
 let Data;

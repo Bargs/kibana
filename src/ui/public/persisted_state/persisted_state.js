@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import toPath from 'lodash/internal/toPath';
-import errors from 'ui/errors';
-import SimpleEmitter from 'ui/utils/simple_emitter';
-import EventsProvider from 'ui/events';
+import errors from '../errors';
+import SimpleEmitter from '../utils/simple_emitter';
+import EventsProvider from '../events';
 
 export default function (Private) {
   let Events = Private(EventsProvider);

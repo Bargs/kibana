@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import extractBuckets from 'ui/agg_response/hierarchical/_extract_buckets';
+import extractBuckets from '../../agg_response/hierarchical/_extract_buckets';
 export default function (vis, resp) {
 
   // Create the initial results structure

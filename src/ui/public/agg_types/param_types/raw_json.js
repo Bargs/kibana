@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import editorHtml from 'ui/agg_types/controls/raw_json.html';
-import AggTypesParamTypesBaseProvider from 'ui/agg_types/param_types/base';
+import editorHtml from '../../agg_types/controls/raw_json.html';
+import AggTypesParamTypesBaseProvider from '../../agg_types/param_types/base';
 export default function RawJSONAggParamFactory(Private) {
 
   let BaseAggParam = Private(AggTypesParamTypesBaseProvider);

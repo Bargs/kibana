@@ -2,11 +2,11 @@ import _ from 'lodash';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
 import FixturesStubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
-import VisProvider from 'ui/vis';
-import RegistryVisTypesProvider from 'ui/registry/vis_types';
-import AggTypesIndexProvider from 'ui/agg_types/index';
-import VisAggConfigProvider from 'ui/vis/agg_config';
-import AggTypesBucketsBucketCountBetweenProvider from 'ui/agg_types/buckets/_bucket_count_between';
+import VisProvider from '../../vis';
+import RegistryVisTypesProvider from '../../registry/vis_types';
+import AggTypesIndexProvider from '../../agg_types/index';
+import VisAggConfigProvider from '../../vis/agg_config';
+import AggTypesBucketsBucketCountBetweenProvider from '../../agg_types/buckets/_bucket_count_between';
 describe('bucketCountBetween util', function () {
   let indexPattern;
   let Vis;

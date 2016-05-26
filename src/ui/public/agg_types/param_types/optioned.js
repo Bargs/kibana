@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import IndexedArray from 'ui/indexed_array';
-import AggTypesParamTypesBaseProvider from 'ui/agg_types/param_types/base';
+import IndexedArray from '../../indexed_array';
+import AggTypesParamTypesBaseProvider from '../../agg_types/param_types/base';
 export default function OptionedAggParamFactory(Private) {
 
   let BaseAggParam = Private(AggTypesParamTypesBaseProvider);

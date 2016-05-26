@@ -1,7 +1,7 @@
-import ObjDefine from 'ui/utils/obj_define';
-import IndexPatternsFieldFormatFieldFormatProvider from 'ui/index_patterns/_field_format/field_format';
-import IndexPatternsFieldTypesProvider from 'ui/index_patterns/_field_types';
-import RegistryFieldFormatsProvider from 'ui/registry/field_formats';
+import ObjDefine from '../utils/obj_define';
+import IndexPatternsFieldFormatFieldFormatProvider from '../index_patterns/_field_format/field_format';
+import IndexPatternsFieldTypesProvider from '../index_patterns/_field_types';
+import RegistryFieldFormatsProvider from '../registry/field_formats';
 export default function FieldObjectProvider(Private, shortDotsFilter, $rootScope, Notifier) {
   let notify = new Notifier({ location: 'IndexPattern Field' });
   let FieldFormat = Private(IndexPatternsFieldFormatFieldFormatProvider);

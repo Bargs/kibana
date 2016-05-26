@@ -4,9 +4,9 @@ import expect from 'expect.js';
 import angular from 'angular';
 import _ from 'lodash';
 
-import navbarExtensionsRegistry from 'ui/registry/navbar_extensions';
-import Registry from 'ui/registry/_registry';
-import 'ui/navbar_extensions';
+import navbarExtensionsRegistry from '../../registry/navbar_extensions';
+import Registry from '../../registry/_registry';
+import '../../navbar_extensions';
 
 const defaultMarkup = `
   <navbar-extensions name="testing"></navbar-extensions>`;

@@ -4,8 +4,8 @@ import _ from 'lodash';
 import sinon from 'auto-release-sinon';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import 'ui/private';
-import EventsProvider from 'ui/events';
+import '../../private';
+import EventsProvider from '../../events';
 
 describe('Events', function () {
   require('test_utils/no_digest_promises').activateForSuite();

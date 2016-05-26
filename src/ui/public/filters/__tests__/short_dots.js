@@ -3,7 +3,7 @@ import expect from 'expect.js';
 import _ from 'lodash';
 import ngMock from 'ng_mock';
 import 'plugins/kibana/discover/index';
-import 'ui/filters/short_dots';
+import '../../filters/short_dots';
 
 
 let filter;

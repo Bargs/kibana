@@ -1,12 +1,12 @@
 import _ from 'lodash';
-import 'ui/vislib';
+import '../vislib';
 import 'plugins/kbn_vislib_vis_types/controls/vislib_basic_options';
 import 'plugins/kbn_vislib_vis_types/controls/point_series_options';
 import 'plugins/kbn_vislib_vis_types/controls/line_interpolation_option';
-import VisSchemasProvider from 'ui/vis/schemas';
-import VisVisTypeProvider from 'ui/vis/vis_type';
-import AggResponsePointSeriesPointSeriesProvider from 'ui/agg_response/point_series/point_series';
-import VislibVisTypeVislibRenderbotProvider from 'ui/vislib_vis_type/vislib_renderbot';
+import VisSchemasProvider from '../vis/schemas';
+import VisVisTypeProvider from '../vis/vis_type';
+import AggResponsePointSeriesPointSeriesProvider from '../agg_response/point_series/point_series';
+import VislibVisTypeVislibRenderbotProvider from '../vislib_vis_type/vislib_renderbot';
 export default function VislibVisTypeFactory(Private) {
 
   let VisTypeSchemas = Private(VisSchemasProvider);

@@ -1,15 +1,15 @@
 import _ from 'lodash';
 import $ from 'jquery';
-import addWordBreaks from 'ui/utils/add_word_breaks';
-import 'ui/highlight';
-import 'ui/highlight/highlight_tags';
-import 'ui/doc_viewer';
-import 'ui/filters/trust_as_html';
-import 'ui/filters/short_dots';
-import noWhiteSpace from 'ui/utils/no_white_space';
-import openRowHtml from 'ui/doc_table/components/table_row/open.html';
-import detailsHtml from 'ui/doc_table/components/table_row/details.html';
-import uiModules from 'ui/modules';
+import addWordBreaks from '../../utils/add_word_breaks';
+import '../../highlight';
+import '../../highlight/highlight_tags';
+import '../../doc_viewer';
+import '../../filters/trust_as_html';
+import '../../filters/short_dots';
+import noWhiteSpace from '../../utils/no_white_space';
+import openRowHtml from '../../doc_table/components/table_row/open.html';
+import detailsHtml from '../../doc_table/components/table_row/details.html';
+import uiModules from '../../modules';
 let module = uiModules.get('app/discover');
 
 

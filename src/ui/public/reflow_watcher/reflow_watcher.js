@@ -1,7 +1,7 @@
 import angular from 'angular';
 import $ from 'jquery';
 import _ from 'lodash';
-import EventsProvider from 'ui/events';
+import EventsProvider from '../events';
 export default function ReflowWatcherService(Private, $rootScope, $http) {
 
   let EventEmitter = Private(EventsProvider);

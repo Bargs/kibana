@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import inflector from 'ui/indexed_array/inflector';
+import inflector from '../indexed_array/inflector';
 
 
 let pathGetter = _(_.get).rearg(1, 0).ary(2);

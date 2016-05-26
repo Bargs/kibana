@@ -1,7 +1,7 @@
-import 'ui/stringify/editors/color.less';
+import '../../stringify/editors/color.less';
 import _ from 'lodash';
-import IndexPatternsFieldFormatProvider from 'ui/index_patterns/_field_format/field_format';
-import colorTemplate from 'ui/stringify/editors/color.html';
+import IndexPatternsFieldFormatProvider from '../../index_patterns/_field_format/field_format';
+import colorTemplate from '../../stringify/editors/color.html';
 export default function ColorFormatProvider(Private) {
 
   const FieldFormat = Private(IndexPatternsFieldFormatProvider);

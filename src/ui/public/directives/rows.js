@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import _ from 'lodash';
-import AggConfigResult from 'ui/vis/agg_config_result';
-import FilterBarFilterBarClickHandlerProvider from 'ui/filter_bar/filter_bar_click_handler';
-import uiModules from 'ui/modules';
+import AggConfigResult from '../vis/agg_config_result';
+import FilterBarFilterBarClickHandlerProvider from '../filter_bar/filter_bar_click_handler';
+import uiModules from '../modules';
 let module = uiModules.get('kibana');
 
 module.directive('kbnRows', function ($compile, $rootScope, getAppState, Private) {

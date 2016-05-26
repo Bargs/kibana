@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import IndexedArray from 'ui/indexed_array';
-import VisAggConfigProvider from 'ui/vis/agg_config';
-import AggTypesIndexProvider from 'ui/agg_types/index';
+import IndexedArray from '../indexed_array';
+import VisAggConfigProvider from '../vis/agg_config';
+import AggTypesIndexProvider from '../agg_types/index';
 export default function AggConfigsFactory(Private) {
   let AggConfig = Private(VisAggConfigProvider);
 

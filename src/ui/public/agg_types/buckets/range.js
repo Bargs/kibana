@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import AggTypesBucketsBucketAggTypeProvider from 'ui/agg_types/buckets/_bucket_agg_type';
-import AggTypesBucketsCreateFilterRangeProvider from 'ui/agg_types/buckets/create_filter/range';
-import IndexPatternsFieldFormatFieldFormatProvider from 'ui/index_patterns/_field_format/field_format';
+import AggTypesBucketsBucketAggTypeProvider from '../../agg_types/buckets/_bucket_agg_type';
+import AggTypesBucketsCreateFilterRangeProvider from '../../agg_types/buckets/create_filter/range';
+import IndexPatternsFieldFormatFieldFormatProvider from '../../index_patterns/_field_format/field_format';
 import RangeKeyProvider from './range_key';
-import rangesTemplate from 'ui/agg_types/controls/ranges.html';
+import rangesTemplate from '../../agg_types/controls/ranges.html';
 export default function RangeAggDefinition(Private) {
   let BucketAggType = Private(AggTypesBucketsBucketAggTypeProvider);
   let createFilter = Private(AggTypesBucketsCreateFilterRangeProvider);

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import $ from 'jquery';
-import metadata from 'ui/metadata';
-import formatMsg from 'ui/notify/lib/_format_msg';
-import fatalSplashScreen from 'ui/notify/partials/fatal_splash_screen.html';
+import metadata from '../metadata';
+import formatMsg from '../notify/lib/_format_msg';
+import fatalSplashScreen from '../notify/partials/fatal_splash_screen.html';
 /* eslint no-console: 0 */
 
 let notifs = [];

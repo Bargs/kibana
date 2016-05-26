@@ -1,7 +1,7 @@
-import 'ui/compile_recursive_directive';
-import 'ui/agg_table';
-import uiModules from 'ui/modules';
-import aggTableGroupTemplate from 'ui/agg_table/agg_table_group.html';
+import '../compile_recursive_directive';
+import '../agg_table';
+import uiModules from '../modules';
+import aggTableGroupTemplate from '../agg_table/agg_table_group.html';
 
 uiModules
 .get('kibana')

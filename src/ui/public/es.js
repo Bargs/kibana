@@ -1,6 +1,6 @@
 import 'elasticsearch-browser';
 import _ from 'lodash';
-import uiModules from 'ui/modules';
+import uiModules from './modules';
 
 let es; // share the client amongst all apps
 uiModules

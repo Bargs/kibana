@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import IndexPatternsFieldFormatProvider from 'ui/index_patterns/_field_format/field_format';
+import IndexPatternsFieldFormatProvider from '../../index_patterns/_field_format/field_format';
 export default function IpFormatProvider(Private) {
   let FieldFormat = Private(IndexPatternsFieldFormatProvider);
 

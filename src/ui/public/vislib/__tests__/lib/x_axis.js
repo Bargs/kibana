@@ -4,9 +4,9 @@ import _ from 'lodash';
 import ngMock from 'ng_mock';
 import expect from 'expect.js';
 import $ from 'jquery';
-import VislibLibDataProvider from 'ui/vislib/lib/data';
-import PersistedStatePersistedStateProvider from 'ui/persisted_state/persisted_state';
-import VislibLibXAxisProvider from 'ui/vislib/lib/x_axis';
+import VislibLibDataProvider from '../../../vislib/lib/data';
+import PersistedStatePersistedStateProvider from '../../../persisted_state/persisted_state';
+import VislibLibXAxisProvider from '../../../vislib/lib/x_axis';
 
 describe('Vislib xAxis Class Test Suite', function () {
   let XAxis;

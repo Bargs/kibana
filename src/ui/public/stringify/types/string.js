@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import 'ui/field_format_editor/samples/samples';
-import IndexPatternsFieldFormatProvider from 'ui/index_patterns/_field_format/field_format';
+import '../../field_format_editor/samples/samples';
+import IndexPatternsFieldFormatProvider from '../../index_patterns/_field_format/field_format';
 export default function StringFormatProvider(Private) {
   let FieldFormat = Private(IndexPatternsFieldFormatProvider);
 

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import angular from 'angular';
-import compareFilters from 'ui/filter_bar/lib/compare_filters';
+import compareFilters from '../../filter_bar/lib/compare_filters';
 
 /**
  * Combine 2 filter collections, removing duplicates

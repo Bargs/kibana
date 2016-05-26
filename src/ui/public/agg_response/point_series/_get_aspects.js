@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import AggResponsePointSeriesFakeXAspectProvider from 'ui/agg_response/point_series/_fake_x_aspect';
+import AggResponsePointSeriesFakeXAspectProvider from '../../agg_response/point_series/_fake_x_aspect';
 export default function PointSeriesGetAspects(Private) {
   let fakeXAspect = Private(AggResponsePointSeriesFakeXAspectProvider);
 

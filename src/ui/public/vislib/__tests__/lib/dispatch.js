@@ -8,7 +8,7 @@ import expect from 'expect.js';
 import data from 'fixtures/vislib/mock_data/date_histogram/_series';
 import $ from 'jquery';
 import FixturesVislibVisFixtureProvider from 'fixtures/vislib/_vis_fixture';
-import PersistedStatePersistedStateProvider from 'ui/persisted_state/persisted_state';
+import PersistedStatePersistedStateProvider from '../../../persisted_state/persisted_state';
 
 describe('Vislib Dispatch Class Test Suite', function () {
 

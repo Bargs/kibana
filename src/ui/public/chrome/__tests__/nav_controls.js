@@ -2,9 +2,9 @@ import ngMock from 'ng_mock';
 import $ from 'jquery';
 import expect from 'expect.js';
 
-import uiModules from 'ui/modules';
-import chromeNavControlsRegistry from 'ui/registry/chrome_nav_controls';
-import Registry from 'ui/registry/_registry';
+import uiModules from '../../modules';
+import chromeNavControlsRegistry from '../../registry/chrome_nav_controls';
+import Registry from '../../registry/_registry';
 
 describe('chrome nav controls', function () {
   let compile;

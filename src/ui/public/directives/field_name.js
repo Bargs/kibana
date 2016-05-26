@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import 'ui/filters/short_dots';
-import uiModules from 'ui/modules';
+import '../filters/short_dots';
+import uiModules from '../modules';
 let module = uiModules.get('kibana');
 
 module.directive('fieldName', function ($compile, $rootScope, $filter) {

@@ -1,5 +1,5 @@
-import uiModules from 'ui/modules';
-import shareTemplate from 'ui/share/views/share.html';
+import uiModules from '../../modules';
+import shareTemplate from '../../share/views/share.html';
 const app = uiModules.get('kibana');
 
 app.directive('share', function () {

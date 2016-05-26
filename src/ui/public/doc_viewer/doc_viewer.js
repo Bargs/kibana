@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import $ from 'jquery';
-import uiModules from 'ui/modules';
-import DocViewsProvider from 'ui/registry/doc_views';
+import uiModules from '../modules';
+import DocViewsProvider from '../registry/doc_views';
 
-import 'ui/doc_viewer/doc_viewer.less';
+import '../doc_viewer/doc_viewer.less';
 
 uiModules.get('kibana')
 .directive('docViewer', function (config, Private) {

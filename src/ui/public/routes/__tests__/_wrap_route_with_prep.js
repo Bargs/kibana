@@ -1,12 +1,12 @@
-import RouteManager from 'ui/routes/route_manager';
+import RouteManager from '../../routes/route_manager';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
 
-import wrapRouteWithPrep from 'ui/routes/wrap_route_with_prep';
+import wrapRouteWithPrep from '../../routes/wrap_route_with_prep';
 import Promise from 'bluebird';
 import _ from 'lodash';
 import { stub } from 'auto-release-sinon';
-import 'ui/private';
+import '../../private';
 
 
 let routes;

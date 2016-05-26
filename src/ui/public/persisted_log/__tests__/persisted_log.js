@@ -2,7 +2,7 @@
 import sinon from 'sinon';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import 'ui/persisted_log';
+import '../../persisted_log';
 
 let storage;
 let config;

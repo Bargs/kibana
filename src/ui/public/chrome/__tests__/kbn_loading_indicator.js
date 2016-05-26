@@ -1,6 +1,6 @@
 import ngMock from 'ng_mock';
 import expect from 'expect.js';
-import uiModules from 'ui/modules';
+import uiModules from '../../modules';
 import $ from 'jquery';
 
 import '../directives/kbn_loading_indicator';

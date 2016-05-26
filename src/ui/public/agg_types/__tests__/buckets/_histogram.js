@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import AggTypesIndexProvider from 'ui/agg_types/index';
+import AggTypesIndexProvider from '../../../agg_types/index';
 import AggParamWriterProvider from '../agg_param_writer';
 describe('Histogram Agg', function () {
 

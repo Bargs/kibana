@@ -3,10 +3,11 @@ import angular from 'angular';
 import ngMock from 'ng_mock';
 import expect from 'expect.js';
 import $ from 'jquery';
-import VislibLibLayoutSplitsColumnChartChartSplitProvider from 'ui/vislib/lib/layout/splits/column_chart/chart_split';
-import VislibLibLayoutSplitsColumnChartChartTitleSplitProvider from 'ui/vislib/lib/layout/splits/column_chart/chart_title_split';
-import VislibLibLayoutSplitsColumnChartXAxisSplitProvider from 'ui/vislib/lib/layout/splits/column_chart/x_axis_split';
-import VislibLibLayoutSplitsColumnChartYAxisSplitProvider from 'ui/vislib/lib/layout/splits/column_chart/y_axis_split';
+import VislibLibLayoutSplitsColumnChartChartSplitProvider from '../../../../../../vislib/lib/layout/splits/column_chart/chart_split';
+import VislibLibLayoutSplitsColumnChartChartTitleSplitProvider
+from '../../../../../../vislib/lib/layout/splits/column_chart/chart_title_split';
+import VislibLibLayoutSplitsColumnChartXAxisSplitProvider from '../../../../../../vislib/lib/layout/splits/column_chart/x_axis_split';
+import VislibLibLayoutSplitsColumnChartYAxisSplitProvider from '../../../../../../vislib/lib/layout/splits/column_chart/y_axis_split';
 
 describe('Vislib Split Function Test Suite', function () {
   describe('Column Chart', function () {

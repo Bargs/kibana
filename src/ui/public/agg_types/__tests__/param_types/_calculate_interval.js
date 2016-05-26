@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import VisProvider from 'ui/vis';
-import VisAggConfigProvider from 'ui/vis/agg_config';
+import VisProvider from '../../../vis';
+import VisAggConfigProvider from '../../../vis/agg_config';
 import FixturesStubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
-import AggTypesParamTypesCalculateIntervalProvider from 'ui/agg_types/param_types/_calculate_interval';
+import AggTypesParamTypesCalculateIntervalProvider from '../../../agg_types/param_types/_calculate_interval';
 
 describe('calculateInterval()', function () {
   let AggConfig;

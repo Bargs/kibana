@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
-import errors from 'ui/errors';
-import 'ui/es';
-import 'ui/promises';
-import 'ui/safe_confirm';
-import 'ui/index_patterns';
-import uiModules from 'ui/modules';
-import Notifier from 'ui/notify/notifier';
+import errors from '../errors';
+import '../es';
+import '../promises';
+import '../safe_confirm';
+import '../index_patterns';
+import uiModules from '../modules';
+import Notifier from '../notify/notifier';
 
 import DocSourceProvider from './data_source/doc_source';
 import SearchSourceProvider from './data_source/search_source';

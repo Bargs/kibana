@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import angular from 'angular';
-import 'ui/highlight';
+import '../../highlight';
 export default function contentTypesProvider(highlightFilter) {
 
   let types = {

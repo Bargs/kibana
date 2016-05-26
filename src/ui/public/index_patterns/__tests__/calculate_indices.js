@@ -4,7 +4,7 @@ import sinon from 'auto-release-sinon';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
 import moment from 'moment';
-import IndexPatternsCalculateIndicesProvider from 'ui/index_patterns/_calculate_indices';
+import IndexPatternsCalculateIndicesProvider from '../../index_patterns/_calculate_indices';
 describe('ui/index_patterns/_calculate_indices', () => {
 
   let Promise;

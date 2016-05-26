@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import _ from 'lodash';
-import sequencer from 'ui/utils/sequencer';
-import EventsProvider from 'ui/events';
-import ReflowWatcherProvider from 'ui/reflow_watcher';
+import sequencer from '../../utils/sequencer';
+import EventsProvider from '../../events';
+import ReflowWatcherProvider from '../../reflow_watcher';
 export default function ResizeCheckerFactory(Private, Notifier, $rootScope) {
 
   let EventEmitter = Private(EventsProvider);

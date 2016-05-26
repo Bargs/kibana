@@ -1,4 +1,4 @@
-import notify from 'ui/notify';
+import notify from '../notify';
 import _ from 'lodash';
 import { escapeRegExp as reEsc } from 'lodash';
 import { parse, format } from 'url';

@@ -1,13 +1,13 @@
-import 'ui/vislib/lib/handler/types/pie';
-import 'ui/vislib/lib/handler/types/point_series';
-import 'ui/vislib/lib/handler/types/tile_map';
-import 'ui/vislib/lib/handler/handler_types';
-import 'ui/vislib/lib/layout/layout_types';
-import 'ui/vislib/lib/data';
-import 'ui/vislib/visualizations/_map.js';
-import 'ui/vislib/visualizations/vis_types';
-import 'ui/vislib/styles/main.less';
-import VislibVisProvider from 'ui/vislib/vis';
+import '../vislib/lib/handler/types/pie';
+import '../vislib/lib/handler/types/point_series';
+import '../vislib/lib/handler/types/tile_map';
+import '../vislib/lib/handler/handler_types';
+import '../vislib/lib/layout/layout_types';
+import '../vislib/lib/data';
+import '../vislib/visualizations/_map.js';
+import '../vislib/visualizations/vis_types';
+import '../vislib/styles/main.less';
+import VislibVisProvider from '../vislib/vis';
 // prefetched for faster optimization runs
 // end prefetching
 

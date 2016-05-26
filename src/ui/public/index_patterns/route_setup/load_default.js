@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import Notifier from 'ui/notify/notifier';
-import { NoDefaultIndexPattern, NoDefinedIndexPatterns } from 'ui/errors';
+import Notifier from '../../notify/notifier';
+import { NoDefaultIndexPattern, NoDefinedIndexPatterns } from '../../errors';
 import GetIdsProvider from '../_get_ids';
-import CourierDataSourceRootSearchSourceProvider from 'ui/courier/data_source/_root_search_source';
-import uiRoutes from 'ui/routes';
+import CourierDataSourceRootSearchSourceProvider from '../../courier/data_source/_root_search_source';
+import uiRoutes from '../../routes';
 let notify = new Notifier({
   location: 'Index Patterns'
 });

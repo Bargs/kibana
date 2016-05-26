@@ -2,10 +2,10 @@ import _ from 'lodash';
 import moment from 'moment';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import VisProvider from 'ui/vis';
-import AggResponsePointSeriesAddToSiriProvider from 'ui/agg_response/point_series/_add_to_siri';
-import VisAggConfigProvider from 'ui/vis/agg_config';
-import AggResponsePointSeriesGetAspectsProvider from 'ui/agg_response/point_series/_get_aspects';
+import VisProvider from '../../../vis';
+import AggResponsePointSeriesAddToSiriProvider from '../../../agg_response/point_series/_add_to_siri';
+import VisAggConfigProvider from '../../../vis/agg_config';
+import AggResponsePointSeriesGetAspectsProvider from '../../../agg_response/point_series/_get_aspects';
 import FixturesStubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
 describe('getAspects', function () {
 

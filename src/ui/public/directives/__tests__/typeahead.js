@@ -2,7 +2,7 @@ import angular from 'angular';
 import sinon from 'sinon';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import 'ui/typeahead';
+import '../../typeahead';
 import 'plugins/kibana/discover/index';
 
 // TODO: This should not be needed, timefilter is only included here, it should move

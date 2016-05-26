@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import angular from 'angular';
-import AggTypesBucketsBucketAggTypeProvider from 'ui/agg_types/buckets/_bucket_agg_type';
-import AggTypesBucketsCreateFilterFiltersProvider from 'ui/agg_types/buckets/create_filter/filters';
-import DecorateQueryProvider from 'ui/courier/data_source/_decorate_query';
-import filtersTemplate from 'ui/agg_types/controls/filters.html';
+import AggTypesBucketsBucketAggTypeProvider from '../../agg_types/buckets/_bucket_agg_type';
+import AggTypesBucketsCreateFilterFiltersProvider from '../../agg_types/buckets/create_filter/filters';
+import DecorateQueryProvider from '../../courier/data_source/_decorate_query';
+import filtersTemplate from '../../agg_types/controls/filters.html';
 export default function FiltersAggDefinition(Private, Notifier) {
   let BucketAggType = Private(AggTypesBucketsBucketAggTypeProvider);
   let createFilter = Private(AggTypesBucketsCreateFilterFiltersProvider);

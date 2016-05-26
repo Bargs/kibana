@@ -3,14 +3,14 @@ import _ from 'lodash';
 import angular from 'angular';
 
 
-import metadata from 'ui/metadata';
+import metadata from '../metadata';
 import 'babel/polyfill';
 import $ from 'jquery';
-import 'ui/timefilter';
-import 'ui/private';
-import 'ui/promises';
-import 'ui/directives/kbn_src';
-import 'ui/watch_multi';
+import '../timefilter';
+import '../private';
+import '../promises';
+import '../directives/kbn_src';
+import '../watch_multi';
 
 let chrome = {};
 let internals = _.defaults(

@@ -1,5 +1,5 @@
 import angular from 'angular';
-import uiModules from 'ui/modules';
+import uiModules from '../modules';
 let module = uiModules.get('kibana');
 
 // Simple filter to allow using ng-bind-html without explicitly calling $sce.trustAsHtml in a controller

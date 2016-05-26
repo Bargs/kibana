@@ -1,13 +1,13 @@
 /* global mocha */
 
 // chrome expects to be loaded first, let it get its way
-import chrome from 'ui/chrome';
+import chrome from '../chrome';
 
 import Nonsense from 'Nonsense';
 import sinon from 'sinon';
 import _ from 'lodash';
 
-import StackTraceMapper from 'ui/stack_trace_mapper';
+import StackTraceMapper from '../stack_trace_mapper';
 import { parse } from 'url';
 import $ from 'jquery';
 import './test_harness.less';

@@ -1,7 +1,7 @@
 import angular from 'angular';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import 'ui/directives/validate_ip';
+import '../../directives/validate_ip';
 
 
 describe('Validate IP directive', function () {

@@ -1,9 +1,9 @@
 import angular from 'angular';
 import { once, cloneDeep, defaultsDeep, isPlainObject } from 'lodash';
-import uiRoutes from 'ui/routes';
-import uiModules from 'ui/modules';
-import Notifier from 'ui/notify/notifier';
-import ConfigDelayedUpdaterProvider from 'ui/config/_delayed_updater';
+import uiRoutes from '../routes';
+import uiModules from '../modules';
+import Notifier from '../notify/notifier';
+import ConfigDelayedUpdaterProvider from '../config/_delayed_updater';
 const module = uiModules.get('kibana/config');
 
 // service for delivering config variables to everywhere else

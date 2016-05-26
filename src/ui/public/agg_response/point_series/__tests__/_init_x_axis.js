@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import AggResponsePointSeriesInitXAxisProvider from 'ui/agg_response/point_series/_init_x_axis';
+import AggResponsePointSeriesInitXAxisProvider from '../../../agg_response/point_series/_init_x_axis';
 describe('initXAxis', function () {
 
   let initXAxis;

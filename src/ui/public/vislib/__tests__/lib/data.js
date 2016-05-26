@@ -6,8 +6,8 @@ import expect from 'expect.js';
 import dataSeries from 'fixtures/vislib/mock_data/date_histogram/_series';
 import dataSeriesNeg from 'fixtures/vislib/mock_data/date_histogram/_series_neg';
 import dataStacked from 'fixtures/vislib/mock_data/stacked/_stacked';
-import VislibLibDataProvider from 'ui/vislib/lib/data';
-import PersistedStatePersistedStateProvider from 'ui/persisted_state/persisted_state';
+import VislibLibDataProvider from '../../../vislib/lib/data';
+import PersistedStatePersistedStateProvider from '../../../persisted_state/persisted_state';
 
 let seriesData = {
   'label': '',

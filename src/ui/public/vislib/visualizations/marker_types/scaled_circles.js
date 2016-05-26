@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import L from 'leaflet';
-import VislibVisualizationsMarkerTypesBaseMarkerProvider from 'ui/vislib/visualizations/marker_types/base_marker';
+import VislibVisualizationsMarkerTypesBaseMarkerProvider from '../../../vislib/visualizations/marker_types/base_marker';
 export default function ScaledCircleMarkerFactory(Private) {
 
   let BaseMarker = Private(VislibVisualizationsMarkerTypesBaseMarkerProvider);

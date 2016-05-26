@@ -1,8 +1,8 @@
-import VislibVisualizationsColumnChartProvider from 'ui/vislib/visualizations/column_chart';
-import VislibVisualizationsPieChartProvider from 'ui/vislib/visualizations/pie_chart';
-import VislibVisualizationsLineChartProvider from 'ui/vislib/visualizations/line_chart';
-import VislibVisualizationsAreaChartProvider from 'ui/vislib/visualizations/area_chart';
-import VislibVisualizationsTileMapProvider from 'ui/vislib/visualizations/tile_map';
+import VislibVisualizationsColumnChartProvider from '../../vislib/visualizations/column_chart';
+import VislibVisualizationsPieChartProvider from '../../vislib/visualizations/pie_chart';
+import VislibVisualizationsLineChartProvider from '../../vislib/visualizations/line_chart';
+import VislibVisualizationsAreaChartProvider from '../../vislib/visualizations/area_chart';
+import VislibVisualizationsTileMapProvider from '../../vislib/visualizations/tile_map';
 
 export default function VisTypeFactory(Private) {
 

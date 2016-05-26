@@ -1,9 +1,9 @@
 import angular from 'angular';
 import _ from 'lodash';
 
-import errors from 'ui/errors';
-import slugifyId from 'ui/utils/slugify_id';
-import MappingSetupProvider from 'ui/utils/mapping_setup';
+import errors from '../../errors';
+import slugifyId from '../../utils/slugify_id';
+import MappingSetupProvider from '../../utils/mapping_setup';
 
 import DocSourceProvider from '../data_source/doc_source';
 import SearchSourceProvider from '../data_source/search_source';

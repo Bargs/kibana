@@ -3,7 +3,7 @@ import _ from 'lodash';
 import expect from 'expect.js';
 import simulateKeys from 'test_utils/simulate_keys';
 import ngMock from 'ng_mock';
-import 'ui/number_list';
+import '../../../number_list';
 describe('NumberList directive', function () {
 
 

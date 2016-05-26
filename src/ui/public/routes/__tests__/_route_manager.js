@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import ngMock from 'ng_mock';
 import sinon from 'auto-release-sinon';
-import RouteManager from 'ui/routes/route_manager';
+import RouteManager from '../../routes/route_manager';
 import expect from 'expect.js';
 
 let routes; // will contain an new instance of RouteManager for each test

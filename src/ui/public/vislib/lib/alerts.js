@@ -1,7 +1,7 @@
 import d3 from 'd3';
 import $ from 'jquery';
 import _ from 'lodash';
-import Binder from 'ui/binder';
+import Binder from '../../binder';
 export default function AlertsFactory(Private) {
 
   /**

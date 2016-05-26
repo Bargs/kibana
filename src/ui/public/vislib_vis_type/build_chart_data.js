@@ -1,5 +1,5 @@
-import AggResponseIndexProvider from 'ui/agg_response/index';
-import AggResponseTabifyTableProvider from 'ui/agg_response/tabify/_table';
+import AggResponseIndexProvider from '../agg_response/index';
+import AggResponseTabifyTableProvider from '../agg_response/tabify/_table';
 
 export default function VislibVisBuildChartData(Private) {
   let aggResponse = Private(AggResponseIndexProvider);

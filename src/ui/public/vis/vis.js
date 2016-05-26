@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import AggTypesIndexProvider from 'ui/agg_types/index';
-import RegistryVisTypesProvider from 'ui/registry/vis_types';
-import VisAggConfigsProvider from 'ui/vis/agg_configs';
+import AggTypesIndexProvider from '../agg_types/index';
+import RegistryVisTypesProvider from '../registry/vis_types';
+import VisAggConfigsProvider from '../vis/agg_configs';
 export default function VisFactory(Notifier, Private) {
   let aggTypes = Private(AggTypesIndexProvider);
   let visTypes = Private(RegistryVisTypesProvider);

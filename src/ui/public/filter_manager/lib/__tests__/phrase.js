@@ -1,5 +1,5 @@
 
-import fn from 'ui/filter_manager/lib/phrase';
+import fn from '../../../filter_manager/lib/phrase';
 import expect from 'expect.js';
 import _ from 'lodash';
 import ngMock from 'ng_mock';

@@ -1,8 +1,8 @@
 import d3 from 'd3';
 import _ from 'lodash';
 import $ from 'jquery';
-import errors from 'ui/errors';
-import VislibLibErrorHandlerProvider from 'ui/vislib/lib/_error_handler';
+import errors from '../../errors';
+import VislibLibErrorHandlerProvider from '../../vislib/lib/_error_handler';
 export default function YAxisFactory(Private) {
 
   let ErrorHandler = Private(VislibLibErrorHandlerProvider);

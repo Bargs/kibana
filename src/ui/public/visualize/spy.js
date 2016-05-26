@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import _ from 'lodash';
-import RegistrySpyModesProvider from 'ui/registry/spy_modes';
-import uiModules from 'ui/modules';
-import spyTemplate from 'ui/visualize/spy.html';
+import RegistrySpyModesProvider from '../registry/spy_modes';
+import uiModules from '../modules';
+import spyTemplate from '../visualize/spy.html';
 uiModules
   .get('app/visualize')
   .directive('visualizeSpy', function (Private, $compile) {

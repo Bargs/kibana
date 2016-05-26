@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import FilterBarQueryFilterProvider from 'ui/filter_bar/query_filter';
+import FilterBarQueryFilterProvider from '../filter_bar/query_filter';
 // Adds a filter to a passed state
 export default function (Private) {
   let queryFilter = Private(FilterBarQueryFilterProvider);

@@ -1,8 +1,8 @@
 import d3 from 'd3';
 import _ from 'lodash';
 import $ from 'jquery';
-import SimpleEmitter from 'ui/utils/simple_emitter';
-import VislibComponentsTooltipProvider from 'ui/vislib/components/tooltip';
+import SimpleEmitter from '../../utils/simple_emitter';
+import VislibComponentsTooltipProvider from '../../vislib/components/tooltip';
 export default function DispatchClass(Private) {
   let Tooltip = Private(VislibComponentsTooltipProvider);
 

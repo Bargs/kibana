@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
-import uiModules from 'ui/modules';
+import uiModules from '../modules';
 let module = uiModules.get('kibana');
 
 let html = '<span class="dropzone" ng-transclude></span>';

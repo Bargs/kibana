@@ -1,10 +1,10 @@
 import d3 from 'd3';
 import _ from 'lodash';
-import errors from 'ui/errors';
-import VislibComponentsZeroInjectionInjectZerosProvider from 'ui/vislib/components/zero_injection/inject_zeros';
-import VislibComponentsZeroInjectionOrderedXKeysProvider from 'ui/vislib/components/zero_injection/ordered_x_keys';
-import VislibComponentsLabelsLabelsProvider from 'ui/vislib/components/labels/labels';
-import VislibComponentsColorColorProvider from 'ui/vislib/components/color/color';
+import errors from '../../errors';
+import VislibComponentsZeroInjectionInjectZerosProvider from '../../vislib/components/zero_injection/inject_zeros';
+import VislibComponentsZeroInjectionOrderedXKeysProvider from '../../vislib/components/zero_injection/ordered_x_keys';
+import VislibComponentsLabelsLabelsProvider from '../../vislib/components/labels/labels';
+import VislibComponentsColorColorProvider from '../../vislib/components/color/color';
 export default function DataFactory(Private) {
 
   let injectZeros = Private(VislibComponentsZeroInjectionInjectZerosProvider);

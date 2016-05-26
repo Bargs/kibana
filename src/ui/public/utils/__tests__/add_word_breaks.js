@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import expect from 'expect.js';
-import addWordBreaks from 'ui/utils/add_word_breaks';
+import addWordBreaks from '../../utils/add_word_breaks';
 
 describe('addWordBreaks', function () {
 

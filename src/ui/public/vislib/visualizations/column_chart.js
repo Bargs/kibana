@@ -2,10 +2,10 @@ import d3 from 'd3';
 import _ from 'lodash';
 import $ from 'jquery';
 import moment from 'moment';
-import errors from 'ui/errors';
-import VislibLibDataProvider from 'ui/vislib/lib/data';
-import VislibVisualizationsPointSeriesChartProvider from 'ui/vislib/visualizations/_point_series_chart';
-import VislibVisualizationsTimeMarkerProvider from 'ui/vislib/visualizations/time_marker';
+import errors from '../../errors';
+import VislibLibDataProvider from '../../vislib/lib/data';
+import VislibVisualizationsPointSeriesChartProvider from '../../vislib/visualizations/_point_series_chart';
+import VislibVisualizationsTimeMarkerProvider from '../../vislib/visualizations/time_marker';
 export default function ColumnChartFactory(Private) {
 
   let DataClass = Private(VislibLibDataProvider);

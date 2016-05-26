@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import IndexPatternsFieldFormatFieldFormatProvider from 'ui/index_patterns/_field_format/field_format';
+import IndexPatternsFieldFormatFieldFormatProvider from '../../index_patterns/_field_format/field_format';
 describe('FieldFormat class', function () {
 
   let FieldFormat;

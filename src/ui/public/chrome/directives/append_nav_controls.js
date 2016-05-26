@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-import chromeNavControlsRegistry from 'ui/registry/chrome_nav_controls';
-import UiModules from 'ui/modules';
+import chromeNavControlsRegistry from '../../registry/chrome_nav_controls';
+import UiModules from '../../modules';
 
 export default function (chrome, internals) {
 

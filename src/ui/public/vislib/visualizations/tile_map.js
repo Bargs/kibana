@@ -1,8 +1,8 @@
 import d3 from 'd3';
 import _ from 'lodash';
 import $ from 'jquery';
-import VislibVisualizationsChartProvider from 'ui/vislib/visualizations/_chart';
-import VislibVisualizationsMapProvider from 'ui/vislib/visualizations/_map';
+import VislibVisualizationsChartProvider from '../../vislib/visualizations/_chart';
+import VislibVisualizationsMapProvider from '../../vislib/visualizations/_map';
 export default function TileMapFactory(Private) {
 
   let Chart = Private(VislibVisualizationsChartProvider);

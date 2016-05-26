@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import VisProvider from 'ui/vis';
-import AggTypesIndexProvider from 'ui/agg_types/index';
-import RegistryVisTypesProvider from 'ui/registry/vis_types';
+import VisProvider from '../../vis';
+import AggTypesIndexProvider from '../../agg_types/index';
+import RegistryVisTypesProvider from '../../registry/vis_types';
 import FixturesStubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
 module.exports = function AggParamWriterHelper(Private) {
   let Vis = Private(VisProvider);

@@ -1,6 +1,6 @@
-import IndexedArray from 'ui/indexed_array';
+import IndexedArray from '../indexed_array';
 import _ from 'lodash';
-import IndexPatternsFieldProvider from 'ui/index_patterns/_field';
+import IndexPatternsFieldProvider from '../index_patterns/_field';
 export default function FieldListProvider(Private) {
   let Field = Private(IndexPatternsFieldProvider);
 

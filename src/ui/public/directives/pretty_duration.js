@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import dateMath from '@elastic/datemath';
 import moment from 'moment';
-import 'ui/timepicker/quick_ranges';
-import 'ui/timepicker/time_units';
-import uiModules from 'ui/modules';
+import '../timepicker/quick_ranges';
+import '../timepicker/time_units';
+import uiModules from '../modules';
 let module = uiModules.get('kibana');
 
 

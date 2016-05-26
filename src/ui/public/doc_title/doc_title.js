@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import chrome from 'ui/chrome';
-import uiModules from 'ui/modules';
+import chrome from '../chrome';
+import uiModules from '../modules';
 
 uiModules.get('kibana')
 .run(function ($rootScope, docTitle) {

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import $ from 'jquery';
-import 'ui/render_directive';
-import RegistryNavbarExtensionsProvider from 'ui/registry/navbar_extensions';
-import uiModules from 'ui/modules';
+import '../render_directive';
+import RegistryNavbarExtensionsProvider from '../registry/navbar_extensions';
+import uiModules from '../modules';
 const navbar = uiModules.get('kibana/navbar');
 
 

@@ -5,7 +5,7 @@ import ngMock from 'ng_mock';
 import faker from 'faker';
 import _ from 'lodash';
 import MockState from 'fixtures/mock_state';
-import 'ui/url';
+import '../../url';
 
 // global vars, injected and mocked in init()
 let kbnUrl;

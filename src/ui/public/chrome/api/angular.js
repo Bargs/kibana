@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { format as formatUrl, parse as parseUrl } from 'url';
 
-import modules from 'ui/modules';
-import Notifier from 'ui/notify/notifier';
+import modules from '../../modules';
+import Notifier from '../../notify/notifier';
 import { UrlOverflowServiceProvider } from '../../error_url_overflow';
 
 const URL_LIMIT_WARN_WITHIN = 150;

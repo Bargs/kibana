@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import uiRegistry from 'ui/registry/_registry';
+import uiRegistry from '../registry/_registry';
 
 export default uiRegistry({
   name: 'fieldFormats',

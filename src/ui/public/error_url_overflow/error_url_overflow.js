@@ -1,6 +1,6 @@
-import uiRoutes from 'ui/routes';
-import uiModules from 'ui/modules';
-import KbnUrlProvider from 'ui/url';
+import uiRoutes from '../routes';
+import uiModules from '../modules';
+import KbnUrlProvider from '../url';
 
 import './error_url_overflow.less';
 import template from './error_url_overflow.html';

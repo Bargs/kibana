@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import AggTypesAggParamsProvider from 'ui/agg_types/agg_params';
-import RegistryFieldFormatsProvider from 'ui/registry/field_formats';
+import AggTypesAggParamsProvider from '../agg_types/agg_params';
+import RegistryFieldFormatsProvider from '../registry/field_formats';
 export default function AggTypeFactory(Private) {
   let AggParams = Private(AggTypesAggParamsProvider);
   let fieldFormats = Private(RegistryFieldFormatsProvider);

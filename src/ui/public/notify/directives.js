@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import uiModules from 'ui/modules';
-import toasterTemplate from 'ui/notify/partials/toaster.html';
-import 'ui/notify/notify.less';
+import uiModules from '../modules';
+import toasterTemplate from '../notify/partials/toaster.html';
+import '../notify/notify.less';
 
 let notify = uiModules.get('kibana/notify');
 

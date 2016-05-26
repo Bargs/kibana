@@ -1,6 +1,6 @@
-import toUser from 'ui/parse_query/lib/to_user';
-import ParseQueryLibFromUserProvider from 'ui/parse_query/lib/from_user';
-import uiModules from 'ui/modules';
+import toUser from '../parse_query/lib/to_user';
+import ParseQueryLibFromUserProvider from '../parse_query/lib/from_user';
+import uiModules from '../modules';
 uiModules
   .get('kibana')
   .directive('parseQuery', function (Private) {

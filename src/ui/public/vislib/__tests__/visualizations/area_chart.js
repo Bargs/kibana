@@ -8,7 +8,7 @@ import woahLotsOfVariables from 'fixtures/vislib/mock_data/date_histogram/_serie
 import notQuiteEnoughVariables from 'fixtures/vislib/mock_data/not_enough_data/_one_point';
 import $ from 'jquery';
 import FixturesVislibVisFixtureProvider from 'fixtures/vislib/_vis_fixture';
-import PersistedStatePersistedStateProvider from 'ui/persisted_state/persisted_state';
+import PersistedStatePersistedStateProvider from '../../../persisted_state/persisted_state';
 let someOtherVariables = {
   'series pos': require('fixtures/vislib/mock_data/date_histogram/_series'),
   'series pos neg': require('fixtures/vislib/mock_data/date_histogram/_series_pos_neg'),

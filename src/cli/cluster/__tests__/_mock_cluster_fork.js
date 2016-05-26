@@ -17,14 +17,14 @@ export default class MockClusterFork extends EventEmitter {
     assign(this, {
       process: {
         kill: sinon.spy(() => {
-          (async () => {
+          ((async () => {
             await wait();
             this.emit('disconnect');
             await wait();
             dead = true;
             this.emit('exit');
             cluster.emit('exit', this, this.exitCode || 0);
-          }());
+          })());
         }),
       },
       isDead: sinon.spy(() => dead),
@@ -35,10 +35,10 @@ export default class MockClusterFork extends EventEmitter {
     sinon.spy(this, 'removeListener');
     sinon.spy(this, 'emit');
 
-    (async () => {
+    ((async () => {
       await wait();
       dead = false;
       this.emit('online');
-    }());
+    })());
   }
 }

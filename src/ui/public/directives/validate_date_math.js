@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import dateMath from '@elastic/datemath';
-import uiModules from 'ui/modules';
+import uiModules from '../modules';
 
 uiModules.get('kibana').directive('validateDateMath', function () {
   return {

@@ -1,4 +1,4 @@
-import Notifier from 'ui/notify/notifier';
+import Notifier from '../../notify/notifier';
 
 export default function CourierFetchNotifier() {
   return new Notifier({

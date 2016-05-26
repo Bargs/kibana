@@ -3,12 +3,12 @@ import $ from 'jquery';
 import ngMock from 'ng_mock';
 import expect from 'expect.js';
 import sinon from 'auto-release-sinon';
-import VislibProvider from 'ui/vislib';
-import VislibVisProvider from 'ui/vislib/vis';
-import VisRenderbotProvider from 'ui/vis/renderbot';
-import VislibVisTypeVislibRenderbotProvider from 'ui/vislib_vis_type/vislib_renderbot';
-import PersistedStatePersistedStateProvider from 'ui/persisted_state/persisted_state';
-import AggResponseIndexProvider from 'ui/agg_response/index';
+import VislibProvider from '../../vislib';
+import VislibVisProvider from '../../vislib/vis';
+import VisRenderbotProvider from '../../vis/renderbot';
+import VislibVisTypeVislibRenderbotProvider from '../../vislib_vis_type/vislib_renderbot';
+import PersistedStatePersistedStateProvider from '../../persisted_state/persisted_state';
+import AggResponseIndexProvider from '../../agg_response/index';
 describe('renderbot', function exportWrapper() {
   let vislib;
   let Vis;

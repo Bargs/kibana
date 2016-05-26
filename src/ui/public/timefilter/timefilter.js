@@ -2,14 +2,14 @@ import _ from 'lodash';
 import angular from 'angular';
 import moment from 'moment';
 import dateMath from '@elastic/datemath';
-import 'ui/state_management/global_state';
-import 'ui/config';
-import EventsProvider from 'ui/events';
-import UtilsDiffTimePickerValsProvider from 'ui/utils/diff_time_picker_vals';
-import TimefilterLibDiffTimeProvider from 'ui/timefilter/lib/diff_time';
-import TimefilterLibDiffIntervalProvider from 'ui/timefilter/lib/diff_interval';
-import uiRoutes from 'ui/routes';
-import uiModules from 'ui/modules';
+import '../state_management/global_state';
+import '../config';
+import EventsProvider from '../events';
+import UtilsDiffTimePickerValsProvider from '../utils/diff_time_picker_vals';
+import TimefilterLibDiffTimeProvider from '../timefilter/lib/diff_time';
+import TimefilterLibDiffIntervalProvider from '../timefilter/lib/diff_interval';
+import uiRoutes from '../routes';
+import uiModules from '../modules';
 
 uiRoutes
 .addSetupWork(function (timefilter) {

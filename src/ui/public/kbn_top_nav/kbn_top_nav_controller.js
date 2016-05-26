@@ -1,8 +1,8 @@
 import { defaults, capitalize } from 'lodash';
 
-import uiModules from 'ui/modules';
-import filterTemplate from 'ui/chrome/config/filter.html';
-import intervalTemplate from 'ui/chrome/config/interval.html';
+import uiModules from '../modules';
+import filterTemplate from '../chrome/config/filter.html';
+import intervalTemplate from '../chrome/config/interval.html';
 
 export default function ($compile) {
   return class KbnTopNavController {

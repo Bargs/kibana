@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Tab from 'ui/chrome/tab';
+import Tab from '../chrome/tab';
 import { startsWith, get, set, omit, wrap, pick } from 'lodash';
 import { parse } from 'url';
 

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import _ from 'lodash';
-import RegistryFieldFormatsProvider from 'ui/registry/field_formats';
+import RegistryFieldFormatsProvider from '../../registry/field_formats';
 export default function TileMapTooltipFormatter($compile, $rootScope, Private) {
 
   let fieldFormats = Private(RegistryFieldFormatsProvider);

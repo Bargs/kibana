@@ -1,6 +1,6 @@
-import 'ui/field_format_editor/samples/samples';
-import uiModules from 'ui/modules';
-import patternTemplate from 'ui/field_format_editor/pattern/pattern.html';
+import '../../field_format_editor/samples/samples';
+import uiModules from '../../modules';
+import patternTemplate from '../../field_format_editor/pattern/pattern.html';
 
 uiModules
 .get('kibana')

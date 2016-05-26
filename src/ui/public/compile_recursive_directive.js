@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import uiModules from 'ui/modules';
+import uiModules from './modules';
 
 /**
  * Angular can't render directives that render themselves recursively:

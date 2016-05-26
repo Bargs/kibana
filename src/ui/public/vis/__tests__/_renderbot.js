@@ -1,6 +1,6 @@
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import VisRenderbotProvider from 'ui/vis/renderbot';
+import VisRenderbotProvider from '../../vis/renderbot';
 describe('renderbot', function () {
   let Renderbot;
 

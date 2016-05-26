@@ -2,8 +2,8 @@ const app = uiModules.get('kibana');
 import Clipboard from 'clipboard';
 import '../styles/index.less';
 import LibUrlShortenerProvider from '../lib/url_shortener';
-import uiModules from 'ui/modules';
-import shareObjectUrlTemplate from 'ui/share/views/share_object_url.html';
+import uiModules from '../../modules';
+import shareObjectUrlTemplate from '../../share/views/share_object_url.html';
 
 
 app.directive('shareObjectUrl', function (Private, Notifier) {

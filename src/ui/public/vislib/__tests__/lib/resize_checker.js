@@ -4,9 +4,9 @@ import Promise from 'bluebird';
 import ngMock from 'ng_mock';
 import expect from 'expect.js';
 import sinon from 'auto-release-sinon';
-import VislibLibResizeCheckerProvider from 'ui/vislib/lib/resize_checker';
-import EventsProvider from 'ui/events';
-import ReflowWatcherProvider from 'ui/reflow_watcher';
+import VislibLibResizeCheckerProvider from '../../../vislib/lib/resize_checker';
+import EventsProvider from '../../../events';
+import ReflowWatcherProvider from '../../../reflow_watcher';
 
 describe('Vislib Resize Checker', function () {
 

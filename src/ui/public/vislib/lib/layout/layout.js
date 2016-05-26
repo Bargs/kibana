@@ -1,6 +1,6 @@
 import d3 from 'd3';
 import _ from 'lodash';
-import VislibLibLayoutLayoutTypesProvider from 'ui/vislib/lib/layout/layout_types';
+import VislibLibLayoutLayoutTypesProvider from '../../../vislib/lib/layout/layout_types';
 export default function LayoutFactory(Private) {
 
   let layoutType = Private(VislibLibLayoutLayoutTypesProvider);

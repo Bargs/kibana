@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import d3 from 'd3';
-import Binder from 'ui/binder';
-import errors from 'ui/errors';
-import 'ui/vislib/styles/main.less';
-import VislibLibResizeCheckerProvider from 'ui/vislib/lib/resize_checker';
-import EventsProvider from 'ui/events';
-import VislibLibHandlerHandlerTypesProvider from 'ui/vislib/lib/handler/handler_types';
-import VislibVisualizationsVisTypesProvider from 'ui/vislib/visualizations/vis_types';
+import Binder from '../binder';
+import errors from '../errors';
+import '../vislib/styles/main.less';
+import VislibLibResizeCheckerProvider from '../vislib/lib/resize_checker';
+import EventsProvider from '../events';
+import VislibLibHandlerHandlerTypesProvider from '../vislib/lib/handler/handler_types';
+import VislibVisualizationsVisTypesProvider from '../vislib/visualizations/vis_types';
 export default function VisFactory(Private) {
 
 

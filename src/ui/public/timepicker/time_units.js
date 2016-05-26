@@ -1,4 +1,4 @@
-import uiModules from 'ui/modules';
+import uiModules from '../modules';
 let module = uiModules.get('kibana');
 
 module.constant('timeUnits', {

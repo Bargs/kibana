@@ -4,9 +4,9 @@ import _ from 'lodash';
 import ngMock from 'ng_mock';
 import expect from 'expect.js';
 import $ from 'jquery';
-import VislibLibChartTitleProvider from 'ui/vislib/lib/chart_title';
-import VislibLibDataProvider from 'ui/vislib/lib/data';
-import PersistedStatePersistedStateProvider from 'ui/persisted_state/persisted_state';
+import VislibLibChartTitleProvider from '../../../vislib/lib/chart_title';
+import VislibLibDataProvider from '../../../vislib/lib/data';
+import PersistedStatePersistedStateProvider from '../../../persisted_state/persisted_state';
 
 describe('Vislib ChartTitle Class Test Suite', function () {
   let ChartTitle;

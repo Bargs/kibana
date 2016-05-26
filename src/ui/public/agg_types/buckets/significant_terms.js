@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import AggTypesBucketsBucketAggTypeProvider from 'ui/agg_types/buckets/_bucket_agg_type';
-import AggTypesBucketsCreateFilterTermsProvider from 'ui/agg_types/buckets/create_filter/terms';
-import orderAndSizeTemplate from 'ui/agg_types/controls/order_and_size.html';
+import AggTypesBucketsBucketAggTypeProvider from '../../agg_types/buckets/_bucket_agg_type';
+import AggTypesBucketsCreateFilterTermsProvider from '../../agg_types/buckets/create_filter/terms';
+import orderAndSizeTemplate from '../../agg_types/controls/order_and_size.html';
 export default function SignificantTermsAggDefinition(Private) {
   let BucketAggType = Private(AggTypesBucketsBucketAggTypeProvider);
   let createFilter = Private(AggTypesBucketsCreateFilterTermsProvider);

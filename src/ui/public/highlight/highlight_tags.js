@@ -1,4 +1,4 @@
-import uiModules from 'ui/modules';
+import uiModules from '../modules';
 let module = uiModules.get('kibana');
 
 // By default, ElasticSearch surrounds matched values in <em></em>. This is not ideal because it is possible that

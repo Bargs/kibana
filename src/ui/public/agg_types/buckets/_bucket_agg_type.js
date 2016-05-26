@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import AggTypesAggTypeProvider from 'ui/agg_types/agg_type';
+import AggTypesAggTypeProvider from '../../agg_types/agg_type';
 export default function BucketAggTypeProvider(Private) {
   let AggType = Private(AggTypesAggTypeProvider);
 

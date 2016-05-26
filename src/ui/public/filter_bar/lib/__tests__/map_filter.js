@@ -1,7 +1,7 @@
 import sinon from 'auto-release-sinon';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import FilterBarLibMapFilterProvider from 'ui/filter_bar/lib/map_filter';
+import FilterBarLibMapFilterProvider from '../../../filter_bar/lib/map_filter';
 
 describe('Filter Bar Directive', function () {
   let mapFilter;

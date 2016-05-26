@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import 'ui/filters/uriescape';
-import 'ui/filters/rison';
-import uiModules from 'ui/modules';
+import '../filters/uriescape';
+import '../filters/rison';
+import uiModules from '../modules';
 
 
 uiModules.get('kibana/url')

@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import IndexedArray from 'ui/indexed_array';
-import RegistryVisTypesProvider from 'ui/registry/vis_types';
+import IndexedArray from '../indexed_array';
+import RegistryVisTypesProvider from '../registry/vis_types';
 let notPropsOptNames = IndexedArray.OPT_NAMES.concat('constructor');
 
 /**

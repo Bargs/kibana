@@ -1,6 +1,6 @@
-import VislibLibLayoutTypesColumnLayoutProvider from 'ui/vislib/lib/layout/types/column_layout';
-import VislibLibLayoutTypesPieLayoutProvider from 'ui/vislib/lib/layout/types/pie_layout';
-import VislibLibLayoutTypesMapLayoutProvider from 'ui/vislib/lib/layout/types/map_layout';
+import VislibLibLayoutTypesColumnLayoutProvider from '../../../vislib/lib/layout/types/column_layout';
+import VislibLibLayoutTypesPieLayoutProvider from '../../../vislib/lib/layout/types/pie_layout';
+import VislibLibLayoutTypesMapLayoutProvider from '../../../vislib/lib/layout/types/map_layout';
 
 export default function LayoutTypeFactory(Private) {
 

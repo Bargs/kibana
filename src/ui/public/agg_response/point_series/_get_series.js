@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import AggResponsePointSeriesGetPointProvider from 'ui/agg_response/point_series/_get_point';
-import AggResponsePointSeriesAddToSiriProvider from 'ui/agg_response/point_series/_add_to_siri';
+import AggResponsePointSeriesGetPointProvider from '../../agg_response/point_series/_get_point';
+import AggResponsePointSeriesAddToSiriProvider from '../../agg_response/point_series/_add_to_siri';
 export default function PointSeriesGetSeries(Private) {
   let getPoint = Private(AggResponsePointSeriesGetPointProvider);
   let addToSiri = Private(AggResponsePointSeriesAddToSiriProvider);

@@ -4,11 +4,11 @@ import sinon from 'auto-release-sinon';
 import aggResp from 'fixtures/agg_resp/date_histogram';
 import ngMock from 'ng_mock';
 import expect from 'expect.js';
-import VisProvider from 'ui/vis';
+import VisProvider from '../../../../vis';
 import FixturesStubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
-import AggTypesBucketsCreateFilterDateHistogramProvider from 'ui/agg_types/buckets/create_filter/date_histogram';
-import TimeBucketsProvider from 'ui/time_buckets';
-import AggTypesBucketsIntervalOptionsProvider from 'ui/agg_types/buckets/_interval_options';
+import AggTypesBucketsCreateFilterDateHistogramProvider from '../../../../agg_types/buckets/create_filter/date_histogram';
+import TimeBucketsProvider from '../../../../time_buckets';
+import AggTypesBucketsIntervalOptionsProvider from '../../../../agg_types/buckets/_interval_options';
 describe('AggConfig Filters', function () {
   describe('date_histogram', function () {
 

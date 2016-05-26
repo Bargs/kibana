@@ -4,9 +4,9 @@ import ngMock from 'ng_mock';
 import expect from 'expect.js';
 import fixtures from 'fixtures/fake_hierarchical_data';
 import sinon from 'auto-release-sinon';
-import AggResponseTabifyTabifyProvider from 'ui/agg_response/tabify/tabify';
+import AggResponseTabifyTabifyProvider from '../../agg_response/tabify/tabify';
 import FixturesStubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
-import VisProvider from 'ui/vis';
+import VisProvider from '../../vis';
 describe('AggTable Directive', function () {
 
   let $rootScope;

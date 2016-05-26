@@ -1,10 +1,10 @@
 import moment from 'moment';
-import dateRange from 'ui/utils/date_range';
-import 'ui/directives/validate_date_math';
-import AggTypesBucketsBucketAggTypeProvider from 'ui/agg_types/buckets/_bucket_agg_type';
-import AggTypesBucketsCreateFilterDateRangeProvider from 'ui/agg_types/buckets/create_filter/date_range';
-import RegistryFieldFormatsProvider from 'ui/registry/field_formats';
-import dateRangesTemplate from 'ui/agg_types/controls/date_ranges.html';
+import dateRange from '../../utils/date_range';
+import '../../directives/validate_date_math';
+import AggTypesBucketsBucketAggTypeProvider from '../../agg_types/buckets/_bucket_agg_type';
+import AggTypesBucketsCreateFilterDateRangeProvider from '../../agg_types/buckets/create_filter/date_range';
+import RegistryFieldFormatsProvider from '../../registry/field_formats';
+import dateRangesTemplate from '../../agg_types/controls/date_ranges.html';
 
 export default function DateRangeAggDefinition(Private, config) {
   let BucketAggType = Private(AggTypesBucketsBucketAggTypeProvider);

@@ -1,4 +1,4 @@
-import modules from 'ui/modules';
+import modules from '../modules';
 import _ from 'lodash';
 
 modules.get('kibana/persisted_log')

@@ -1,4 +1,4 @@
-import SearchSourceProvider from 'ui/courier/data_source/search_source';
+import SearchSourceProvider from '../../courier/data_source/search_source';
 
 export default function RootSearchSource(Private, $rootScope, timefilter, Notifier) {
   let SearchSource = Private(SearchSourceProvider);

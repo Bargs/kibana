@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import BaseObject from 'ui/utils/base_object';
+import BaseObject from '../utils/base_object';
 
 /**
  * Simple event emitter class used in the vislib. Calls

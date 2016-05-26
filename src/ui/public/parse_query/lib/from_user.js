@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import DecorateQueryProvider from 'ui/courier/data_source/_decorate_query';
+import DecorateQueryProvider from '../../courier/data_source/_decorate_query';
 export default function GetQueryFromUser(es, Private) {
   let decorateQuery = Private(DecorateQueryProvider);
 

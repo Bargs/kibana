@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import IndexPatternsMapFieldProvider from 'ui/index_patterns/_map_field';
+import IndexPatternsMapFieldProvider from '../index_patterns/_map_field';
 export default function transformMappingIntoFields(Private, kbnIndex, config) {
   let mapField = Private(IndexPatternsMapFieldProvider);
 

@@ -2,11 +2,11 @@ import angular from 'angular';
 import _ from 'lodash';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import 'ui/private';
+import '../../private';
 
-import docViewsRegistry from 'ui/registry/doc_views';
-import Registry from 'ui/registry/_registry';
-import 'ui/doc_viewer';
+import docViewsRegistry from '../../registry/doc_views';
+import Registry from '../../registry/_registry';
+import '../../doc_viewer';
 
 describe('docViewer', function () {
   let $rootScope;

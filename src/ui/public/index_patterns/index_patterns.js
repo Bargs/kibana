@@ -1,14 +1,14 @@
-import 'ui/filters/short_dots';
+import '../filters/short_dots';
 import _ from 'lodash';
-import errors from 'ui/errors';
-import IndexPatternsIndexPatternProvider from 'ui/index_patterns/_index_pattern';
-import IndexPatternsPatternCacheProvider from 'ui/index_patterns/_pattern_cache';
-import IndexPatternsGetIdsProvider from 'ui/index_patterns/_get_ids';
-import IndexPatternsIntervalsProvider from 'ui/index_patterns/_intervals';
-import IndexPatternsMapperProvider from 'ui/index_patterns/_mapper';
-import IndexPatternsPatternToWildcardProvider from 'ui/index_patterns/_pattern_to_wildcard';
-import RegistryFieldFormatsProvider from 'ui/registry/field_formats';
-import uiModules from 'ui/modules';
+import errors from '../errors';
+import IndexPatternsIndexPatternProvider from '../index_patterns/_index_pattern';
+import IndexPatternsPatternCacheProvider from '../index_patterns/_pattern_cache';
+import IndexPatternsGetIdsProvider from '../index_patterns/_get_ids';
+import IndexPatternsIntervalsProvider from '../index_patterns/_intervals';
+import IndexPatternsMapperProvider from '../index_patterns/_mapper';
+import IndexPatternsPatternToWildcardProvider from '../index_patterns/_pattern_to_wildcard';
+import RegistryFieldFormatsProvider from '../registry/field_formats';
+import uiModules from '../modules';
 let module = uiModules.get('kibana/index_patterns');
 
 function IndexPatternsProvider(es, Notifier, Private, Promise, kbnIndex) {

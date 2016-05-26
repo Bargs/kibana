@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment';
-import IndexedArray from 'ui/indexed_array';
+import IndexedArray from '../indexed_array';
 export default function IndexNameIntervalsService(timefilter) {
 
   let intervals = new IndexedArray({

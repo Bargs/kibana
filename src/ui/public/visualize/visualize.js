@@ -1,11 +1,11 @@
-import 'ui/visualize/spy';
-import 'ui/visualize/visualize.less';
-import 'ui/visualize/visualize_legend';
+import '../visualize/spy';
+import '../visualize/visualize.less';
+import '../visualize/visualize_legend';
 import $ from 'jquery';
 import _ from 'lodash';
-import RegistryVisTypesProvider from 'ui/registry/vis_types';
-import uiModules from 'ui/modules';
-import visualizeTemplate from 'ui/visualize/visualize.html';
+import RegistryVisTypesProvider from '../registry/vis_types';
+import uiModules from '../modules';
+import visualizeTemplate from '../visualize/visualize.html';
 uiModules
 .get('kibana/directive')
 .directive('visualize', function (Notifier, SavedVis, indexPatterns, Private, config, $timeout) {

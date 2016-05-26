@@ -1,6 +1,6 @@
-import VislibLibHandlerTypesPointSeriesProvider from 'ui/vislib/lib/handler/types/point_series';
-import VislibLibHandlerTypesPieProvider from 'ui/vislib/lib/handler/types/pie';
-import VislibLibHandlerTypesTileMapProvider from 'ui/vislib/lib/handler/types/tile_map';
+import VislibLibHandlerTypesPointSeriesProvider from '../../../vislib/lib/handler/types/point_series';
+import VislibLibHandlerTypesPieProvider from '../../../vislib/lib/handler/types/pie';
+import VislibLibHandlerTypesTileMapProvider from '../../../vislib/lib/handler/types/tile_map';
 
 export default function HandlerTypeFactory(Private) {
   let pointSeries = Private(VislibLibHandlerTypesPointSeriesProvider);

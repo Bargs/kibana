@@ -1,11 +1,11 @@
-import VislibComponentsZeroInjectionInjectZerosProvider from 'ui/vislib/components/zero_injection/inject_zeros';
-import VislibLibHandlerHandlerProvider from 'ui/vislib/lib/handler/handler';
-import VislibLibDataProvider from 'ui/vislib/lib/data';
-import VislibLibXAxisProvider from 'ui/vislib/lib/x_axis';
-import VislibLibYAxisProvider from 'ui/vislib/lib/y_axis';
-import VislibLibAxisTitleProvider from 'ui/vislib/lib/axis_title';
-import VislibLibChartTitleProvider from 'ui/vislib/lib/chart_title';
-import VislibLibAlertsProvider from 'ui/vislib/lib/alerts';
+import VislibComponentsZeroInjectionInjectZerosProvider from '../../../../vislib/components/zero_injection/inject_zeros';
+import VislibLibHandlerHandlerProvider from '../../../../vislib/lib/handler/handler';
+import VislibLibDataProvider from '../../../../vislib/lib/data';
+import VislibLibXAxisProvider from '../../../../vislib/lib/x_axis';
+import VislibLibYAxisProvider from '../../../../vislib/lib/y_axis';
+import VislibLibAxisTitleProvider from '../../../../vislib/lib/axis_title';
+import VislibLibChartTitleProvider from '../../../../vislib/lib/chart_title';
+import VislibLibAlertsProvider from '../../../../vislib/lib/alerts';
 
 export default function ColumnHandler(Private) {
   let injectZeros = Private(VislibComponentsZeroInjectionInjectZerosProvider);

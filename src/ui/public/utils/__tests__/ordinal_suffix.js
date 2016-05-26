@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import addOrdinalSuffix from 'ui/utils/ordinal_suffix';
+import addOrdinalSuffix from '../../utils/ordinal_suffix';
 import expect from 'expect.js';
 
 describe('ordinal suffix util', function () {

@@ -3,9 +3,9 @@ import sinon from 'auto-release-sinon';
 import noDigestPromises from 'test_utils/no_digest_promises';
 import ngMock from 'ng_mock';
 import expect from 'expect.js';
-import errors from 'ui/errors';
-import PersistedStatePersistedStateProvider from 'ui/persisted_state/persisted_state';
-import EventsProvider from 'ui/events';
+import errors from '../../errors';
+import PersistedStatePersistedStateProvider from '../../persisted_state/persisted_state';
+import EventsProvider from '../../events';
 
 let PersistedState;
 let Events;

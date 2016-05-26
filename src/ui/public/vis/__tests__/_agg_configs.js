@@ -2,12 +2,12 @@ import _ from 'lodash';
 import sinon from 'auto-release-sinon';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import RealAggConfigPM from 'ui/vis/agg_config';
-import VisProvider from 'ui/vis';
-import VisAggConfigProvider from 'ui/vis/agg_config';
-import VisAggConfigsProvider from 'ui/vis/agg_configs';
+import RealAggConfigPM from '../../vis/agg_config';
+import VisProvider from '../../vis';
+import VisAggConfigProvider from '../../vis/agg_config';
+import VisAggConfigsProvider from '../../vis/agg_configs';
 import FixturesStubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
-import VisSchemasProvider from 'ui/vis/schemas';
+import VisSchemasProvider from '../../vis/schemas';
 describe('AggConfigs', function () {
 
   let Vis;

@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import rison from 'rison-node';
-import applyDiff from 'ui/utils/diff_object';
-import qs from 'ui/utils/query_string';
-import EventsProvider from 'ui/events';
-import Notifier from 'ui/notify/notifier';
-import KbnUrlProvider from 'ui/url';
+import applyDiff from '../utils/diff_object';
+import qs from '../utils/query_string';
+import EventsProvider from '../events';
+import Notifier from '../notify/notifier';
+import KbnUrlProvider from '../url';
 
 const notify = new Notifier();
 export default function StateProvider(Private, $rootScope, $location) {

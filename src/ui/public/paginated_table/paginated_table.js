@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import uiModules from 'ui/modules';
-import paginatedTableTemplate from 'ui/paginated_table/paginated_table.html';
+import uiModules from '../modules';
+import paginatedTableTemplate from '../paginated_table/paginated_table.html';
 uiModules
 .get('kibana')
 .directive('paginatedTable', function ($filter) {

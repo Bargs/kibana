@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import AggTypesParamTypesBaseProvider from 'ui/agg_types/param_types/base';
-import AggTypesParamTypesRawJsonProvider from 'ui/agg_types/param_types/raw_json';
+import AggTypesParamTypesBaseProvider from '../../../agg_types/param_types/base';
+import AggTypesParamTypesRawJsonProvider from '../../../agg_types/param_types/raw_json';
 
 
 module.exports = describe('JSON', function () {

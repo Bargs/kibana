@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import slugifyId from 'ui/utils/slugify_id';
+import slugifyId from '../../utils/slugify_id';
 import expect from 'expect.js';
 
 describe('slugifyId()', function () {

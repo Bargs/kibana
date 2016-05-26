@@ -7,7 +7,7 @@ import fixtures from 'fixtures/fake_hierarchical_data';
 import series from 'fixtures/vislib/mock_data/date_histogram/_series';
 import terms from 'fixtures/vislib/mock_data/terms/_columns';
 import $ from 'jquery';
-import VislibVisualizationsTimeMarkerProvider from 'ui/vislib/visualizations/time_marker';
+import VislibVisualizationsTimeMarkerProvider from '../../../vislib/visualizations/time_marker';
 
 describe('Vislib Time Marker Test Suite', function () {
   let height = 50;

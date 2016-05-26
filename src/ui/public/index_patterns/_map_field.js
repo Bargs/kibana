@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import IndexPatternsCastMappingTypeProvider from 'ui/index_patterns/_cast_mapping_type';
+import IndexPatternsCastMappingTypeProvider from '../index_patterns/_cast_mapping_type';
 export default function MapFieldFn(Private, config) {
   let castMappingType = Private(IndexPatternsCastMappingTypeProvider);
 

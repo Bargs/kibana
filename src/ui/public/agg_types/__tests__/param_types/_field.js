@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import AggTypesParamTypesBaseProvider from 'ui/agg_types/param_types/base';
-import AggTypesParamTypesFieldProvider from 'ui/agg_types/param_types/field';
+import AggTypesParamTypesBaseProvider from '../../../agg_types/param_types/base';
+import AggTypesParamTypesFieldProvider from '../../../agg_types/param_types/field';
 describe('Field', function () {
 
   let BaseAggParam;

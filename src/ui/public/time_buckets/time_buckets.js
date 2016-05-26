@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import moment from 'moment';
 import dateMath from '@elastic/datemath';
-import parseInterval from 'ui/utils/parse_interval';
-import TimeBucketsCalcAutoIntervalProvider from 'ui/time_buckets/calc_auto_interval';
-import TimeBucketsCalcEsIntervalProvider from 'ui/time_buckets/calc_es_interval';
+import parseInterval from '../utils/parse_interval';
+import TimeBucketsCalcAutoIntervalProvider from '../time_buckets/calc_auto_interval';
+import TimeBucketsCalcEsIntervalProvider from '../time_buckets/calc_es_interval';
 export default function IntervalHelperProvider(Private, timefilter, config) {
 
   let calcAuto = Private(TimeBucketsCalcAutoIntervalProvider);

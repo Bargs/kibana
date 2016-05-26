@@ -1,4 +1,4 @@
-import modules from 'ui/modules';
+import modules from '../modules';
 import angular from 'angular';
 
 function Storage(store) {

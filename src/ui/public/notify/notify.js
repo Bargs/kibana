@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import $ from 'jquery';
-import modules from 'ui/modules';
-import errors from 'ui/notify/errors';
-import Notifier from 'ui/notify/notifier';
-import 'ui/notify/directives';
-import chrome from 'ui/chrome';
-import { kbnIndex } from 'ui/metadata';
+import modules from '../modules';
+import errors from '../notify/errors';
+import Notifier from '../notify/notifier';
+import '../notify/directives';
+import chrome from '../chrome';
+import { kbnIndex } from '../metadata';
 let module = modules.get('kibana/notify');
 let rootNotifier = new Notifier();
 

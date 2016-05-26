@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import AggConfigResult from 'ui/vis/agg_config_result';
-import AggResponseTabifyTableProvider from 'ui/agg_response/tabify/_table';
-import AggResponseTabifyTableGroupProvider from 'ui/agg_response/tabify/_table_group';
-import AggResponseTabifyGetColumnsProvider from 'ui/agg_response/tabify/_get_columns';
+import AggConfigResult from '../../vis/agg_config_result';
+import AggResponseTabifyTableProvider from '../../agg_response/tabify/_table';
+import AggResponseTabifyTableGroupProvider from '../../agg_response/tabify/_table_group';
+import AggResponseTabifyGetColumnsProvider from '../../agg_response/tabify/_get_columns';
 export default function TabbedAggResponseWriterProvider(Private) {
   let Table = Private(AggResponseTabifyTableProvider);
   let TableGroup = Private(AggResponseTabifyTableGroupProvider);

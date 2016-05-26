@@ -1,4 +1,4 @@
-import errors from 'ui/errors';
+import errors from '../errors';
 
 export default function RedirectWhenMissingFn($location, kbnUrl, Notifier, Promise) {
   let SavedObjectNotFound = errors.SavedObjectNotFound;

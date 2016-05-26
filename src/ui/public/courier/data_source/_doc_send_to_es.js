@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import errors from 'ui/errors';
-import RequestQueueProvider from 'ui/courier/_request_queue';
-import FetchProvider from 'ui/courier/fetch/fetch';
+import errors from '../../errors';
+import RequestQueueProvider from '../../courier/_request_queue';
+import FetchProvider from '../../courier/fetch/fetch';
 
 export default function (Promise, Private, es) {
   let requestQueue = Private(RequestQueueProvider);

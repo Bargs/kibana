@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import errors from 'ui/errors';
+import errors from '../../errors';
 
 export default function ErrorHandlerFactory() {
 

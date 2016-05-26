@@ -7,7 +7,7 @@ import sinon from 'auto-release-sinon';
 import geoJsonData from 'fixtures/vislib/mock_data/geohash/_geo_json';
 import MockMap from 'fixtures/tilemap_map';
 import $ from 'jquery';
-import VislibVisualizationsTileMapProvider from 'ui/vislib/visualizations/tile_map';
+import VislibVisualizationsTileMapProvider from '../../../../vislib/visualizations/tile_map';
 let mockChartEl = $('<div>');
 
 let TileMap;

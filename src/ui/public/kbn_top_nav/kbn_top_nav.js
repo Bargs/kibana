@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import 'ui/watch_multi';
+import '../watch_multi';
 import angular from 'angular';
-import 'ui/directives/input_focus';
-import uiModules from 'ui/modules';
+import '../directives/input_focus';
+import uiModules from '../modules';
 import KbnTopNavControllerProvider from './kbn_top_nav_controller';
 
 const module = uiModules.get('kibana');

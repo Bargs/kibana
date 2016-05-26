@@ -1,5 +1,5 @@
-import AggTypesMetricsMetricAggTypeProvider from 'ui/agg_types/metrics/metric_agg_type';
-import RegistryFieldFormatsProvider from 'ui/registry/field_formats';
+import AggTypesMetricsMetricAggTypeProvider from '../../agg_types/metrics/metric_agg_type';
+import RegistryFieldFormatsProvider from '../../registry/field_formats';
 
 export default function AggTypeMetricCardinalityProvider(Private) {
   let MetricAggType = Private(AggTypesMetricsMetricAggTypeProvider);

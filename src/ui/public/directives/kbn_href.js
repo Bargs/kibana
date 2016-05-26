@@ -1,4 +1,4 @@
-import UiModules from 'ui/modules';
+import UiModules from '../modules';
 import { words, camelCase, kebabCase } from 'lodash';
 
 export function kbnUrlDirective(name) {

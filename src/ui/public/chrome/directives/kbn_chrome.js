@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-import UiModules from 'ui/modules';
+import UiModules from '../../modules';
 
 export default function (chrome, internals) {
 

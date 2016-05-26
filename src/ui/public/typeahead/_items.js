@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import listTemplate from 'ui/typeahead/partials/typeahead-items.html';
-import 'ui/notify/directives';
-import uiModules from 'ui/modules';
+import listTemplate from '../typeahead/partials/typeahead-items.html';
+import '../notify/directives';
+import uiModules from '../modules';
 let typeahead = uiModules.get('kibana/typeahead');
 
 

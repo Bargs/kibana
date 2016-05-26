@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import moment from 'moment';
-import AggTypesBucketsBucketAggTypeProvider from 'ui/agg_types/buckets/_bucket_agg_type';
-import precisionTemplate from 'ui/agg_types/controls/precision.html';
+import AggTypesBucketsBucketAggTypeProvider from '../../agg_types/buckets/_bucket_agg_type';
+import precisionTemplate from '../../agg_types/controls/precision.html';
 export default function GeoHashAggDefinition(Private, config) {
   let BucketAggType = Private(AggTypesBucketsBucketAggTypeProvider);
   let defaultPrecision = 2;

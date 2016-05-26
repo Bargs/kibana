@@ -2,11 +2,11 @@ import d3 from 'd3';
 import angular from 'angular';
 import expect from 'expect.js';
 import ngMock from 'ng_mock';
-import VislibVisProvider from 'ui/vislib/vis';
-import VislibLibDataProvider from 'ui/vislib/lib/data';
-import PersistedStatePersistedStateProvider from 'ui/persisted_state/persisted_state';
-import VislibVisualizationsColumnChartProvider from 'ui/vislib/visualizations/column_chart';
-import VislibVisualizationsChartProvider from 'ui/vislib/visualizations/_chart';
+import VislibVisProvider from '../../../vislib/vis';
+import VislibLibDataProvider from '../../../vislib/lib/data';
+import PersistedStatePersistedStateProvider from '../../../persisted_state/persisted_state';
+import VislibVisualizationsColumnChartProvider from '../../../vislib/visualizations/column_chart';
+import VislibVisualizationsChartProvider from '../../../vislib/visualizations/_chart';
 
 describe('Vislib _chart Test Suite', function () {
   let ColumnChart;

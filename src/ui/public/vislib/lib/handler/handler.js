@@ -1,9 +1,9 @@
 import d3 from 'd3';
 import _ from 'lodash';
-import errors from 'ui/errors';
-import Binder from 'ui/binder';
-import VislibLibDataProvider from 'ui/vislib/lib/data';
-import VislibLibLayoutLayoutProvider from 'ui/vislib/lib/layout/layout';
+import errors from '../../../errors';
+import Binder from '../../../binder';
+import VislibLibDataProvider from '../../../vislib/lib/data';
+import VislibLibLayoutLayoutProvider from '../../../vislib/lib/layout/layout';
 export default function HandlerBaseClass(Private) {
 
   let Data = Private(VislibLibDataProvider);

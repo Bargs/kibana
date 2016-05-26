@@ -1,8 +1,8 @@
 import d3 from 'd3';
 import _ from 'lodash';
 import $ from 'jquery';
-import errors from 'ui/errors';
-import VislibVisualizationsChartProvider from 'ui/vislib/visualizations/_chart';
+import errors from '../../errors';
+import VislibVisualizationsChartProvider from '../../vislib/visualizations/_chart';
 export default function PieChartFactory(Private) {
 
   let Chart = Private(VislibVisualizationsChartProvider);

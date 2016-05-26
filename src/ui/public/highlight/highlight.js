@@ -1,7 +1,7 @@
-import 'ui/highlight/highlight_tags';
+import '../highlight/highlight_tags';
 import _ from 'lodash';
 import angular from 'angular';
-import uiModules from 'ui/modules';
+import uiModules from '../modules';
 
 let module = uiModules.get('kibana');
 

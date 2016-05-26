@@ -1,24 +1,24 @@
-import IndexedArray from 'ui/indexed_array';
-import 'ui/agg_types/agg_params';
-import AggTypesMetricsCountProvider from 'ui/agg_types/metrics/count';
-import AggTypesMetricsAvgProvider from 'ui/agg_types/metrics/avg';
-import AggTypesMetricsSumProvider from 'ui/agg_types/metrics/sum';
-import AggTypesMetricsMedianProvider from 'ui/agg_types/metrics/median';
-import AggTypesMetricsMinProvider from 'ui/agg_types/metrics/min';
-import AggTypesMetricsMaxProvider from 'ui/agg_types/metrics/max';
-import AggTypesMetricsStdDeviationProvider from 'ui/agg_types/metrics/std_deviation';
-import AggTypesMetricsCardinalityProvider from 'ui/agg_types/metrics/cardinality';
-import AggTypesMetricsPercentilesProvider from 'ui/agg_types/metrics/percentiles';
-import AggTypesMetricsPercentileRanksProvider from 'ui/agg_types/metrics/percentile_ranks';
-import AggTypesBucketsDateHistogramProvider from 'ui/agg_types/buckets/date_histogram';
-import AggTypesBucketsHistogramProvider from 'ui/agg_types/buckets/histogram';
-import AggTypesBucketsRangeProvider from 'ui/agg_types/buckets/range';
-import AggTypesBucketsDateRangeProvider from 'ui/agg_types/buckets/date_range';
-import AggTypesBucketsIpRangeProvider from 'ui/agg_types/buckets/ip_range';
-import AggTypesBucketsTermsProvider from 'ui/agg_types/buckets/terms';
-import AggTypesBucketsFiltersProvider from 'ui/agg_types/buckets/filters';
-import AggTypesBucketsSignificantTermsProvider from 'ui/agg_types/buckets/significant_terms';
-import AggTypesBucketsGeoHashProvider from 'ui/agg_types/buckets/geo_hash';
+import IndexedArray from '../indexed_array';
+import '../agg_types/agg_params';
+import AggTypesMetricsCountProvider from '../agg_types/metrics/count';
+import AggTypesMetricsAvgProvider from '../agg_types/metrics/avg';
+import AggTypesMetricsSumProvider from '../agg_types/metrics/sum';
+import AggTypesMetricsMedianProvider from '../agg_types/metrics/median';
+import AggTypesMetricsMinProvider from '../agg_types/metrics/min';
+import AggTypesMetricsMaxProvider from '../agg_types/metrics/max';
+import AggTypesMetricsStdDeviationProvider from '../agg_types/metrics/std_deviation';
+import AggTypesMetricsCardinalityProvider from '../agg_types/metrics/cardinality';
+import AggTypesMetricsPercentilesProvider from '../agg_types/metrics/percentiles';
+import AggTypesMetricsPercentileRanksProvider from '../agg_types/metrics/percentile_ranks';
+import AggTypesBucketsDateHistogramProvider from '../agg_types/buckets/date_histogram';
+import AggTypesBucketsHistogramProvider from '../agg_types/buckets/histogram';
+import AggTypesBucketsRangeProvider from '../agg_types/buckets/range';
+import AggTypesBucketsDateRangeProvider from '../agg_types/buckets/date_range';
+import AggTypesBucketsIpRangeProvider from '../agg_types/buckets/ip_range';
+import AggTypesBucketsTermsProvider from '../agg_types/buckets/terms';
+import AggTypesBucketsFiltersProvider from '../agg_types/buckets/filters';
+import AggTypesBucketsSignificantTermsProvider from '../agg_types/buckets/significant_terms';
+import AggTypesBucketsGeoHashProvider from '../agg_types/buckets/geo_hash';
 export default function AggTypeService(Private) {
 
   let aggs = {

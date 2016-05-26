@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import BoundToConfigObjProvider from 'ui/bound_to_config_obj';
-import StringifyTypesNumeralProvider from 'ui/stringify/types/_numeral';
+import BoundToConfigObjProvider from '../../bound_to_config_obj';
+import StringifyTypesNumeralProvider from '../../stringify/types/_numeral';
 export default function PercentFormatProvider(Private) {
   let BoundToConfigObj = Private(BoundToConfigObjProvider);
   let Numeral = Private(StringifyTypesNumeralProvider);

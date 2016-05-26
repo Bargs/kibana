@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import expect from 'expect.js';
-import parse from 'ui/utils/range';
+import parse from '../../utils/range';
 describe('Range parsing utility', function () {
 
   it('throws an error for inputs that are not formatted properly', function () {

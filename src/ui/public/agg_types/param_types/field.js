@@ -1,7 +1,7 @@
-import { SavedObjectNotFound } from 'ui/errors';
+import { SavedObjectNotFound } from '../../errors';
 import _ from 'lodash';
-import editorHtml from 'ui/agg_types/controls/field.html';
-import AggTypesParamTypesBaseProvider from 'ui/agg_types/param_types/base';
+import editorHtml from '../../agg_types/controls/field.html';
+import AggTypesParamTypesBaseProvider from '../../agg_types/param_types/base';
 export default function FieldAggParamFactory(Private) {
 
   let BaseAggParam = Private(AggTypesParamTypesBaseProvider);

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import RegistryFieldFormatsProvider from 'ui/registry/field_formats';
+import RegistryFieldFormatsProvider from '../registry/field_formats';
 export default function AggConfigFactory(Private, fieldTypeFilter) {
   let fieldFormats = Private(RegistryFieldFormatsProvider);
 

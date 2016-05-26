@@ -1,4 +1,4 @@
-import diff from 'ui/utils/diff_object';
+import diff from '../../utils/diff_object';
 import expect from 'expect.js';
 import _ from 'lodash';
 

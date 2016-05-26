@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import $ from 'jquery';
 import L from 'leaflet';
-import VislibVisualizationsMarkerTypesScaledCirclesProvider from 'ui/vislib/visualizations/marker_types/scaled_circles';
-import VislibVisualizationsMarkerTypesShadedCirclesProvider from 'ui/vislib/visualizations/marker_types/shaded_circles';
-import VislibVisualizationsMarkerTypesGeohashGridProvider from 'ui/vislib/visualizations/marker_types/geohash_grid';
-import VislibVisualizationsMarkerTypesHeatmapProvider from 'ui/vislib/visualizations/marker_types/heatmap';
+import VislibVisualizationsMarkerTypesScaledCirclesProvider from '../../vislib/visualizations/marker_types/scaled_circles';
+import VislibVisualizationsMarkerTypesShadedCirclesProvider from '../../vislib/visualizations/marker_types/shaded_circles';
+import VislibVisualizationsMarkerTypesGeohashGridProvider from '../../vislib/visualizations/marker_types/geohash_grid';
+import VislibVisualizationsMarkerTypesHeatmapProvider from '../../vislib/visualizations/marker_types/heatmap';
 export default function MapFactory(Private) {
 
   let defaultMapZoom = 2;
