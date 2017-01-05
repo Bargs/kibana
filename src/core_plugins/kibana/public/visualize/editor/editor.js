@@ -5,6 +5,7 @@ import 'plugins/kibana/visualize/editor/agg_filter';
 import 'ui/visualize';
 import 'ui/collapsible_sidebar';
 import 'ui/share';
+import 'ui/query_bar';
 import chrome from 'ui/chrome';
 import angular from 'angular';
 import { Notifier } from 'ui/notify/notifier';
@@ -22,6 +23,8 @@ import { VisualizeConstants } from '../visualize_constants';
 import { documentationLinks } from 'ui/documentation_links/documentation_links';
 import { KibanaParsedUrl } from 'ui/url/kibana_parsed_url';
 import { absoluteToParsedUrl } from 'ui/url/absolute_to_parsed_url';
+import { addNode, toKueryExpression, fromKueryExpression, filterToKueryAST } from 'ui/kuery';
+import { migrateLegacyQuery } from 'ui/utils/migrateLegacyQuery';
 
 uiRoutes
 .when(VisualizeConstants.CREATE_PATH, {
@@ -69,7 +72,7 @@ uiModules
   };
 });
 
-function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kbnUrl, courier, Private, Promise, kbnBaseUrl) {
+function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kbnUrl, courier, Private, Promise, config, kbnBaseUrl) {
   const docTitle = Private(DocTitleProvider);
   const brushEvent = Private(UtilsBrushEventProvider);
   const queryFilter = Private(FilterBarQueryFilterProvider);
@@ -137,7 +140,7 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
   const stateDefaults = {
     uiState: savedVis.uiStateJSON ? JSON.parse(savedVis.uiStateJSON) : {},
     linked: !!savedVis.savedSearchId,
-    query: searchSource.getOwn('query') || { query_string: { query: '*' } },
+    query: searchSource.getOwn('query') || { query: '', language: config.get('search:queryLanguage') },
     filters: searchSource.getOwn('filter') || [],
     vis: savedVisState
   };
@@ -200,6 +203,24 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
 
     editableVis.listeners.click = vis.listeners.click = filterBarClickHandler($state);
     editableVis.listeners.brush = vis.listeners.brush = brushEvent($state);
+
+    $scope.$watch('$state.$newFilters', function (filters = []) {
+      // need to convert filters generated from user interaction with viz into kuery AST
+      // normally these would be handled by the filter bar directive
+      if ($state.query.language === 'kuery') {
+        const kueryAST = fromKueryExpression($state.query.query);
+
+        const newKueryAST = filters.reduce((currentAST, filter) => {
+          return addNode(currentAST, filterToKueryAST(filter));
+        }, kueryAST);
+
+        $scope.fetchWithNewQuery({ query: toKueryExpression(newKueryAST), language: 'kuery' });
+      }
+    });
+
+    $scope.$watch('state.query', (newQuery) => {
+      $state.query = migrateLegacyQuery(newQuery);
+    });
 
     // track state of editable vis vs. "actual" vis
     $scope.stageEditableVis = transferVisState(editableVis, vis, true);
@@ -298,6 +319,17 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
     if ($scope.vis.type.requiresSearch) {
       courier.fetch();
     }
+  };
+
+  $scope.fetchWithNewQuery = function (query) {
+    // reset state if language changes
+    if ($state.query.language && $state.query.language !== query.language) {
+      $state.filters = [];
+      $state.$newFilters = [];
+    }
+
+    $state.query = query;
+    $scope.fetch();
   };
 
   /**
