@@ -1,0 +1,55 @@
+Query
+  = head:Clause tail:(whitespace Clause)* {
+      var result = [head], i;
+
+      for (i = 0; i < tail.length; i++) {
+        result.push(tail[i][1])
+      }
+
+      return result;
+    }
+    / '' { return [];}
+
+Clause
+  = operators:[-]* body:Term {
+    if (operators[0] === '-') {
+      body.negate = true;
+    }
+    else {
+      body.negate = false;
+    }
+    return body;
+  }
+
+Term
+  = field:string ':' value:string {
+
+    return {
+      type: 'match',
+      params: {
+        field: field,
+        value: value,
+      }
+    };
+  }
+  / field:string ':[' gt:string ' to ' lt:string ']' {
+    return {
+      type: 'range',
+      params: {
+        field: field,
+        gt: gt,
+        lt: lt
+      }
+    }
+  }
+
+
+integer "integer"
+  = digits:[0-9]+ { return parseInt(digits.join(''), 10); }
+
+whitespace
+  = [ \t\n\r]+
+
+string
+  = string:[^\[\]()"',:=\ \t]+ { return string.join(''); }
+

@@ -6,6 +6,7 @@ import chrome from 'ui/chrome';
 
 import 'plugins/kibana/dashboard/grid';
 import 'plugins/kibana/dashboard/panel/panel';
+import 'ui/query_bar';
 
 import { SavedObjectNotFound } from 'ui/errors';
 import { getDashboardTitle, getUnsavedChangesWarningMessage } from './dashboard_strings';
@@ -25,6 +26,8 @@ import { notify } from 'ui/notify';
 import './panel/get_object_loaders_for_dashboard';
 import { documentationLinks } from 'ui/documentation_links/documentation_links';
 import { showCloneModal } from './top_nav/show_clone_modal';
+import { kueryASTUtils, toKueryExpression, fromKueryExpression, filterToKueryAST } from 'ui/kuery';
+import { migrateLegacyQuery } from '../../../../ui/public/utils/migrateLegacyQuery.js';
 
 const app = uiModules.get('app/dashboard', [
   'elasticsearch',
@@ -80,6 +83,7 @@ app.directive('dashboardApp', function ($injector) {
   const quickRanges = $injector.get('quickRanges');
   const kbnUrl = $injector.get('kbnUrl');
   const confirmModal = $injector.get('confirmModal');
+  const config = $injector.get('config');
   const Private = $injector.get('Private');
   const brushEvent = Private(UtilsBrushEventProvider);
   const filterBarClickHandler = Private(FilterBarClickHandlerProvider);
@@ -128,7 +132,10 @@ app.directive('dashboardApp', function ($injector) {
         updateState();
       });
 
-      dashboardState.applyFilters(dashboardState.getQuery(), filterBar.getFilters());
+      dashboardState.applyFilters(
+        dashboardState.getQuery() || { query: '', language: config.get('search:queryLanguage') },
+        filterBar.getFilters()
+      );
       let pendingVisCount = _.size(dashboardState.getPanels());
 
       timefilter.enabled = true;
@@ -181,6 +188,16 @@ app.directive('dashboardApp', function ($injector) {
         $scope.refresh();
       };
 
+      $scope.fetchWithNewQuery = function (query) {
+        // reset state if language changes
+        if ($scope.model.query.language && $scope.model.query.language !== query.language) {
+          filterBar.removeAll();
+        }
+
+        $scope.model.query = query;
+        $scope.filterResults();
+      };
+
       // called by the saved-object-finder when a user clicks a vis
       $scope.addVis = function (hit, showToast = true) {
         pendingVisCount++;
@@ -225,6 +242,28 @@ app.directive('dashboardApp', function ($injector) {
         dashboardState.removePanel(panelIndex);
         $scope.indexPatterns = dashboardState.getPanelIndexPatterns();
       };
+
+      $scope.$watch('model.query', (newQuery) => {
+        $scope.model.query = migrateLegacyQuery(newQuery);
+        dashboardState.applyFilters($scope.model.query, filterBar.getFilters());
+      });
+
+      $scope.$watch(() => dashboardState.getAppState().$newFilters, function (filters) {
+        // need to convert filters generated from user interaction with viz into kuery AST
+        // normally these would be handled by the filter bar directive
+        if ($scope.model.query.language === 'kuery') {
+          let kueryAST = fromKueryExpression($scope.model.query.query);
+
+          _.map(filters, (filter) => {
+            kueryAST = kueryASTUtils.addNode(
+              kueryAST,
+              filterToKueryAST(filter)
+            );
+          });
+
+          $scope.fetchWithNewQuery({ query: toKueryExpression(kueryAST), language: 'kuery' });
+        }
+      });
 
       $scope.$listen(timefilter, 'fetch', $scope.refresh);
 

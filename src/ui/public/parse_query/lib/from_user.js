@@ -1,8 +1,6 @@
 import _ from 'lodash';
-import { DecorateQueryProvider } from 'ui/courier/data_source/_decorate_query';
 
-export function ParseQueryLibFromUserProvider(es, Private) {
-  const decorateQuery = Private(DecorateQueryProvider);
+export function ParseQueryLibFromUserProvider() {
 
   /**
    * Take text from the user and make it into a query object
@@ -10,19 +8,14 @@ export function ParseQueryLibFromUserProvider(es, Private) {
    * @returns {object}
    */
   return function (text) {
-    function getQueryStringQuery(text) {
-      return decorateQuery({ query_string: { query: text } });
-    }
+    const matchAll = '';
 
-    const matchAll = getQueryStringQuery('*');
-
-    // If we get an empty object, treat it as a *
     if (_.isObject(text)) {
-      if (Object.keys(text).length) {
-        return text;
-      } else {
+      // If we get an empty object, treat it as a *
+      if (!Object.keys(text).length) {
         return matchAll;
       }
+      return text;
     }
 
     // Nope, not an object.
@@ -33,10 +26,10 @@ export function ParseQueryLibFromUserProvider(es, Private) {
       try {
         return JSON.parse(text);
       } catch (e) {
-        return getQueryStringQuery(text);
+        return text;
       }
     } else {
-      return getQueryStringQuery(text);
+      return text;
     }
   };
 }
