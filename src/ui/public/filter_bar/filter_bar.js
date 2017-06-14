@@ -9,7 +9,6 @@ import { FilterBarLibExtractTimeFilterProvider } from 'ui/filter_bar/lib/extract
 import { FilterBarLibFilterOutTimeBasedFilterProvider } from 'ui/filter_bar/lib/filter_out_time_based_filter';
 import { FilterBarLibChangeTimeFilterProvider } from 'ui/filter_bar/lib/change_time_filter';
 import { FilterBarQueryFilterProvider } from 'ui/filter_bar/query_filter';
-import { compareFilters } from './lib/compare_filters';
 import { uiModules } from 'ui/modules';
 
 export { disableFilter, enableFilter, toggleFilterDisabled } from './lib/disable_filter';
@@ -29,7 +28,9 @@ module.directive('filterBar', function (Private, Promise, getAppState) {
     template,
     restrict: 'E',
     scope: {
-      indexPatterns: '='
+      indexPatterns: '=',
+      addedFilters: '=',
+      onApplyFilters: '&',
     },
     link: function ($scope) {
       // bind query filter actions to the scope
@@ -54,7 +55,7 @@ module.directive('filterBar', function (Private, Promise, getAppState) {
       };
 
       $scope.applyFilters = function (filters) {
-        addAndInvertFilters(filterAppliedAndUnwrap(filters));
+        $scope.onApplyFilters({ $filters: filterAppliedAndUnwrap(filters) });
         $scope.newFilters = [];
 
         // change time filter
@@ -103,8 +104,8 @@ module.directive('filterBar', function (Private, Promise, getAppState) {
         $scope.state = appState;
       });
 
-      $scope.$watch('state.$newFilters', function (filters) {
-        if (!filters) return;
+      $scope.$watch('addedFilters', function (filters) {
+        if (_.isEmpty(filters)) return;
 
         // If filters is not undefined and the length is greater than
         // one we need to set the newFilters attribute and allow the
@@ -133,26 +134,9 @@ module.directive('filterBar', function (Private, Promise, getAppState) {
             return filters;
           })
           .then(filterOutTimeBasedFilter)
-          .then(addAndInvertFilters);
+          .then((filter) => $scope.onApplyFilters({ $filters: [filter] }));
         }
       });
-
-      function addAndInvertFilters(filters) {
-        const existingFilters = queryFilter.getFilters();
-        const inversionFilters = _.filter(existingFilters, (existingFilter) => {
-          const newMatchingFilter = _.find(filters, _.partial(compareFilters, existingFilter));
-          return newMatchingFilter
-            && newMatchingFilter.meta
-            && existingFilter.meta
-            && existingFilter.meta.negate !== newMatchingFilter.meta.negate;
-        });
-        const newFilters = _.reject(filters, (filter) => {
-          return _.find(inversionFilters, _.partial(compareFilters, filter));
-        });
-
-        _.forEach(inversionFilters, $scope.invertFilter);
-        $scope.addFilters(newFilters);
-      }
 
       function updateFilters() {
         const filters = queryFilter.getFilters();

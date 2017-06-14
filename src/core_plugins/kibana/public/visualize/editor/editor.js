@@ -23,6 +23,7 @@ import { VisualizeConstants } from '../visualize_constants';
 import { documentationLinks } from 'ui/documentation_links/documentation_links';
 import { kueryASTUtils, toKueryExpression, fromKueryExpression, filterToKueryAST } from 'ui/kuery';
 import { migrateLegacyQuery } from '../../../../../ui/public/utils/migrateLegacyQuery.js';
+import { QueryManagerProvider } from '../../../../../ui/public/query_manager';
 
 uiRoutes
 .when(VisualizeConstants.CREATE_PATH, {
@@ -75,6 +76,7 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
   const brushEvent = Private(UtilsBrushEventProvider);
   const queryFilter = Private(FilterBarQueryFilterProvider);
   const filterBarClickHandler = Private(FilterBarClickHandlerProvider);
+  const queryManager = Private(QueryManagerProvider);
 
   const notify = new Notifier({
     location: 'Visualization Editor'
@@ -174,6 +176,8 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
     $scope.state = $state;
     $scope.queryDocLinks = documentationLinks.query;
     $scope.dateDocLinks = documentationLinks.date;
+    $scope.newFilters = [];
+    $scope.queryManager = queryManager;
 
     // Create a PersistedState instance.
     $scope.uiState = $state.makeStateful('uiState');
@@ -199,10 +203,12 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
     });
     $scope.$on('$destroy', () => stateMonitor.destroy());
 
-    editableVis.listeners.click = vis.listeners.click = filterBarClickHandler($state);
+    editableVis.listeners.click = vis.listeners.click = filterBarClickHandler($state, addNewFilters);
     editableVis.listeners.brush = vis.listeners.brush = brushEvent($state);
 
-    $scope.$watch('$state.$newFilters', function (filters) {
+    function addNewFilters(filters) {
+      if (_.isEmpty(filters)) return;
+
       // need to convert filters generated from user interaction with viz into kuery AST
       // normally these would be handled by the filter bar directive
       if ($state.query.language === 'kuery') {
@@ -217,7 +223,11 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
 
         $scope.fetchWithNewQuery({ query: toKueryExpression(kueryAST), language: 'kuery' });
       }
-    });
+
+      if ($state.query.language === 'lucene') {
+        $scope.newFilters = filters;
+      }
+    }
 
     $scope.$watch('state.query', (newQuery) => {
       $state.query = migrateLegacyQuery(newQuery);

@@ -249,6 +249,8 @@ app.directive('dashboardApp', function ($injector) {
       });
 
       $scope.$watch(() => dashboardState.getAppState().$newFilters, function (filters) {
+        if (_.isEmpty(filters)) return;
+
         // need to convert filters generated from user interaction with viz into kuery AST
         // normally these would be handled by the filter bar directive
         if ($scope.model.query.language === 'kuery') {
@@ -262,6 +264,10 @@ app.directive('dashboardApp', function ($injector) {
           });
 
           $scope.fetchWithNewQuery({ query: toKueryExpression(kueryAST), language: 'kuery' });
+        }
+
+        if ($scope.model.query.language === 'lucene') {
+          $scope.newFilters = filters;
         }
       });
 

@@ -46,8 +46,9 @@
 
   <!-- Filters. -->
   <filter-bar
-    state="state"
     index-patterns="[indexPattern]"
+    added-filters="newFilters"
+    on-apply-filters="queryManager.addAndInvertLegacyFilters(state, $filters)"
     ng-if="state.query.language === 'lucene'"
   ></filter-bar>
 

@@ -4,7 +4,7 @@ import { uniqFilters } from './lib/uniq_filters';
 import { findByParam } from 'ui/utils/find_by_param';
 
 export function FilterBarClickHandlerProvider(Notifier) {
-  return function ($state) {
+  return function ($state, cb) {
     return function (event, simulate) {
       const notify = new Notifier({
         location: 'Filter bar'
@@ -59,7 +59,7 @@ export function FilterBarClickHandlerProvider(Notifier) {
         filters = dedupFilters($state.filters, uniqFilters(filters), { negate: true });
         // We need to add a bunch of filter deduping here.
         if (!simulate) {
-          $state.$newFilters = filters;
+          cb(filters);
         }
 
         return filters;
