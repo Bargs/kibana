@@ -1,11 +1,10 @@
-import * as compound from './compound';
-import * as match from './match';
-import * as range from './range';
+import * as functionType from './function';
+import * as literal from './literal';
+import * as namedArg from './named_arg';
 
 export const nodeTypes = {
-  compound,
-  match,
-  range,
+  function: functionType,
+  literal,
+  namedArg,
 };
-
 

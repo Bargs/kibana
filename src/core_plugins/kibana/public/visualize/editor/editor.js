@@ -23,8 +23,8 @@ import { VisualizeConstants } from '../visualize_constants';
 import { documentationLinks } from 'ui/documentation_links/documentation_links';
 import { KibanaParsedUrl } from 'ui/url/kibana_parsed_url';
 import { absoluteToParsedUrl } from 'ui/url/absolute_to_parsed_url';
-import { addNode, toKueryExpression, fromKueryExpression, filterToKueryAST } from 'ui/kuery';
 import { migrateLegacyQuery } from 'ui/utils/migrateLegacyQuery';
+import { QueryManagerProvider } from 'ui/query_manager';
 
 uiRoutes
 .when(VisualizeConstants.CREATE_PATH, {
@@ -165,6 +165,7 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
 
     return appState;
   }());
+  const queryManager = Private(QueryManagerProvider)($state);
 
   function init() {
     // export some objects
@@ -206,20 +207,15 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
 
     $scope.$watch('$state.$newFilters', function (filters = []) {
       // need to convert filters generated from user interaction with viz into kuery AST
-      // normally these would be handled by the filter bar directive
-      if ($state.query.language === 'kuery') {
-        const kueryAST = fromKueryExpression($state.query.query);
-
-        const newKueryAST = filters.reduce((currentAST, filter) => {
-          return addNode(currentAST, filterToKueryAST(filter));
-        }, kueryAST);
-
-        $scope.fetchWithNewQuery({ query: toKueryExpression(newKueryAST), language: 'kuery' });
-      }
+      // These are handled by the filter bar directive when lucene is the query language
+      Promise.all(filters.map(queryManager.addLegacyFilter))
+      .then($scope.fetch);
     });
 
     $scope.$watch('state.query', (newQuery) => {
       $state.query = migrateLegacyQuery(newQuery);
+
+      $scope.fetch();
     });
 
     // track state of editable vis vs. "actual" vis
@@ -321,7 +317,7 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
     }
   };
 
-  $scope.fetchWithNewQuery = function (query) {
+  $scope.updateQuery = function (query) {
     // reset state if language changes
     if ($state.query.language && $state.query.language !== query.language) {
       $state.filters = [];
@@ -329,7 +325,6 @@ function VisEditor($rootScope, $scope, $route, timefilter, AppState, $window, kb
     }
 
     $state.query = query;
-    $scope.fetch();
   };
 
   /**

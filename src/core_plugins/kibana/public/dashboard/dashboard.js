@@ -26,9 +26,8 @@ import { notify } from 'ui/notify';
 import './panel/get_object_loaders_for_dashboard';
 import { documentationLinks } from 'ui/documentation_links/documentation_links';
 import { showCloneModal } from './top_nav/show_clone_modal';
-import { addNode, toKueryExpression, fromKueryExpression, filterToKueryAST, nodeTypes } from 'ui/kuery';
 import { migrateLegacyQuery } from 'ui/utils/migrateLegacyQuery';
-import { FilterManagerProvider } from 'ui/filter_manager';
+import { QueryManagerProvider } from 'ui/query_manager';
 import { ESC_KEY_CODE } from 'ui_framework/services';
 
 const app = uiModules.get('app/dashboard', [
@@ -94,7 +93,6 @@ app.directive('dashboardApp', function ($injector) {
     restrict: 'E',
     controllerAs: 'dashboardApp',
     controller: function ($scope, $rootScope, $route, $routeParams, $location, getAppState, $compile, dashboardConfig) {
-      const filterManager = Private(FilterManagerProvider);
       const filterBar = Private(FilterBarQueryFilterProvider);
       const docTitle = Private(DocTitleProvider);
       const notify = new Notifier({ location: 'Dashboard' });
@@ -106,6 +104,7 @@ app.directive('dashboardApp', function ($injector) {
       }
 
       const dashboardState = new DashboardState(dash, AppState, dashboardConfig);
+      const queryManager = Private(QueryManagerProvider)(dashboardState.getAppState());
 
       // The 'previouslyStored' check is so we only update the time filter on dashboard open, not during
       // normal cross app navigation.
@@ -243,19 +242,8 @@ app.directive('dashboardApp', function ($injector) {
       };
 
       $scope.filter = function (field, value, operator, index) {
-        if ($scope.model.query.language === 'lucene') {
-          filterManager.add(field, value, operator, index);
-        }
-
-        if ($scope.model.query.language === 'kuery') {
-          const fieldName = _.isObject(field) ? field.name : field;
-          const kueryAST = fromKueryExpression($scope.model.query.query);
-          const newAST = addNode(
-            kueryAST,
-            nodeTypes.match.buildNode({ field: fieldName, values: value, operation: operator })
-          );
-          $scope.updateQuery({ query: toKueryExpression(newAST), language: 'kuery' });
-        }
+        queryManager.add(field, value, operator, index);
+        updateState();
       };
 
 
@@ -267,16 +255,11 @@ app.directive('dashboardApp', function ($injector) {
 
       $scope.$watch(() => dashboardState.getAppState().$newFilters, function (filters = []) {
         // need to convert filters generated from user interaction with viz into kuery AST
-        // normally these would be handled by the filter bar directive
-        if ($scope.model.query.language === 'kuery') {
-          const kueryAST = fromKueryExpression($scope.model.query.query);
-
-          const newKueryAST = filters.reduce((currentAST, filter) => {
-            return addNode(currentAST, filterToKueryAST(filter));
-          }, kueryAST);
-
-          $scope.updateQuery({ query: toKueryExpression(newKueryAST), language: 'kuery' });
-        }
+        // These are handled by the filter bar directive when lucene is the query language
+        Promise.all(filters.map(queryManager.addLegacyFilter))
+        .then(updateState)
+        .then(() => dashboardState.applyFilters($scope.model.query, filterBar.getFilters()))
+        .then($scope.refresh());
       });
 
       $scope.$listen(timefilter, 'fetch', $scope.refresh);

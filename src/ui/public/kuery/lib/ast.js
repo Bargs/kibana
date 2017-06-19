@@ -21,19 +21,18 @@ export function toKueryExpression(node) {
   return nodeTypes[node.type].toKueryExpression(node);
 }
 
-export function toElasticsearchQuery(node) {
+export function toElasticsearchQuery(node, indexPattern) {
   if (!node || !node.type) {
-    return toElasticsearchQuery(nodeTypes.compound.buildNode({ children: [] }));
+    return toElasticsearchQuery(nodeTypes.function.buildNode('and', false, []));
   }
 
-  return nodeTypes[node.type].toElasticsearchQuery(node);
+  return nodeTypes[node.type].toElasticsearchQuery(node, indexPattern);
 }
 
-export function addNode(rootNode, newNode) {
-  if (rootNode.type !== 'compound') {
-    throw new Error('Nodes can only be added to compound nodes');
+export function addNode(node, newNode) {
+  if (!_.has(nodeTypes[node.type], 'addNode')) {
+    throw new Error(`Cannot append to nodes of type ${node.type}`);
   }
 
-  rootNode.params.children = [...rootNode.params.children, newNode];
-  return rootNode;
+  return nodeTypes[node.type].addNode(node, newNode);
 }

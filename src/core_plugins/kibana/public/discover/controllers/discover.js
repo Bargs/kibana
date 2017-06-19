@@ -21,16 +21,15 @@ import { DocTitleProvider } from 'ui/doc_title';
 import { UtilsBrushEventProvider } from 'ui/utils/brush_event';
 import PluginsKibanaDiscoverHitSortFnProvider from 'plugins/kibana/discover/_hit_sort_fn';
 import { FilterBarQueryFilterProvider } from 'ui/filter_bar/query_filter';
-import { FilterManagerProvider } from 'ui/filter_manager';
 import { AggTypesBucketsIntervalOptionsProvider } from 'ui/agg_types/buckets/_interval_options';
 import { stateMonitorFactory } from 'ui/state_management/state_monitor_factory';
 import uiRoutes from 'ui/routes';
 import { uiModules } from 'ui/modules';
 import indexTemplate from 'plugins/kibana/discover/index.html';
 import { StateProvider } from 'ui/state_management/state';
-import { addNode, toKueryExpression, fromKueryExpression, nodeTypes } from 'ui/kuery';
 import { documentationLinks } from 'ui/documentation_links/documentation_links';
 import { migrateLegacyQuery } from 'ui/utils/migrateLegacyQuery';
+import { QueryManagerProvider } from 'ui/query_manager';
 
 const app = uiModules.get('apps/discover', [
   'kibana/notify',
@@ -100,7 +99,6 @@ function discoverController($scope, config, courier, $route, $window, Notifier,
   const brushEvent = Private(UtilsBrushEventProvider);
   const HitSortFn = Private(PluginsKibanaDiscoverHitSortFnProvider);
   const queryFilter = Private(FilterBarQueryFilterProvider);
-  const filterManager = Private(FilterManagerProvider);
 
   const notify = new Notifier({
     location: 'Discover'
@@ -160,6 +158,7 @@ function discoverController($scope, config, courier, $route, $window, Notifier,
   };
 
   const $state = $scope.state = new AppState(getStateDefaults());
+  const queryManager = Private(QueryManagerProvider)($state);
 
   const getFieldCounts = async () => {
     // the field counts aren't set until we have the data back,
@@ -329,6 +328,8 @@ function discoverController($scope, config, courier, $route, $window, Notifier,
 
       $scope.$watch('state.query', (newQuery) => {
         $state.query = migrateLegacyQuery(newQuery);
+
+        $scope.fetch();
       });
 
       $scope.$watchMulti([
@@ -433,14 +434,13 @@ function discoverController($scope, config, courier, $route, $window, Notifier,
     .catch(notify.error);
   };
 
-  $scope.fetchWithNewQuery = function (query) {
+  $scope.updateQuery = function (query) {
     // reset state if language changes
     if ($state.query.language && $state.query.language !== query.language) {
       $state.filters = [];
     }
 
     $state.query = query;
-    $scope.fetch();
   };
 
   $scope.searchSource.onBeginSegmentedFetch(function (segmented) {
@@ -575,19 +575,7 @@ function discoverController($scope, config, courier, $route, $window, Notifier,
   // TODO: On array fields, negating does not negate the combination, rather all terms
   $scope.filterQuery = function (field, values, operation) {
     $scope.indexPattern.popularizeField(field, 1);
-
-    if ($state.query.language === 'lucene') {
-      filterManager.add(field, values, operation, $state.index);
-    }
-
-    if ($state.query.language === 'kuery') {
-      const kueryAST = fromKueryExpression($state.query.query);
-      const newAST = addNode(
-        kueryAST,
-        nodeTypes.match.buildNode({ field: field.name, values, operation })
-      );
-      $scope.fetchWithNewQuery({ query: toKueryExpression(newAST), language: 'kuery' });
-    }
+    queryManager.add(field, values, operation, $scope.indexPattern.id);
   };
 
   $scope.addColumn = function addColumn(columnName) {

@@ -1,62 +1,169 @@
-Query
-  = head:Clause tail:(whitespace Clause)* {
-    var result = [head], i;
+/*
+ * Kuery parser
+ */
 
-    for (i = 0; i < tail.length; i++) {
-      result.push(tail[i][1])
+/*
+ * Initialization block
+ */
+{
+ function ltoo (literal) {
+  return {type: 'literal', value: literal}
+ }
+
+ function simpleLocation (location) {
+  // Returns an object representing the position of the function within the expression,
+  // demarcated by the position of its first character and last character. We calculate these values
+  // using the offset because the expression could span multiple lines, and we don't want to deal
+  // with column and line values.
+  return {
+   min: location.start.offset,
+   max: location.end.offset
+  }
+ }
+
+ function buildAndQuery(children, location, text, serializeStyle) {
+  return {
+    type: 'function',
+    function: 'and',
+    arguments: children,
+    location: simpleLocation(location),
+    text: text,
+    serializeStyle: serializeStyle,
+  }
+ }
+
+ function buildNotQuery(children, location, text, serializeStyle) {
+   return {
+      type: 'function',
+      function: 'not',
+      arguments: children,
+      location: simpleLocation(location),
+      text: text,
+      serializeStyle: serializeStyle,
+   }
+ }
+}
+
+start
+  = space? query:OrQuery space? {
+    if (query.type === 'literal') {
+      return buildAndQuery([query], location(), text(), 'implicit');
     }
+    return query;
+  }
+  / whitespace:[\ \t\r\n]* {
+    return {
+      type: 'function',
+      function: 'is',
+      arguments: [ltoo('*')],
+      location: simpleLocation(location()),
+      text: text(),
+      serializeStyle: 'operator',
+    };
+  }
 
-    return {
-      type: 'compound',
-      negate: false,
-      params: {
-        children: result
-      }
+OrQuery
+  = left:AndQuery space+ 'or'i space+ right:OrQuery {
+	  return {
+      type: 'function',
+      function: 'or',
+      arguments: [left, right],
+	    location: simpleLocation(location()),
+      text: text(),
+      serializeStyle: 'operator',
     };
   }
-  / '' {
-    return {
-      type: 'compound',
-      negate: false,
-      params: {
-        children: []
-      }
-    };
+  / AndQuery
+
+AndQuery
+  = left:NegatedClause space+ 'and'i space+ right:AndQuery {
+    return buildAndQuery([left, right], location(), text(), 'operator');
   }
+  / left:NegatedClause space+ !'or' right:AndQuery {
+    return buildAndQuery([left, right], location(), text(), 'implicit');
+  }
+  / NegatedClause
+
+NegatedClause
+  = [-] clause:Clause {
+  	return buildNotQuery([clause], location(), text(), 'operator');
+  }
+  / Clause
 
 Clause
-  = operators:[-]* body:Term {
-    if (operators[0] === '-') {
-      body.negate = true;
-    }
-    else {
-      body.negate = false;
-    }
-    return body;
+  = '(' subQuery:start ')' {
+    return subQuery;
   }
+  / Term
 
 Term
-  = field:literal ':' value:literal {
-
+  = field:literal_arg_type ':' value:literal_arg_type {
     return {
-      type: 'match',
-      params: {
-        field: field,
-        value: value,
-      }
+      type: 'function',
+      function: 'is',
+      arguments: [field, value],
+      location: simpleLocation(location()),
+      text: text(),
+      serializeStyle: 'operator',
     };
   }
-  / field:literal ':[' gt:literal ' to ' lt:literal ']' {
+  / field:literal_arg_type ':[' gt:literal_arg_type ' to 'i lt:literal_arg_type ']' {
     return {
-      type: 'range',
-      params: {
-        field: field,
-        gt: gt,
-        lt: lt
-      }
+      type: 'function',
+      function: 'range',
+      arguments: [field, gt, lt],
+      location: simpleLocation(location()),
+      text: text(),
+      serializeStyle: 'shorthand',
     }
   }
+  / function
+  / literal_arg_type
 
+function_name
+ = first:[a-zA-Z]+ rest:[.a-zA-Z0-9_-]* { return first.join('') + rest.join('') }
+
+function "function"
+ = name:function_name space? '(' space? arg_list:arg_list? space? ')' {
+  var result = {
+    type: 'function',
+    function: name,
+    arguments: arg_list || [],
+    location: simpleLocation(location()),
+    text: text()
+  }
+
+  return result;
+ }
+
+arg_list
+ = first:argument rest:(space? ',' space? arg:argument {return arg})* space? ','? {
+  return [first].concat(rest);
+ }
+
+argument
+ = name:function_name space? '=' space? value:arg_type {
+  return {
+   type: 'namedArg',
+   name: name,
+   value: value,
+   location: simpleLocation(location()),
+   text: text()
+  }
+ }
+ / element:arg_type {return element}
+
+arg_type
+ = OrQuery
+ / literal_arg_type
+
+literal_arg_type
+ = literal:literal {
+  var result = ltoo(literal);
+  result.location = simpleLocation(location()),
+  result.text = text();
+  return result;
+ }
 
  /* ----- Core types ----- */
 
@@ -74,7 +181,7 @@ literal "literal"
    return Number(result)
   }
 
-whitespace
+space
  = [\ \t\r\n]+
 
 dq_char

@@ -11,7 +11,7 @@ export function FilterBarPushFilterProvider() {
       const pendingFilter = { meta: { negate: negate, index: index } };
       _.extend(pendingFilter, filter);
       filters.push(pendingFilter);
-      $state.filters = filters;
+      $state.$newFilters = filters;
     };
   };
 }

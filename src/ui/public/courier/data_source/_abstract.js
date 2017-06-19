@@ -330,7 +330,7 @@ export function AbstractDataSourceProvider(Private, Promise, PromiseEmitter, con
           _.set(flatState.body, '_source.includes', remainingFields);
         }
 
-        flatState.body.query = buildESQuery(flatState.query, flatState.filters);
+        flatState.body.query = buildESQuery(flatState.index, flatState.query, flatState.filters);
 
         if (flatState.highlightAll != null) {
           if (flatState.highlightAll && flatState.body.query) {

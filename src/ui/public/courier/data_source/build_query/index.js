@@ -12,10 +12,10 @@ export function BuildESQueryProvider(Private) {
    * @param queries - an array of query objects. Each query has a language property and a query property.
    * @param filters - an array of filter objects
    */
-  function buildESQuery(queries, filters) {
+  function buildESQuery(indexPattern, queries, filters) {
     const queriesByLanguage = groupBy(queries, 'language');
 
-    const kueryQuery = buildQueryFromKuery(queriesByLanguage.kuery);
+    const kueryQuery = buildQueryFromKuery(indexPattern, queriesByLanguage.kuery);
     const luceneQuery = buildQueryFromLucene(queriesByLanguage.lucene, decorateQuery);
     const filterQuery = buildQueryFromFilters(filters, decorateQuery);
 
