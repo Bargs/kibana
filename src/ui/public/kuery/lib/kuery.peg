@@ -63,7 +63,7 @@ start
   }
 
 OrQuery
-  = left:AndQuery space+ 'or'i space+ right:OrQuery {
+  = left:AndQuery space 'or'i space right:OrQuery {
 	  return {
       type: 'function',
       function: 'or',
@@ -76,10 +76,10 @@ OrQuery
   / AndQuery
 
 AndQuery
-  = left:NegatedClause space+ 'and'i space+ right:AndQuery {
+  = left:NegatedClause space 'and'i space right:AndQuery {
     return buildAndQuery([left, right], location(), text(), 'operator');
   }
-  / left:NegatedClause space+ !'or' right:AndQuery {
+  / left:NegatedClause space !'or' right:AndQuery {
     return buildAndQuery([left, right], location(), text(), 'implicit');
   }
   / NegatedClause
@@ -107,7 +107,7 @@ Term
       serializeStyle: 'operator',
     };
   }
-  / field:literal_arg_type ':[' gt:literal_arg_type ' to 'i lt:literal_arg_type ']' {
+  / field:literal_arg_type ':[' space? gt:literal_arg_type space 'to'i space lt:literal_arg_type space? ']' {
     return {
       type: 'function',
       function: 'range',
