@@ -50,9 +50,13 @@ export function toKueryExpression(node) {
   }
   const [ fieldNameArg, ...args ] = node.arguments;
   const fieldName = ast.toKueryExpression(fieldNameArg);
+  const { gte, lte } = extractArguments(args);
 
-  const { gt, lt } = extractArguments(args);
-  return `${fieldName}:[${ast.toKueryExpression(gt)} to ${ast.toKueryExpression(lt)}]`;
+  if (_.isUndefined(gte) || _.isUndefined(lte)) {
+    throw new Error(`Shorthand syntax only supports inclusive ranges`);
+  }
+
+  return `${fieldName}:[${ast.toKueryExpression(gte)} to ${ast.toKueryExpression(lte)}]`;
 }
 
 function extractArguments(args) {
