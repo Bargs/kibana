@@ -60,7 +60,7 @@ function extractArguments(args) {
     throw new Error('range ends cannot be both inclusive and exclusive');
   }
 
-  const unnamedArgOrder = ['gt', 'lt'];
+  const unnamedArgOrder = ['gte', 'lte'];
 
   return args.reduce((acc, arg, index) => {
     if (arg.type === 'namedArg') {
