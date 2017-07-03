@@ -23,15 +23,6 @@ typeahead.directive('kbnTypeahead', function () {
       self.focused = false;
       self.mousedOver = false;
 
-      // instantiate history and add items to the scope
-      self.history = new PersistedLog('typeahead:' + $scope.historyKey, {
-        maxLength: config.get('history:limit'),
-        filterDuplicates: true
-      });
-
-      $scope.items = self.history.get();
-      $scope.filteredItems = [];
-
       self.setInputModel = function (model) {
         $scope.inputModel = model;
 
@@ -193,6 +184,16 @@ typeahead.directive('kbnTypeahead', function () {
       self.isVisible = function () {
         return !self.hidden && ($scope.filteredItems.length > 0) && (self.focused || self.mousedOver);
       };
+
+      $scope.$watch('historyKey', () => {
+        self.history = new PersistedLog('typeahead:' + $scope.historyKey, {
+          maxLength: config.get('history:limit'),
+          filterDuplicates: true
+        });
+
+        $scope.items = self.history.get();
+        $scope.filteredItems = [];
+      });
 
       // handle updates to parent scope history
       $scope.$watch('items', function () {
