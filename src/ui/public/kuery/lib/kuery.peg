@@ -118,7 +118,7 @@ Term
     }
   }
   / function
-  / literal_arg_type
+  / !Keywords literal:literal_arg_type { return literal; }
 
 function_name
  = first:[a-zA-Z]+ rest:[.a-zA-Z0-9_-]* { return first.join('') + rest.join('') }
@@ -164,6 +164,9 @@ literal_arg_type
   result.text = text();
   return result;
  }
+
+Keywords
+  = 'and' / 'or'
 
  /* ----- Core types ----- */
 
