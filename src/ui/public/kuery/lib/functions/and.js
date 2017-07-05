@@ -44,7 +44,3 @@ export function toKueryExpression(node) {
     return queryStrings.join(' and ');
   }
 }
-
-export function addNode(node, newNode) {
-  return nodeTypes.function.buildNode('and', node.arguments.concat(newNode));
-}

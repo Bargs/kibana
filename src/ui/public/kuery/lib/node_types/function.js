@@ -34,13 +34,3 @@ export function toKueryExpression(node) {
 
   return `${node.function}(${functionArguments.join(', ')})`;
 }
-
-export function addNode(node, newNode) {
-  const kueryFunction = functions[node.function];
-
-  if (!_.has(kueryFunction, 'addNode')) {
-    throw new Error(`Cannot append nodes to function "${node.function}"`);
-  }
-
-  return kueryFunction.addNode(node, newNode);
-}

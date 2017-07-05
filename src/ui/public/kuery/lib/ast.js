@@ -28,11 +28,3 @@ export function toElasticsearchQuery(node, indexPattern) {
 
   return nodeTypes[node.type].toElasticsearchQuery(node, indexPattern);
 }
-
-export function addNode(node, newNode) {
-  if (!_.has(nodeTypes[node.type], 'addNode')) {
-    throw new Error(`Cannot append to nodes of type ${node.type}`);
-  }
-
-  return nodeTypes[node.type].addNode(node, newNode);
-}
