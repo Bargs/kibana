@@ -26,9 +26,12 @@ export function toElasticsearchQuery(node, indexPattern) {
     return { match_all: {} };
   }
   else if (fieldName === '*' && !_.isUndefined(value)) {
+    const userQuery = String(value);
+    const query = isDoubleQuoted(userQuery) ? userQuery : `"${userQuery}"`;
+
     return {
-      query_string: {
-        query: value,
+      simple_query_string: {
+        query,
         all_fields: true
       }
     };
@@ -58,3 +61,8 @@ export function toKueryExpression(node) {
 
   return `${fieldName}:${value}`;
 }
+
+function isDoubleQuoted(str) {
+  return (_.first(str) === '"') && (_.last(str) === '"');
+}
+

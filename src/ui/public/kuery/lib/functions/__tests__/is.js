@@ -52,10 +52,10 @@ describe('kuery functions', function () {
         expect(_.isEqual(expected, result)).to.be(true);
       });
 
-      it('should return an ES query_string query in all fields mode when fieldName is "*"', function () {
+      it('should return an ES simple_query_string query in all fields mode when fieldName is "*"', function () {
         const expected = {
-          query_string: {
-            query: 200,
+          simple_query_string: {
+            query: '"200"',
             all_fields: true,
           }
         };
@@ -63,6 +63,20 @@ describe('kuery functions', function () {
         const node = nodeTypes.function.buildNode('is', '*', 200);
         const result = is.toElasticsearchQuery(node, indexPattern);
         expect(_.isEqual(expected, result)).to.be(true);
+      });
+
+      // See discussion about kuery escaping for background:
+      // https://github.com/elastic/kibana/pull/12624#issuecomment-312650307
+      it('should ensure the simple_query_string query is wrapped in double quotes to force a phrase search', function () {
+        const node = nodeTypes.function.buildNode('is', '*', '+response');
+        const result = is.toElasticsearchQuery(node, indexPattern);
+        expect(result.simple_query_string.query).to.be('"+response"');
+      });
+
+      it('already double quoted phrases should not get wrapped a second time', function () {
+        const node = nodeTypes.function.buildNode('is', '*', '"+response"');
+        const result = is.toElasticsearchQuery(node, indexPattern);
+        expect(result.simple_query_string.query).to.be('"+response"');
       });
 
       it('should return an ES exists query when no value is provided', function () {
