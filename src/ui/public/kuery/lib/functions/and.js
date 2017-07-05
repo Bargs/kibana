@@ -25,6 +25,10 @@ export function toElasticsearchQuery(node, indexPattern) {
 }
 
 export function toKueryExpression(node) {
+  if (!['operator', 'implicit'].includes(node.serializeStyle)) {
+    throw new Error(`Cannot serialize "and" function as "${node.serializeStyle}"`);
+  }
+
   const queryStrings = (node.arguments || []).map((arg) => {
     const query = ast.toKueryExpression(arg);
     if (arg.type === 'function' && arg.function === 'or') {
