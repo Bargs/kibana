@@ -52,8 +52,8 @@ describe('kuery functions', function () {
         const node = nodeTypes.function.buildNode('not', literalFoo);
         const result = not.toElasticsearchQuery(node, indexPattern);
         const resultChild = result.bool.must_not;
-        expect(resultChild).to.have.property('query_string');
-        expect(resultChild.query_string.all_fields).to.be(true);
+        expect(resultChild).to.have.property('simple_query_string');
+        expect(resultChild.simple_query_string.all_fields).to.be(true);
       });
 
     });
