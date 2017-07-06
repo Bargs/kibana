@@ -53,6 +53,96 @@ describe('kuery AST API', function () {
       expectDeepEqual(actual, expected);
     });
 
+    it('should return an "and" function for single literals', function () {
+      const expected = nodeTypes.function.buildNode('and', [nodeTypes.literal.buildNode('foo')]);
+      const actual = fromKueryExpressionNoMeta('foo');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should ignore extraneous whitespace at the beginning and end of the query', function () {
+      const expected = nodeTypes.function.buildNode('and', [nodeTypes.literal.buildNode('foo')]);
+      const actual = fromKueryExpressionNoMeta('  foo ');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('literals and queries separated by whitespace should be joined by an implicit "and"', function () {
+      const expected = nodeTypes.function.buildNode('and', [
+        nodeTypes.literal.buildNode('foo'),
+        nodeTypes.literal.buildNode('bar'),
+      ]);
+      const actual = fromKueryExpressionNoMeta('foo bar');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should also support explicit "and"s as a binary operator', function () {
+      const expected = nodeTypes.function.buildNode('and', [
+        nodeTypes.literal.buildNode('foo'),
+        nodeTypes.literal.buildNode('bar'),
+      ], 'operator');
+      const actual = fromKueryExpressionNoMeta('foo and bar');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should also support "and" as a function', function () {
+      const expected = nodeTypes.function.buildNode('and', [
+        nodeTypes.literal.buildNode('foo'),
+        nodeTypes.literal.buildNode('bar'),
+      ], 'function');
+      const actual = fromKueryExpressionNoMeta('and(foo, bar)');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should support "or" as a binary operator', function () {
+      const expected = nodeTypes.function.buildNode('or', [
+        nodeTypes.literal.buildNode('foo'),
+        nodeTypes.literal.buildNode('bar'),
+      ], 'operator');
+      const actual = fromKueryExpressionNoMeta('foo or bar');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should support "or" as a function', function () {
+      const expected = nodeTypes.function.buildNode('or', [
+        nodeTypes.literal.buildNode('foo'),
+        nodeTypes.literal.buildNode('bar'),
+      ], 'function');
+      const actual = fromKueryExpressionNoMeta('or(foo, bar)');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should support negation of queries with a "-" prefix', function () {
+      const expected = nodeTypes.function.buildNode('not',
+        nodeTypes.function.buildNode('or', [
+          nodeTypes.literal.buildNode('foo'),
+          nodeTypes.literal.buildNode('bar'),
+        ], 'function'), 'operator');
+      const actual = fromKueryExpressionNoMeta('-or(foo, bar)');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('"and" should have a higher precedence than "or"', function () {
+      const expected = nodeTypes.function.buildNode('or', [
+        nodeTypes.literal.buildNode('foo'),
+        nodeTypes.function.buildNode('and', [
+          nodeTypes.literal.buildNode('bar'),
+          nodeTypes.literal.buildNode('baz'),
+        ], 'operator')
+      ], 'operator');
+      const actual = fromKueryExpressionNoMeta('foo or bar and baz');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should support grouping to override default precedence', function () {
+      const expected = nodeTypes.function.buildNode('and', [
+        nodeTypes.function.buildNode('or', [
+          nodeTypes.literal.buildNode('foo'),
+          nodeTypes.literal.buildNode('bar'),
+        ], 'operator'),
+        nodeTypes.literal.buildNode('baz'),
+      ], 'operator');
+      const actual = fromKueryExpressionNoMeta('(foo or bar) and baz');
+      expectDeepEqual(actual, expected);
+    });
   });
 
   describe('toKueryExpression', function () {

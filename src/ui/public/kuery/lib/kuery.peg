@@ -41,34 +41,12 @@
       max: location.end.offset
     }
   }
-
-  function buildAndQuery(children, location, text, serializeStyle) {
-    return {
-      type: 'function',
-      function: 'and',
-      arguments: children,
-      location: simpleLocation(location),
-      text: text,
-      serializeStyle: serializeStyle,
-    }
-  }
-
-  function buildNotQuery(children, location, text, serializeStyle) {
-    return {
-      type: 'function',
-      function: 'not',
-      arguments: children,
-      location: simpleLocation(location),
-      text: text,
-      serializeStyle: serializeStyle,
-    }
-  }
 }
 
 start
   = space? query:OrQuery space? {
     if (query.type === 'literal') {
-      return buildAndQuery([query], location(), text(), 'implicit');
+      return addMeta(nodeTypes.function.buildNode('and', [query], 'implicit'), text(), location());
     }
     return query;
   }
@@ -78,29 +56,22 @@ start
 
 OrQuery
   = left:AndQuery space 'or'i space right:OrQuery {
-	  return {
-      type: 'function',
-      function: 'or',
-      arguments: [left, right],
-	    location: simpleLocation(location()),
-      text: text(),
-      serializeStyle: 'operator',
-    };
+    return addMeta(nodeTypes.function.buildNode('or', [left, right], 'operator'), text(), location());
   }
   / AndQuery
 
 AndQuery
   = left:NegatedClause space 'and'i space right:AndQuery {
-    return buildAndQuery([left, right], location(), text(), 'operator');
+    return addMeta(nodeTypes.function.buildNode('and', [left, right], 'operator'), text(), location());
   }
   / left:NegatedClause space !'or' right:AndQuery {
-    return buildAndQuery([left, right], location(), text(), 'implicit');
+    return addMeta(nodeTypes.function.buildNode('and', [left, right], 'implicit'), text(), location());
   }
   / NegatedClause
 
 NegatedClause
   = [-] clause:Clause {
-  	return buildNotQuery([clause], location(), text(), 'operator');
+    return addMeta(nodeTypes.function.buildNode('not', clause, 'operator'), text(), location());
   }
   / Clause
 
@@ -139,15 +110,7 @@ function_name
 
 function "function"
  = name:function_name space? '(' space? arg_list:arg_list? space? ')' {
-  var result = {
-    type: 'function',
-    function: name,
-    arguments: arg_list || [],
-    location: simpleLocation(location()),
-    text: text()
-  }
-
-  return result;
+  return addMeta(nodeTypes.function.buildNode(name, arg_list || [], 'function'), text(), location());
  }
 
 arg_list
@@ -173,9 +136,7 @@ arg_type
 
 literal_arg_type
  = literal:literal {
-  var result = ltoo(literal);
-  result.location = simpleLocation(location()),
-  result.text = text();
+  var result = addMeta(ltoo(literal), text(), location());
   return result;
  }
 
