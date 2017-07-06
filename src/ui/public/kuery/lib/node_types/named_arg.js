@@ -1,10 +1,11 @@
 import * as ast from '../ast';
+import { nodeTypes } from '../node_types';
 
 export function buildNode(name, value) {
   return {
     type: 'namedArg',
     name,
-    value,
+    value: nodeTypes.literal.buildNode(value),
   };
 }
 

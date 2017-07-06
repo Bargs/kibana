@@ -8,7 +8,7 @@ export function buildNodeParams(fieldName, params) {
   const args = _.pairs(params).map((argument) => {
     const [ name, value ] = argument;
     const latLon = `${value.lat}, ${value.lon}`;
-    return nodeTypes.namedArg.buildNode(name, nodeTypes.literal.buildNode(latLon));
+    return nodeTypes.namedArg.buildNode(name, latLon);
   });
 
   return {

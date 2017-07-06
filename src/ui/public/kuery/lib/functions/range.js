@@ -8,7 +8,7 @@ export function buildNodeParams(fieldName, params, serializeStyle = 'shorthand')
   const fieldNameArg = nodeTypes.literal.buildNode(fieldName);
   const args = _.pairs(params).map((argument) => {
     const [ name, value ] = argument;
-    return nodeTypes.namedArg.buildNode(name, nodeTypes.literal.buildNode(value));
+    return nodeTypes.namedArg.buildNode(name, value);
   });
 
   // we only support inclusive ranges in the shorthand syntax currently
