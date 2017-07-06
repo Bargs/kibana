@@ -6,42 +6,63 @@
  * Initialization block
  */
 {
- function ltoo (literal) {
-  return {type: 'literal', value: literal}
- }
+  var nodeTypes = options.helpers.nodeTypes;
 
- function simpleLocation (location) {
-  // Returns an object representing the position of the function within the expression,
-  // demarcated by the position of its first character and last character. We calculate these values
-  // using the offset because the expression could span multiple lines, and we don't want to deal
-  // with column and line values.
-  return {
-   min: location.start.offset,
-   max: location.end.offset
+  if (options.includeMetadata === undefined) {
+    options.includeMetadata = true;
   }
- }
 
- function buildAndQuery(children, location, text, serializeStyle) {
-  return {
-    type: 'function',
-    function: 'and',
-    arguments: children,
-    location: simpleLocation(location),
-    text: text,
-    serializeStyle: serializeStyle,
+  function ltoo(literal) {
+    return {type: 'literal', value: literal}
   }
- }
 
- function buildNotQuery(children, location, text, serializeStyle) {
-   return {
+  function addMeta(source, text, location) {
+    if (options.includeMetadata) {
+      return Object.assign(
+        {},
+        source,
+        {
+          text: text,
+          location: simpleLocation(location),
+        }
+      );
+    }
+
+    return source;
+  }
+
+  function simpleLocation(location) {
+    // Returns an object representing the position of the function within the expression,
+    // demarcated by the position of its first character and last character. We calculate these values
+    // using the offset because the expression could span multiple lines, and we don't want to deal
+    // with column and line values.
+    return {
+      min: location.start.offset,
+      max: location.end.offset
+    }
+  }
+
+  function buildAndQuery(children, location, text, serializeStyle) {
+    return {
+      type: 'function',
+      function: 'and',
+      arguments: children,
+      location: simpleLocation(location),
+      text: text,
+      serializeStyle: serializeStyle,
+    }
+  }
+
+  function buildNotQuery(children, location, text, serializeStyle) {
+    return {
       type: 'function',
       function: 'not',
       arguments: children,
       location: simpleLocation(location),
       text: text,
       serializeStyle: serializeStyle,
-   }
- }
+    }
+  }
 }
 
 start
@@ -52,14 +73,7 @@ start
     return query;
   }
   / whitespace:[\ \t\r\n]* {
-    return {
-      type: 'function',
-      function: 'is',
-      arguments: [ltoo('*')],
-      location: simpleLocation(location()),
-      text: text(),
-      serializeStyle: 'operator',
-    };
+    return addMeta(nodeTypes.function.buildNode('is', '*'), text(), location());
   }
 
 OrQuery

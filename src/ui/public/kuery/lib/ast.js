@@ -5,12 +5,14 @@ import { nodeTypes } from './node_types';
 
 const kueryParser = PEG.buildParser(grammar);
 
-export function fromKueryExpression(expression) {
+export function fromKueryExpression(expression, parseOptions = {}) {
   if (_.isUndefined(expression)) {
     throw new Error('expression must be a string, got undefined instead');
   }
 
-  return kueryParser.parse(expression);
+  parseOptions = Object.assign({}, parseOptions, { helpers: { nodeTypes } });
+
+  return kueryParser.parse(expression, parseOptions);
 }
 
 export function toKueryExpression(node) {
