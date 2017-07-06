@@ -23,7 +23,7 @@ export function toKueryExpression(node) {
 
 export function toElasticsearchQuery(node, indexPattern) {
   if (!node || !node.type) {
-    return toElasticsearchQuery(nodeTypes.function.buildNode('and', false, []));
+    return toElasticsearchQuery(nodeTypes.function.buildNode('and', []));
   }
 
   return nodeTypes[node.type].toElasticsearchQuery(node, indexPattern);
