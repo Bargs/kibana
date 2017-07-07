@@ -206,4 +206,38 @@ describe('kuery AST API', function () {
 
   });
 
+  describe('symmetry of to/fromKueryExpression', function () {
+
+    it('converting from an expression to an AST and back again should result in the same expression', function () {
+      function testExpression(expression) {
+        expect(ast.toKueryExpression(ast.fromKueryExpression(expression))).to.be(expression);
+      }
+
+      testExpression('');
+      testExpression('    ');
+      testExpression('foo');
+      testExpression('foo bar');
+      testExpression('foo 200');
+      testExpression('bytes:[1000 to 8000]');
+      testExpression('bytes:[1000 TO    8000]');
+      testExpression('range(bytes, gt=1000, lt=8000)');
+      testExpression('range(bytes, gt=1000, lte=8000)');
+      testExpression('range(bytes, gte=1000, lt=8000)');
+      testExpression('range(bytes, gte=1000, lte=8000)');
+      testExpression('response:200');
+      testExpression('"response":200');
+      testExpression('response:"200"');
+      testExpression('"response":"200"');
+      testExpression('is(response, 200)');
+      testExpression('-is(response, 200)');
+      testExpression('foo or is(tic, tock) or foo:bar');
+      testExpression('or(foo, is(tic, tock), foo:bar)');
+      testExpression('foo is(tic, tock) foo:bar');
+      testExpression('foo and is(tic, tock) and foo:bar');
+      testExpression('(foo or is(tic, tock)) and foo:bar');
+      testExpression('-(foo or is(tic, tock)) and foo:bar');
+    });
+
+  });
+
 });
