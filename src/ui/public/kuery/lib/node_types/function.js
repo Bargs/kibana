@@ -12,6 +12,16 @@ export function buildNode(functionName, ...functionArgs) {
   };
 }
 
+// Mainly only useful in the grammar where we'll already have real argument nodes in hand
+export function buildNodeWithArgumentNodes(functionName, argumentNodes, serializeStyle = 'function') {
+  return {
+    type: 'function',
+    function: functionName,
+    arguments: argumentNodes,
+    serializeStyle
+  };
+}
+
 export function toElasticsearchQuery(node, indexPattern) {
   const kueryFunction = functions[node.function];
   return kueryFunction.toElasticsearchQuery(node, indexPattern);

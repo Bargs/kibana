@@ -110,7 +110,7 @@ function_name
 
 function "function"
  = name:function_name space? '(' space? arg_list:arg_list? space? ')' {
-  return addMeta(nodeTypes.function.buildNode(name, arg_list || [], 'function'), text(), location());
+  return addMeta(nodeTypes.function.buildNodeWithArgumentNodes(name, arg_list || [], 'function'), text(), location());
  }
 
 arg_list
