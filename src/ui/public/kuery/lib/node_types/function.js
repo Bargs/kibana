@@ -5,6 +5,10 @@ import { nodeTypes } from '../node_types';
 export function buildNode(functionName, ...functionArgs) {
   const kueryFunction = functions[functionName];
 
+  if (_.isUndefined(kueryFunction)) {
+    throw new Error(`Unknown function "${functionName}"`);
+  }
+
   return {
     type: 'function',
     function: functionName,
@@ -14,6 +18,10 @@ export function buildNode(functionName, ...functionArgs) {
 
 // Mainly only useful in the grammar where we'll already have real argument nodes in hand
 export function buildNodeWithArgumentNodes(functionName, argumentNodes, serializeStyle = 'function') {
+  if (_.isUndefined(functions[functionName])) {
+    throw new Error(`Unknown function "${functionName}"`);
+  }
+
   return {
     type: 'function',
     function: functionName,

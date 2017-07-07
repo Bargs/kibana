@@ -137,6 +137,33 @@ describe('kuery AST API', function () {
       const actual = fromKueryExpressionNoMeta('(foo or bar) and baz');
       expectDeepEqual(actual, expected);
     });
+
+    it('should support a shorthand operator syntax for "is" functions', function () {
+      const expected = nodeTypes.function.buildNode('is', 'foo', 'bar', 'operator');
+      const actual = fromKueryExpressionNoMeta('foo:bar');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should support a shorthand syntax for inclusive "range" functions', function () {
+      const argumentNodes = [
+        nodeTypes.literal.buildNode('bytes'),
+        nodeTypes.literal.buildNode(1000),
+        nodeTypes.literal.buildNode(8000),
+      ];
+      const expected = nodeTypes.function.buildNodeWithArgumentNodes('range', argumentNodes, 'shorthand');
+      const actual = fromKueryExpressionNoMeta('bytes:[1000 to 8000]');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should support functions with named arguments', function () {
+      const expected = nodeTypes.function.buildNode('range', 'bytes', { gt: 1000, lt: 8000 }, 'function');
+      const actual = fromKueryExpressionNoMeta('range(bytes, gt=1000, lt=8000)');
+      expectDeepEqual(actual, expected);
+    });
+
+    it('should throw an error for unknown functions', function () {
+      expect(ast.fromKueryExpression).withArgs('foo(bar)').to.throwException(/Unknown function "foo"/);
+    });
   });
 
   describe('toKueryExpression', function () {

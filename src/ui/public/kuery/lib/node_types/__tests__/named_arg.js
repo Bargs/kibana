@@ -1,5 +1,7 @@
 import expect from 'expect.js';
+import { expectDeepEqual } from '../../../../../../test_utils/expect_deep_equal.js';
 import * as namedArg from '../named_arg';
+import { nodeTypes } from '../../node_types';
 
 describe('kuery node types', function () {
 
@@ -16,6 +18,13 @@ describe('kuery node types', function () {
         const literalValue = result.value;
         expect(literalValue).to.have.property('type', 'literal');
         expect(literalValue).to.have.property('value', 'foo');
+      });
+
+      it('should support literal nodes as values', function () {
+        const value = nodeTypes.literal.buildNode('foo');
+        const result = namedArg.buildNode('fieldName', value);
+        expect(result.value).to.be(value);
+        expectDeepEqual(result.value, value);
       });
 
     });

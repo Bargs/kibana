@@ -12,10 +12,6 @@
     options.includeMetadata = true;
   }
 
-  function ltoo(literal) {
-    return {type: 'literal', value: literal}
-  }
-
   function addMeta(source, text, location) {
     if (options.includeMetadata) {
       return Object.assign(
@@ -83,24 +79,10 @@ Clause
 
 Term
   = field:literal_arg_type ':' value:literal_arg_type {
-    return {
-      type: 'function',
-      function: 'is',
-      arguments: [field, value],
-      location: simpleLocation(location()),
-      text: text(),
-      serializeStyle: 'operator',
-    };
+    return addMeta(nodeTypes.function.buildNodeWithArgumentNodes('is', [field, value], 'operator'), text(), location());
   }
   / field:literal_arg_type ':[' space? gt:literal_arg_type space 'to'i space lt:literal_arg_type space? ']' {
-    return {
-      type: 'function',
-      function: 'range',
-      arguments: [field, gt, lt],
-      location: simpleLocation(location()),
-      text: text(),
-      serializeStyle: 'shorthand',
-    }
+    return addMeta(nodeTypes.function.buildNodeWithArgumentNodes('range', [field, gt, lt], 'shorthand'), text(), location());
   }
   / function
   / !Keywords literal:literal_arg_type { return literal; }
@@ -120,13 +102,7 @@ arg_list
 
 argument
  = name:function_name space? '=' space? value:arg_type {
-  return {
-   type: 'namedArg',
-   name: name,
-   value: value,
-   location: simpleLocation(location()),
-   text: text()
-  }
+  return addMeta(nodeTypes.namedArg.buildNode(name, value), text(), location());
  }
  / element:arg_type {return element}
 
@@ -136,7 +112,7 @@ arg_type
 
 literal_arg_type
  = literal:literal {
-  var result = addMeta(ltoo(literal), text(), location());
+  var result = addMeta(nodeTypes.literal.buildNode(literal), text(), location());
   return result;
  }
 
