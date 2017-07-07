@@ -4,14 +4,8 @@ import expect from 'expect.js';
 import { nodeTypes } from '../node_types';
 import StubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
 import ngMock from 'ng_mock';
+import { expectDeepEqual } from '../../../../../test_utils/expect_deep_equal.js';
 
-// expect.js's `eql` method provides nice error messages but sometimes misses things
-// since it only tests loose (==) equality. This function uses lodash's `isEqual` as a
-// second sanity check since it checks for strict equality.
-function expectDeepEqual(actual, expected) {
-  expect(actual).to.eql(expected);
-  expect(_.isEqual(actual, expected)).to.be(true);
-}
 
 // Helpful utility allowing us to test the PEG parser by simply checking for deep equality between
 // the nodes the parser generates and the nodes our constructor functions generate.
