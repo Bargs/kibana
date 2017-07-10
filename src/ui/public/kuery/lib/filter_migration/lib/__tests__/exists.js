@@ -19,15 +19,16 @@ describe('filter to kuery migration', function () {
       expect(result.arguments[0].value).to.be('foo');
     });
 
-    it('should return undefined if the given filter is not of type "exists"', function () {
+    it('should throw an exception if the given filter is not of type "exists"', function () {
       const filter = {
         meta: {
           type: 'foo'
         }
       };
 
-      expect(convertExistsFilter(filter)).to.be(undefined);
-
+      expect(convertExistsFilter).withArgs(filter).to.throwException(
+        /Expected filter of type "exists", got "foo"/
+      );
     });
 
   });

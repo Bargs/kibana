@@ -25,15 +25,16 @@ describe('filter to kuery migration', function () {
       expect(value).to.be('bar');
     });
 
-    it('should return undefined if the given filter is not of type "phrase"', function () {
+    it('should throw an exception if the given filter is not of type "phrase"', function () {
       const filter = {
         meta: {
           type: 'foo'
         }
       };
 
-      expect(convertPhraseFilter(filter)).to.be(undefined);
-
+      expect(convertPhraseFilter).withArgs(filter).to.throwException(
+        /Expected filter of type "phrase", got "foo"/
+      );
     });
 
   });

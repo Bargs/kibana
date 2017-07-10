@@ -36,15 +36,16 @@ describe('filter to kuery migration', function () {
       expect(argByName.bottomRight.value.value).to.be('30, 40');
     });
 
-    it('should return undefined if the given filter is not of type "geo_bounding_box"', function () {
+    it('should throw an exception if the given filter is not of type "geo_bounding_box"', function () {
       const filter = {
         meta: {
           type: 'foo'
         }
       };
 
-      expect(convertGeoBoundingBox(filter)).to.be(undefined);
-
+      expect(convertGeoBoundingBox).withArgs(filter).to.throwException(
+        /Expected filter of type "geo_bounding_box", got "foo"/
+      );
     });
 
   });

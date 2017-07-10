@@ -36,15 +36,16 @@ describe('filter to kuery migration', function () {
       expect(args[1].value).to.be('30, 40');
     });
 
-    it('should return undefined if the given filter is not of type "geo_polygon"', function () {
+    it('should throw an exception if the given filter is not of type "geo_polygon"', function () {
       const filter = {
         meta: {
           type: 'foo'
         }
       };
 
-      expect(convertGeoPolygon(filter)).to.be(undefined);
-
+      expect(convertGeoPolygon).withArgs(filter).to.throwException(
+        /Expected filter of type "geo_polygon", got "foo"/
+      );
     });
 
   });

@@ -30,15 +30,16 @@ describe('filter to kuery migration', function () {
       expect(argByName.lt.value.value).to.be(8000);
     });
 
-    it('should return undefined if the given filter is not of type "range"', function () {
+    it('should throw an exception if the given filter is not of type "range"', function () {
       const filter = {
         meta: {
           type: 'foo'
         }
       };
 
-      expect(convertRangeFilter(filter)).to.be(undefined);
-
+      expect(convertRangeFilter).withArgs(filter).to.throwException(
+        /Expected filter of type "range", got "foo"/
+      );
     });
 
   });
