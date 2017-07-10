@@ -117,12 +117,15 @@ describe('kuery AST API', function () {
     it('"and" should have a higher precedence than "or"', function () {
       const expected = nodeTypes.function.buildNode('or', [
         nodeTypes.literal.buildNode('foo'),
-        nodeTypes.function.buildNode('and', [
-          nodeTypes.literal.buildNode('bar'),
-          nodeTypes.literal.buildNode('baz'),
-        ], 'operator')
+        nodeTypes.function.buildNode('or', [
+          nodeTypes.function.buildNode('and', [
+            nodeTypes.literal.buildNode('bar'),
+            nodeTypes.literal.buildNode('baz'),
+          ], 'operator'),
+          nodeTypes.literal.buildNode('qux'),
+        ])
       ], 'operator');
-      const actual = fromKueryExpressionNoMeta('foo or bar and baz');
+      const actual = fromKueryExpressionNoMeta('foo or bar and baz or qux');
       expectDeepEqual(actual, expected);
     });
 
