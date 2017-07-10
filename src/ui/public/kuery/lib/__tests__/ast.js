@@ -218,7 +218,7 @@ describe('kuery AST API', function () {
 
   describe('symmetry of to/fromKueryExpression', function () {
 
-    it('converting from an expression to an AST and back again should result in the same expression', function () {
+    it('toKueryExpression and fromKueryExpression should be inverse operations', function () {
       function testExpression(expression) {
         expect(ast.toKueryExpression(ast.fromKueryExpression(expression))).to.be(expression);
       }
