@@ -257,9 +257,9 @@ app.directive('dashboardApp', function ($injector) {
         // need to convert filters generated from user interaction with viz into kuery AST
         // These are handled by the filter bar directive when lucene is the query language
         Promise.all(filters.map(queryManager.addLegacyFilter))
-        .then(updateState)
-        .then(() => dashboardState.applyFilters($scope.model.query, filterBar.getFilters()))
-        .then($scope.refresh());
+          .then(updateState)
+          .then(() => dashboardState.applyFilters($scope.model.query, filterBar.getFilters()))
+          .then($scope.refresh());
       });
 
       $scope.$listen(timefilter, 'fetch', $scope.refresh);
