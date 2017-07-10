@@ -16,7 +16,7 @@ export function fromKueryExpression(expression, parseOptions = {}) {
 }
 
 export function toKueryExpression(node) {
-  if (!node || !node.type) {
+  if (!node || !node.type || !nodeTypes[node.type]) {
     return '';
   }
 
@@ -24,7 +24,7 @@ export function toKueryExpression(node) {
 }
 
 export function toElasticsearchQuery(node, indexPattern) {
-  if (!node || !node.type) {
+  if (!node || !node.type || !nodeTypes[node.type]) {
     return toElasticsearchQuery(nodeTypes.function.buildNode('and', []));
   }
 

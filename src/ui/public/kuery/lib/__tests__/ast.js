@@ -1,5 +1,4 @@
 import * as ast from '../ast';
-import _ from 'lodash';
 import expect from 'expect.js';
 import { nodeTypes } from '../node_types';
 import StubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
@@ -175,15 +174,19 @@ describe('kuery AST API', function () {
       const node = nodeTypes.function.buildNode('exists', 'foo');
       const expected = nodeTypes.function.toKueryExpression(node);
       const result = ast.toKueryExpression(node);
-      expect(_.isEqual(expected, result)).to.be(true);
+      expectDeepEqual(result, expected);
     });
 
     it('should return an empty string for undefined nodes and unknown node types', function () {
       expect(ast.toKueryExpression()).to.be('');
 
-      const node = nodeTypes.function.buildNode('exists', 'foo');
-      delete node.type;
-      expect(ast.toKueryExpression(node)).to.be('');
+      const noTypeNode = nodeTypes.function.buildNode('exists', 'foo');
+      delete noTypeNode.type;
+      expect(ast.toKueryExpression(noTypeNode)).to.be('');
+
+      const unknownTypeNode = nodeTypes.function.buildNode('exists', 'foo');
+      unknownTypeNode.type = 'notValid';
+      expect(ast.toKueryExpression(unknownTypeNode)).to.be('');
     });
 
   });
@@ -194,17 +197,21 @@ describe('kuery AST API', function () {
       const node = nodeTypes.function.buildNode('exists', 'response');
       const expected = nodeTypes.function.toElasticsearchQuery(node, indexPattern);
       const result = ast.toElasticsearchQuery(node, indexPattern);
-      expect(_.isEqual(expected, result)).to.be(true);
+      expectDeepEqual(result, expected);
     });
 
     it('should return an empty "and" function for undefined nodes and unknown node types', function () {
       const expected = nodeTypes.function.toElasticsearchQuery(nodeTypes.function.buildNode('and', []));
 
-      expect(_.isEqual(ast.toElasticsearchQuery(), expected)).to.be(true);
+      expectDeepEqual(ast.toElasticsearchQuery(), expected);
 
-      const node = nodeTypes.function.buildNode('exists', 'foo');
-      delete node.type;
-      expect(_.isEqual(ast.toElasticsearchQuery(node), expected)).to.be(true);
+      const noTypeNode = nodeTypes.function.buildNode('exists', 'foo');
+      delete noTypeNode.type;
+      expectDeepEqual(ast.toElasticsearchQuery(noTypeNode), expected);
+
+      const unknownTypeNode = nodeTypes.function.buildNode('exists', 'foo');
+      unknownTypeNode.type = 'notValid';
+      expectDeepEqual(ast.toElasticsearchQuery(unknownTypeNode), expected);
     });
 
   });
