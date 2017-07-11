@@ -15,7 +15,7 @@ export function buildNodeParams(fieldName, points) {
 
 export function toElasticsearchQuery(node, indexPattern) {
   const [ fieldNameArg, ...points ] = node.arguments;
-  const fieldName = ast.toElasticsearchQuery(fieldNameArg);
+  const fieldName = nodeTypes.literal.toElasticsearchQuery(fieldNameArg);
   const field = indexPattern.fields.byName[fieldName];
   const queryParams = {
     points: points.map(ast.toElasticsearchQuery)
