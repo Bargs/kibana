@@ -1,7 +1,7 @@
 import * as ast from '../ast';
 import { nodeTypes } from '../node_types';
 
-export function buildNodeParams(children, serializeStyle = 'implicit') {
+export function buildNodeParams(children, serializeStyle = 'operator') {
   return {
     arguments: children,
     serializeStyle

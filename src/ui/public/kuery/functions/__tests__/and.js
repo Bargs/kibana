@@ -33,9 +33,9 @@ describe('kuery functions', function () {
         expect(actualChildNode2).to.be(childNode2);
       });
 
-      it('serializeStyle should default to "implicit"', function () {
+      it('serializeStyle should default to "operator"', function () {
         const { serializeStyle } = and.buildNodeParams([childNode1, childNode2]);
-        expect(serializeStyle).to.be('implicit');
+        expect(serializeStyle).to.be('operator');
       });
 
     });
@@ -65,8 +65,8 @@ describe('kuery functions', function () {
 
     describe('toKueryExpression', function () {
 
-      it('should serialize "and" nodes with an implicit syntax by default', function () {
-        const node = nodeTypes.function.buildNode('and', [childNode1, childNode2]);
+      it('should serialize "and" nodes with an implicit syntax when requested', function () {
+        const node = nodeTypes.function.buildNode('and', [childNode1, childNode2], 'implicit');
         const result = and.toKueryExpression(node);
         expect(result).to.be('"response":200 "extension":"jpg"');
       });
@@ -80,7 +80,7 @@ describe('kuery functions', function () {
       it('should wrap "or" sub-queries in parenthesis', function () {
         const orNode = nodeTypes.function.buildNode('or', [childNode1, childNode2], 'operator');
         const fooBarNode = nodeTypes.function.buildNode('is', 'foo', 'bar');
-        const andNode = nodeTypes.function.buildNode('and', [orNode, fooBarNode]);
+        const andNode = nodeTypes.function.buildNode('and', [orNode, fooBarNode], 'implicit');
 
         const result = and.toKueryExpression(andNode);
         expect(result).to.be('("response":200 or "extension":"jpg") "foo":"bar"');

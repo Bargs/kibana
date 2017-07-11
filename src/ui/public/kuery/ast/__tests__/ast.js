@@ -47,13 +47,13 @@ describe('kuery AST API', function () {
     });
 
     it('should return an "and" function for single literals', function () {
-      const expected = nodeTypes.function.buildNode('and', [nodeTypes.literal.buildNode('foo')]);
+      const expected = nodeTypes.function.buildNode('and', [nodeTypes.literal.buildNode('foo')], 'implicit');
       const actual = fromKueryExpressionNoMeta('foo');
       expectDeepEqual(actual, expected);
     });
 
     it('should ignore extraneous whitespace at the beginning and end of the query', function () {
-      const expected = nodeTypes.function.buildNode('and', [nodeTypes.literal.buildNode('foo')]);
+      const expected = nodeTypes.function.buildNode('and', [nodeTypes.literal.buildNode('foo')], 'implicit');
       const actual = fromKueryExpressionNoMeta('  foo ');
       expectDeepEqual(actual, expected);
     });
@@ -62,7 +62,7 @@ describe('kuery AST API', function () {
       const expected = nodeTypes.function.buildNode('and', [
         nodeTypes.literal.buildNode('foo'),
         nodeTypes.literal.buildNode('bar'),
-      ]);
+      ], 'implicit');
       const actual = fromKueryExpressionNoMeta('foo bar');
       expectDeepEqual(actual, expected);
     });
