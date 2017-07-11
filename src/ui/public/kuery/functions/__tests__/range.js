@@ -36,6 +36,9 @@ describe('kuery functions', function () {
         const result = range.buildNodeParams('bytes', givenParams);
         const { arguments: [ , ...params ] } = result;
 
+        expect(params).to.be.an('array');
+        expect(params).to.not.be.empty();
+
         params.map((param) => {
           expect(param).to.have.property('type', 'namedArg');
           expect(['gt', 'lt'].includes(param.name)).to.be(true);
