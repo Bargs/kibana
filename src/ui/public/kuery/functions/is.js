@@ -70,6 +70,6 @@ export function toKueryExpression(node) {
 }
 
 function isDoubleQuoted(str) {
-  return (_.first(str) === '"') && (_.last(str) === '"');
+  return str.startsWith('"') && str.endsWith('"');
 }
 
