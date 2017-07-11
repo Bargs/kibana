@@ -41,7 +41,7 @@ describe('kuery AST API', function () {
     });
 
     it('should return a match all "is" function for whitespace', function () {
-      const expected = nodeTypes.function.buildNode('is', '*');
+      const expected = nodeTypes.function.buildNode('is', '*', '*');
       const actual = fromKueryExpressionNoMeta('  ');
       expectDeepEqual(actual, expected);
     });

@@ -18,6 +18,11 @@ describe('kuery functions', function () {
 
     describe('buildNodeParams', function () {
 
+      it('fieldName and value should be required arguments', function () {
+        expect(is.buildNodeParams).to.throwException(/fieldName is a required argument/);
+        expect(is.buildNodeParams).withArgs('foo').to.throwException(/value is a required argument/);
+      });
+
       it('should return "arguments" and "serializeStyle" params', function () {
         const result = is.buildNodeParams('response', 200);
         expect(result).to.only.have.keys('arguments', 'serializeStyle');
@@ -42,12 +47,12 @@ describe('kuery functions', function () {
 
     describe('toElasticsearchQuery', function () {
 
-      it('should return an ES match_all query when fieldName is "*" and no value is provided', function () {
+      it('should return an ES match_all query when fieldName and value are both "*"', function () {
         const expected = {
           match_all: {}
         };
 
-        const node = nodeTypes.function.buildNode('is', '*');
+        const node = nodeTypes.function.buildNode('is', '*', '*');
         const result = is.toElasticsearchQuery(node, indexPattern);
         expect(_.isEqual(expected, result)).to.be(true);
       });
@@ -79,12 +84,12 @@ describe('kuery functions', function () {
         expect(result.simple_query_string.query).to.be('"+response"');
       });
 
-      it('should return an ES exists query when no value is provided', function () {
+      it('should return an ES exists query when value is "*"', function () {
         const expected = {
           exists: { field: 'response' }
         };
 
-        const node = nodeTypes.function.buildNode('is', 'response');
+        const node = nodeTypes.function.buildNode('is', 'response', '*');
         const result = is.toElasticsearchQuery(node, indexPattern);
         expect(_.isEqual(expected, result)).to.be(true);
       });

@@ -3,6 +3,13 @@ import * as literal from '../node_types/literal';
 import { getPhraseScript } from 'ui/filter_manager/lib/phrase';
 
 export function buildNodeParams(fieldName, value, serializeStyle = 'operator') {
+  if (_.isUndefined(fieldName)) {
+    throw new Error('fieldName is a required argument');
+  }
+  if (_.isUndefined(value)) {
+    throw new Error('value is a required argument');
+  }
+
   return {
     arguments: [literal.buildNode(fieldName), literal.buildNode(value)],
     serializeStyle
@@ -22,10 +29,10 @@ export function toElasticsearchQuery(node, indexPattern) {
       }
     };
   }
-  else if (fieldName === '*' && _.isUndefined(value)) {
+  else if (fieldName === '*' && value === '*') {
     return { match_all: {} };
   }
-  else if (fieldName === '*' && !_.isUndefined(value)) {
+  else if (fieldName === '*' && value !== '*') {
     const userQuery = String(value);
     const query = isDoubleQuoted(userQuery) ? userQuery : `"${userQuery}"`;
 
@@ -36,7 +43,7 @@ export function toElasticsearchQuery(node, indexPattern) {
       }
     };
   }
-  else if (fieldName !== '*' && _.isUndefined(value)) {
+  else if (fieldName !== '*' && value === '*') {
     return {
       exists: { field: fieldName }
     };
