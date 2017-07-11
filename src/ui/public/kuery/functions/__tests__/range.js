@@ -44,10 +44,10 @@ describe('kuery functions', function () {
         });
       });
 
-      it('serializeStyle should default to "shorthand"', function () {
+      it('serializeStyle should default to "operator"', function () {
         const result = range.buildNodeParams('bytes', { gte: 1000, lte: 8000 });
         const { serializeStyle } = result;
-        expect(serializeStyle).to.be('shorthand');
+        expect(serializeStyle).to.be('operator');
       });
 
       it('serializeStyle should be "function" if either end of the range is exclusive', function () {
@@ -85,8 +85,8 @@ describe('kuery functions', function () {
 
     describe('toKueryExpression', function () {
 
-      it('should serialize "range" nodes with a shorthand syntax', function () {
-        const node = nodeTypes.function.buildNode('range', 'bytes', { gte: 1000, lte: 8000 }, 'shorthand');
+      it('should serialize "range" nodes with an operator syntax', function () {
+        const node = nodeTypes.function.buildNode('range', 'bytes', { gte: 1000, lte: 8000 }, 'operator');
         const result = range.toKueryExpression(node);
         expect(result).to.be('"bytes":[1000 to 8000]');
       });
@@ -97,11 +97,11 @@ describe('kuery functions', function () {
         .withArgs(node).to.throwException(/Cannot serialize "range" function as "notValid"/);
       });
 
-      it('should not support exclusive ranges in the shorthand syntax', function () {
+      it('should not support exclusive ranges in the operator syntax', function () {
         const node = nodeTypes.function.buildNode('range', 'bytes', { gt: 1000, lt: 8000 });
-        node.serializeStyle = 'shorthand';
+        node.serializeStyle = 'operator';
         expect(range.toKueryExpression)
-        .withArgs(node).to.throwException(/Shorthand syntax only supports inclusive ranges/);
+        .withArgs(node).to.throwException(/Operator syntax only supports inclusive ranges/);
       });
 
     });

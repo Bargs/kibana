@@ -3,7 +3,7 @@ import { nodeTypes } from '../node_types';
 import * as ast from '../ast';
 import { getRangeScript } from 'ui/filter_manager/lib/range';
 
-export function buildNodeParams(fieldName, params, serializeStyle = 'shorthand') {
+export function buildNodeParams(fieldName, params, serializeStyle = 'operator') {
   params = _.pick(params, 'gt', 'lt', 'gte', 'lte');
   const fieldNameArg = nodeTypes.literal.buildNode(fieldName);
   const args = _.pairs(params).map((argument) => {
@@ -11,7 +11,7 @@ export function buildNodeParams(fieldName, params, serializeStyle = 'shorthand')
     return nodeTypes.namedArg.buildNode(name, value);
   });
 
-  // we only support inclusive ranges in the shorthand syntax currently
+  // we only support inclusive ranges in the operator syntax currently
   if (_.has(params, 'gt') || _.has(params, 'lt')) {
     serializeStyle = 'function';
   }
@@ -45,7 +45,7 @@ export function toElasticsearchQuery(node, indexPattern) {
 }
 
 export function toKueryExpression(node) {
-  if (node.serializeStyle !== 'shorthand') {
+  if (node.serializeStyle !== 'operator') {
     throw new Error(`Cannot serialize "range" function as "${node.serializeStyle}"`);
   }
   const [ fieldNameArg, ...args ] = node.arguments;
@@ -53,7 +53,7 @@ export function toKueryExpression(node) {
   const { gte, lte } = extractArguments(args);
 
   if (_.isUndefined(gte) || _.isUndefined(lte)) {
-    throw new Error(`Shorthand syntax only supports inclusive ranges`);
+    throw new Error(`Operator syntax only supports inclusive ranges`);
   }
 
   return `${fieldName}:[${ast.toKueryExpression(gte)} to ${ast.toKueryExpression(lte)}]`;

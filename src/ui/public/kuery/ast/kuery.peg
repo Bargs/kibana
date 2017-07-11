@@ -82,7 +82,7 @@ Term
     return addMeta(nodeTypes.function.buildNodeWithArgumentNodes('is', [field, value], 'operator'), text(), location());
   }
   / field:literal_arg_type ':[' space? gt:literal_arg_type space 'to'i space lt:literal_arg_type space? ']' {
-    return addMeta(nodeTypes.function.buildNodeWithArgumentNodes('range', [field, gt, lt], 'shorthand'), text(), location());
+    return addMeta(nodeTypes.function.buildNodeWithArgumentNodes('range', [field, gt, lt], 'operator'), text(), location());
   }
   / function
   / !Keywords literal:literal_arg_type { return literal; }

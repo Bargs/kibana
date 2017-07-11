@@ -146,13 +146,13 @@ describe('kuery AST API', function () {
       expectDeepEqual(actual, expected);
     });
 
-    it('should support a shorthand syntax for inclusive "range" functions', function () {
+    it('should support a shorthand operator syntax for inclusive "range" functions', function () {
       const argumentNodes = [
         nodeTypes.literal.buildNode('bytes'),
         nodeTypes.literal.buildNode(1000),
         nodeTypes.literal.buildNode(8000),
       ];
-      const expected = nodeTypes.function.buildNodeWithArgumentNodes('range', argumentNodes, 'shorthand');
+      const expected = nodeTypes.function.buildNodeWithArgumentNodes('range', argumentNodes, 'operator');
       const actual = fromKueryExpressionNoMeta('bytes:[1000 to 8000]');
       expectDeepEqual(actual, expected);
     });
