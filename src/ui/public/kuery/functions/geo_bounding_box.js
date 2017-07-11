@@ -17,11 +17,11 @@ export function buildNodeParams(fieldName, params) {
 
 export function toElasticsearchQuery(node, indexPattern) {
   const [ fieldNameArg, ...args ] = node.arguments;
-  const fieldName = ast.toElasticsearchQuery(fieldNameArg);
+  const fieldName = ast.toElasticsearchQuery(fieldNameArg, indexPattern);
   const field = indexPattern.fields.byName[fieldName];
   const queryParams = args.reduce((acc, arg) => {
     const snakeArgName = _.snakeCase(arg.name);
-    acc[snakeArgName] = ast.toElasticsearchQuery(arg);
+    acc[snakeArgName] = ast.toElasticsearchQuery(arg, indexPattern);
     return acc;
   }, {});
 
