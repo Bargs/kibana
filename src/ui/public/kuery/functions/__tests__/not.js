@@ -76,6 +76,16 @@ describe('kuery functions', function () {
         expect(not.toKueryExpression(notOrNode)).to.be('-("response":200 or "response":200)');
       });
 
+      it('should not wrap "and" and "or" sub-queries that use the function syntax', function () {
+        const andNode = nodeTypes.function.buildNode('and', [childNode, childNode], 'function');
+        const notAndNode = nodeTypes.function.buildNode('not', andNode, 'operator');
+        expect(not.toKueryExpression(notAndNode)).to.be('-and("response":200, "response":200)');
+
+        const orNode = nodeTypes.function.buildNode('or', [childNode, childNode], 'function');
+        const notOrNode = nodeTypes.function.buildNode('not', orNode, 'operator');
+        expect(not.toKueryExpression(notOrNode)).to.be('-or("response":200, "response":200)');
+      });
+
       it('should throw an error for nodes with unknown or undefined serialize styles', function () {
         const node = nodeTypes.function.buildNode('not', childNode, 'notValid');
         expect(not.toKueryExpression)

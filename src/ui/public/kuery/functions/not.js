@@ -29,7 +29,11 @@ export function toKueryExpression(node) {
   const [ argument ] = node.arguments;
   const queryString = ast.toKueryExpression(argument);
 
-  if (argument.function && (argument.function === 'and' || argument.function === 'or')) {
+  if (
+    argument.function &&
+    (argument.function === 'and' || argument.function === 'or') &&
+    argument.serializeStyle !== 'function'
+  ) {
     return `-(${queryString})`;
   }
   else {
