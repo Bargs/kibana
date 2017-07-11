@@ -21,8 +21,10 @@ export function toElasticsearchQuery(node, indexPattern) {
   const field = indexPattern.fields.byName[fieldName];
   const queryParams = args.reduce((acc, arg) => {
     const snakeArgName = _.snakeCase(arg.name);
-    acc[snakeArgName] = ast.toElasticsearchQuery(arg, indexPattern);
-    return acc;
+    return {
+      ...acc,
+      [snakeArgName]: ast.toElasticsearchQuery(arg),
+    };
   }, {});
 
   if (field && field.scripted) {
