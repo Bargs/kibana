@@ -1,9 +1,9 @@
-import { nodeTypes } from '../../node_types';
-import { convertPhraseFilter } from '../lib/phrase';
-import { convertRangeFilter } from '../lib/range';
-import { convertExistsFilter } from '../lib/exists';
-import { convertGeoBoundingBox } from '../lib/geo_bounding_box';
-import { convertGeoPolygon } from '../lib/geo_polygon';
+import { nodeTypes } from '../node_types';
+import { convertPhraseFilter } from './phrase';
+import { convertRangeFilter } from './range';
+import { convertExistsFilter } from './exists';
+import { convertGeoBoundingBox } from './geo_bounding_box';
+import { convertGeoPolygon } from './geo_polygon';
 
 const conversionChain = [
   convertPhraseFilter,

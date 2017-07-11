@@ -1,4 +1,4 @@
-import { nodeTypes } from '../../node_types';
+import { nodeTypes } from '../node_types';
 
 export function convertExistsFilter(filter) {
   if (filter.meta.type !== 'exists') {

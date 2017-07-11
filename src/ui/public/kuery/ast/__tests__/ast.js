@@ -1,6 +1,6 @@
 import * as ast from '../ast';
 import expect from 'expect.js';
-import { nodeTypes } from '../node_types';
+import { nodeTypes } from '../../node_types/index';
 import StubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
 import ngMock from 'ng_mock';
 import { expectDeepEqual } from '../../../../../test_utils/expect_deep_equal.js';

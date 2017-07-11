@@ -1,5 +1,5 @@
 import expect from 'expect.js';
-import { expectDeepEqual } from '../../../../../../test_utils/expect_deep_equal.js';
+import { expectDeepEqual } from '../../../../../test_utils/expect_deep_equal.js';
 import * as namedArg from '../named_arg';
 import { nodeTypes } from '../../node_types';
 

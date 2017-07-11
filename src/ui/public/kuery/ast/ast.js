@@ -1,7 +1,7 @@
 import grammar from 'raw!./kuery.peg';
 import PEG from 'pegjs';
 import _ from 'lodash';
-import { nodeTypes } from './node_types';
+import { nodeTypes } from '../node_types/index';
 
 const kueryParser = PEG.buildParser(grammar);
 

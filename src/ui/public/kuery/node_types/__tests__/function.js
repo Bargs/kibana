@@ -1,7 +1,7 @@
 import * as functionType from '../function';
 import _ from 'lodash';
 import expect from 'expect.js';
-import { expectDeepEqual } from '../../../../../../test_utils/expect_deep_equal.js';
+import { expectDeepEqual } from '../../../../../test_utils/expect_deep_equal.js';
 import * as isFunction from '../../functions/is';
 import StubbedLogstashIndexPatternProvider from 'fixtures/stubbed_logstash_index_pattern';
 import ngMock from 'ng_mock';
