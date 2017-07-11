@@ -5,10 +5,9 @@ import * as ast from '../ast';
 export function buildNodeParams(fieldName, params) {
   params = _.pick(params, 'topLeft', 'bottomRight');
   const fieldNameArg = nodeTypes.literal.buildNode(fieldName);
-  const args = _.pairs(params).map((argument) => {
-    const [ name, value ] = argument;
+  const args = _.map(params, (value, key) => {
     const latLon = `${value.lat}, ${value.lon}`;
-    return nodeTypes.namedArg.buildNode(name, latLon);
+    return nodeTypes.namedArg.buildNode(key, latLon);
   });
 
   return {
