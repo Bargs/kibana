@@ -1,15 +1,10 @@
 import _ from 'lodash';
+import { luceneStringToDsl } from './lucene_string_to_dsl';
 
 export function buildQueryFromLucene(queries, decorateQuery) {
   const combinedQueries = _.map(queries, (query) => {
-    if (_.isString(query.query)) {
-      if (query.query.trim() === '') {
-        return { match_all: {} };
-      }
-      return decorateQuery({ query_string: { query: query.query } });
-    }
-
-    return decorateQuery(query.query);
+    const queryDsl = luceneStringToDsl(query.query);
+    return decorateQuery(queryDsl);
   });
 
   return {
