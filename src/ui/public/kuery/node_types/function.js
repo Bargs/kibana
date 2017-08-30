@@ -52,3 +52,13 @@ export function toKueryExpression(node) {
 
   return `${node.function}(${functionArguments.join(', ')})`;
 }
+
+export function toLegacyFilter(node, indexPattern) {
+  const kueryFunction = functions[node.function];
+
+  if (!kueryFunction.hasOwnProperty('toLegacyFilter')) {
+    throw new Error(`Function "${node.function}" cannot be converted into a filter.`);
+  }
+
+  return kueryFunction.toLegacyFilter(node, indexPattern);
+}

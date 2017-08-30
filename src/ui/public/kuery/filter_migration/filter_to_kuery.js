@@ -31,5 +31,10 @@ export function filterToKueryAST(filter) {
     throw new Error(`Couldn't convert that filter to a kuery`);
   }
 
+  // Add meta properties to the ast node, use the index when converting back to a filter
+  node.meta = {
+    ...node.meta,
+  };
+
   return negate ? nodeTypes.function.buildNode('not', node) : node;
 }

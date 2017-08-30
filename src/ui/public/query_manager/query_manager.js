@@ -1,50 +1,40 @@
 import _ from 'lodash';
-import { FilterManagerProvider } from 'ui/filter_manager';
 import { FilterBarLibMapAndFlattenFiltersProvider } from 'ui/filter_bar/lib/map_and_flatten_filters';
 import { FilterBarLibExtractTimeFilterProvider } from 'ui/filter_bar/lib/extract_time_filter';
 import { FilterBarLibChangeTimeFilterProvider } from 'ui/filter_bar/lib/change_time_filter';
-import { toKueryExpression, fromKueryExpression, nodeTypes, filterToKueryAST } from 'ui/kuery';
+import { toKueryExpression, fromKueryExpression, toLegacyFilter, nodeTypes, filterToKueryAST } from 'ui/kuery';
 
 export function QueryManagerProvider(Private) {
-  const filterManager = Private(FilterManagerProvider);
   const mapAndFlattenFilters = Private(FilterBarLibMapAndFlattenFiltersProvider);
   const extractTimeFilter = Private(FilterBarLibExtractTimeFilterProvider);
   const changeTimeFilter = Private(FilterBarLibChangeTimeFilterProvider);
 
   return function (state) {
 
-    function add(field, values = [], operation, index) {
-      const fieldName = _.isObject(field) ? field.name : field;
+    function add(field, values = [], operation) {
+      const fieldName = field.name;
+      const indexPattern = field.indexPattern;
+      const negate = operation === '-';
+      const isExistsQuery = fieldName === '_exists_';
+      const existingQuery = getQuery();
 
       if (!Array.isArray(values)) {
         values = [values];
       }
 
-      if (state.query.language === 'lucene') {
-        filterManager.add(field, values, operation, index);
-      }
+      const newQueries = values.map((value) => {
+        const newQuery = isExistsQuery
+          ? nodeTypes.function.buildNode('exists', value)
+          : nodeTypes.function.buildNode('is', fieldName, value);
 
-      if (state.query.language === 'kuery') {
-        const negate = operation === '-';
-        const isExistsQuery = fieldName === '_exists_';
+        return negate ? nodeTypes.function.buildNode('not', newQuery) : newQuery;
+      });
 
-        const newQueries = values.map((value) => {
-          const newQuery = isExistsQuery
-            ? nodeTypes.function.buildNode('exists', value)
-            : nodeTypes.function.buildNode('is', fieldName, value);
+      const allQueries = (_.isEmpty(state.query.query) && _.isEmpty(state.filters))
+        ? newQueries
+        : [existingQuery, ...newQueries];
 
-          return negate ? nodeTypes.function.buildNode('not', newQuery) : newQuery;
-        });
-
-        const allQueries = _.isEmpty(state.query.query)
-          ? newQueries
-          : [fromKueryExpression(state.query.query), ...newQueries];
-
-        state.query = {
-          query: toKueryExpression(nodeTypes.function.buildNode('and', allQueries, 'implicit')),
-          language: 'kuery'
-        };
-      }
+      replaceQuery(nodeTypes.function.buildNode('and', allQueries, 'implicit'), indexPattern);
     }
 
     async function addLegacyFilter(filter) {
@@ -70,9 +60,32 @@ export function QueryManagerProvider(Private) {
       }
     }
 
+    function getQuery() {
+      if (state.query.language === 'lucene') {
+        const legacyFilters = state.filters || [];
+        return nodeTypes.function.buildNode('and', legacyFilters.map(filterToKueryAST), 'implicit');
+      }
+      else if (state.query.language === 'kuery') {
+        return fromKueryExpression(state.query.query);
+      }
+    }
+
+    function replaceQuery(newQuery, indexPattern) {
+      if (state.query.language === 'lucene') {
+        state.filters = toLegacyFilter(newQuery, indexPattern);
+      }
+      else if (state.query.language === 'kuery') {
+        state.query = {
+          query: toKueryExpression(newQuery),
+          language: 'kuery',
+        };
+      }
+    }
+
     return {
       add,
       addLegacyFilter,
+      getQuery,
     };
 
   };

@@ -1,1 +1,1 @@
-export { fromKueryExpression, toKueryExpression, toElasticsearchQuery } from './ast';
+export { fromKueryExpression, toKueryExpression, toElasticsearchQuery, toLegacyFilter } from './ast';

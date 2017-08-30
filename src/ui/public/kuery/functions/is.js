@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import * as literal from '../node_types/literal';
-import { getPhraseScript } from 'ui/filter_manager/lib/phrase';
+import { getPhraseScript, buildPhraseFilter } from 'ui/filter_manager/lib/phrase';
 
 export function buildNodeParams(fieldName, value, serializeStyle = 'operator') {
   if (_.isUndefined(fieldName)) {
@@ -66,4 +66,20 @@ export function toKueryExpression(node) {
   const value = !_.isUndefined(valueArg) ? literal.toKueryExpression(valueArg) : valueArg;
 
   return `${fieldName}:${value}`;
+}
+
+export function toLegacyFilter(node, indexPattern) {
+  /*
+  possible filter types:
+  exists
+  phrase
+  match_all (needs constructor under filter_manager/lib
+  multi_match (is not an existing filter type, either error or create custom filter for this one?)
+  */
+  const { arguments:  [ fieldNameArg, valueArg ] } = node;
+  const fieldName = literal.toElasticsearchQuery(fieldNameArg);
+  const field = indexPattern.fields.byName[fieldName];
+  const value = !_.isUndefined(valueArg) ? literal.toElasticsearchQuery(valueArg) : valueArg;
+
+  return buildPhraseFilter(field, value, indexPattern);
 }

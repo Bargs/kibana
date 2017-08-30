@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as ast from '../ast';
 import { nodeTypes } from '../node_types';
 
@@ -43,4 +44,18 @@ export function toKueryExpression(node) {
   if (node.serializeStyle === 'operator') {
     return queryStrings.join(' and ');
   }
+}
+
+export function toLegacyFilter(node, indexPattern) {
+  const children = node.arguments || [];
+
+  const filters = children.map((child) => {
+    if (child.type === 'literal') {
+      child = nodeTypes.function.buildNode('is', '*', child.value);
+    }
+
+    return ast.toLegacyFilter(child, indexPattern);
+  });
+
+  return _.flatten(filters);
 }
