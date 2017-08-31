@@ -3,11 +3,13 @@ import { FilterBarLibMapAndFlattenFiltersProvider } from 'ui/filter_bar/lib/map_
 import { FilterBarLibExtractTimeFilterProvider } from 'ui/filter_bar/lib/extract_time_filter';
 import { FilterBarLibChangeTimeFilterProvider } from 'ui/filter_bar/lib/change_time_filter';
 import { toKueryExpression, fromKueryExpression, toLegacyFilter, nodeTypes, filterToKueryAST } from 'ui/kuery';
+import { IndexPatternsProvider } from '../index_patterns/index_patterns';
 
 export function QueryManagerProvider(Private) {
   const mapAndFlattenFilters = Private(FilterBarLibMapAndFlattenFiltersProvider);
   const extractTimeFilter = Private(FilterBarLibExtractTimeFilterProvider);
   const changeTimeFilter = Private(FilterBarLibChangeTimeFilterProvider);
+  const indexPatternService = Private(IndexPatternsProvider);
 
   return function (state) {
 
@@ -70,9 +72,9 @@ export function QueryManagerProvider(Private) {
       }
     }
 
-    function replaceQuery(newQuery, indexPattern) {
+    function replaceQuery(newQuery) {
       if (state.query.language === 'lucene') {
-        state.filters = toLegacyFilter(newQuery, indexPattern);
+        state.filters = toLegacyFilter(newQuery, indexPatternService);
       }
       else if (state.query.language === 'kuery') {
         state.query = {

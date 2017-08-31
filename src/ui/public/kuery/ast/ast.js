@@ -31,10 +31,6 @@ export function toElasticsearchQuery(node, indexPattern) {
   return nodeTypes[node.type].toElasticsearchQuery(node, indexPattern);
 }
 
-export function toLegacyFilter(node, indexPattern) {
-  if (!node || !node.type || !nodeTypes[node.type]) {
-    return toLegacyFilter(nodeTypes.function.buildNode('and', []), indexPattern);
-  }
-
-  return nodeTypes[node.type].toLegacyFilter(node, indexPattern);
+export function toLegacyFilter(node, indexPatternService) {
+  return nodeTypes[node.type].toLegacyFilter(node, indexPatternService);
 }

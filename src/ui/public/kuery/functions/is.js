@@ -68,7 +68,7 @@ export function toKueryExpression(node) {
   return `${fieldName}:${value}`;
 }
 
-export function toLegacyFilter(node, indexPattern) {
+export async function toLegacyFilter(node, indexPatternService) {
   /*
   possible filter types:
   exists
@@ -76,6 +76,8 @@ export function toLegacyFilter(node, indexPattern) {
   match_all (needs constructor under filter_manager/lib
   multi_match (is not an existing filter type, either error or create custom filter for this one?)
   */
+
+  const indexPattern = await indexPatternService.get(node.meta.index);
   const { arguments:  [ fieldNameArg, valueArg ] } = node;
   const fieldName = literal.toElasticsearchQuery(fieldNameArg);
   const field = indexPattern.fields.byName[fieldName];

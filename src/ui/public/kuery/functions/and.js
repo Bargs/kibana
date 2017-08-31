@@ -46,7 +46,7 @@ export function toKueryExpression(node) {
   }
 }
 
-export function toLegacyFilter(node, indexPattern) {
+export function toLegacyFilter(node, indexPatternService) {
   const children = node.arguments || [];
 
   const filters = children.map((child) => {
@@ -54,7 +54,7 @@ export function toLegacyFilter(node, indexPattern) {
       child = nodeTypes.function.buildNode('is', '*', child.value);
     }
 
-    return ast.toLegacyFilter(child, indexPattern);
+    return ast.toLegacyFilter(child, indexPatternService);
   });
 
   return _.flatten(filters);

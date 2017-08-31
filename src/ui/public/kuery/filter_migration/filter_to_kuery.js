@@ -14,7 +14,7 @@ const conversionChain = [
 ];
 
 export function filterToKueryAST(filter) {
-  const { negate } = filter.meta;
+  const { negate, index, alias, disabled } = filter.meta;
 
   const node = conversionChain.reduce((acc, converter) => {
     if (acc !== null) return acc;
@@ -32,9 +32,14 @@ export function filterToKueryAST(filter) {
   }
 
   // Add meta properties to the ast node, use the index when converting back to a filter
-  node.meta = {
-    ...node.meta,
-  };
+  node.meta = Object.assign(
+    {},
+    node.meta,
+    {
+      alias,
+      disabled,
+      index,
+    });
 
   return negate ? nodeTypes.function.buildNode('not', node) : node;
 }
