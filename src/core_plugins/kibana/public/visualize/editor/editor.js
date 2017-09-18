@@ -123,13 +123,24 @@ function VisEditor($scope, $route, timefilter, AppState, $window, kbnUrl, courie
     docTitle.change(savedVis.title);
   }
 
+  function getDefaultQuery(searchSource, config) {
+    const ownQuery = searchSource.getOwn('query');
+    if (ownQuery) {
+      return ownQuery;
+    }
+
+    const linkedQuery = searchSource.get('query');
+    const defaultLanguage = _.get(linkedQuery, 'language', config.get('search:queryLanguage'));
+    return { query: '', language: defaultLanguage };
+  }
+
   // Extract visualization state with filtered aggs. You can see these filtered aggs in the URL.
   // Consists of things like aggs, params, listeners, title, type, etc.
   const savedVisState = vis.getState();
   const stateDefaults = {
     uiState: savedVis.uiStateJSON ? JSON.parse(savedVis.uiStateJSON) : {},
     linked: !!savedVis.savedSearchId,
-    query: searchSource.getOwn('query') || { query: '', language: config.get('search:queryLanguage') },
+    query: getDefaultQuery(searchSource, config),
     filters: searchSource.getOwn('filter') || [],
     vis: savedVisState
   };
