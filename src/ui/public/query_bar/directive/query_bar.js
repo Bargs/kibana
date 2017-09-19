@@ -53,7 +53,7 @@ module.directive('queryBar', function () {
       };
 
       this.saveQuery = () => {
-        const attributes = Object.assign({}, this.localQuery, { name: this.saveQueryName });
+        const attributes = Object.assign({}, this.localQuery, { title: this.saveQueryTitle });
 
         savedObjectsClient.create('query', attributes)
         .then(getSavedQueries);
@@ -66,6 +66,7 @@ module.directive('queryBar', function () {
 
       $scope.$watch('queryBar.query', (newQuery) => {
         this.localQuery = Object.assign({}, newQuery);
+        this.saveQueryTitle = this.localQuery.title || '';
       }, true);
 
       getSavedQueries();

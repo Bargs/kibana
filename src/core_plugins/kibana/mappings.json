@@ -170,7 +170,7 @@
   },
   "query": {
     "properties": {
-      "name": {
+      "title": {
         "type": "text"
       },
       "query": {
