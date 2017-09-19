@@ -95,19 +95,21 @@
     <div ng-if="queryBar.showSaveLoad" class="saveLoadContainer">
       <div class="kuiFieldGroup">
         <div class="kuiFieldGroupSection">
-          <input type="text" class="kuiTextInput" placeholder="Save current query">
+          <input ng-model="queryBar.saveQueryName" type="text" class="kuiTextInput" placeholder="Name">
         </div>
         <div class="kuiFieldGroupSection">
-          <button class="kuiButton kuiButton--primary" type="button">
+          <button ng-click="queryBar.saveQuery()" class="kuiButton kuiButton--primary" type="button">
             <span class="kuiButton__inner">
-              <span>Save</span>
+              <span>Save Current Query</span>
             </span>
           </button>
         </div>
       </div>
       <div>
         Load Query
-        
+        <li ng-repeat="savedQuery in queryBar.savedQueries">
+          <a ng-click="queryBar.loadQuery(savedQuery)">{{savedQuery.get('name')}}</a>
+        </li>
       </div>
     </div>
   </div>

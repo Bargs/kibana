@@ -167,5 +167,18 @@
         "type": "keyword"
       }
     }
+  },
+  "query": {
+    "properties": {
+      "name": {
+        "type": "text"
+      },
+      "query": {
+        "type": "keyword"
+      },
+      "language": {
+        "type": "keyword"
+      }
+    }
   }
 }
