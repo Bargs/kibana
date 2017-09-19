@@ -75,6 +75,12 @@
       >
       </select>
 
+      <button ng-click="queryBar.toggleSaveLoad()" class="kuiButton kuiButton--basic kuiLocalSearchSaveLoadButton" type="button">
+        <span class="kuiButton__inner">
+          <span>Save/Load</span>
+        </span>
+      </button>
+
       <button
         type="submit"
         aria-label="Search"
@@ -86,5 +92,23 @@
       </button>
     </div>
     <kbn-typeahead-items></kbn-typeahead-items>
+    <div ng-if="queryBar.showSaveLoad" class="saveLoadContainer">
+      <div class="kuiFieldGroup">
+        <div class="kuiFieldGroupSection">
+          <input type="text" class="kuiTextInput" placeholder="Save current query">
+        </div>
+        <div class="kuiFieldGroupSection">
+          <button class="kuiButton kuiButton--primary" type="button">
+            <span class="kuiButton__inner">
+              <span>Save</span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div>
+        Load Query
+        
+      </div>
+    </div>
   </div>
 </form>

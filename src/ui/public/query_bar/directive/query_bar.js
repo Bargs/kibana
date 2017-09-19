@@ -25,6 +25,7 @@ module.directive('queryBar', function () {
       this.availableQueryLanguages = queryLanguages;
       this.showLanguageSwitcher = config.get('search:queryLanguage:switcher:enable');
       this.typeaheadKey = () => `${this.appName}-${this.query.language}`;
+      this.showSaveLoad = false;
 
       this.submit = () => {
         this.onSubmit({ $query: this.localQuery });
@@ -33,6 +34,10 @@ module.directive('queryBar', function () {
       this.selectLanguage = () => {
         this.localQuery.query = '';
         this.submit();
+      };
+
+      this.toggleSaveLoad = () => {
+        this.showSaveLoad = !this.showSaveLoad;
       };
 
       $scope.$watch('queryBar.query', (newQuery) => {

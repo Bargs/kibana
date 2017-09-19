@@ -2275,6 +2275,16 @@ main {
       box-shadow: 0 0 0 1px #333333, 0 0 0 2px #0079a5;
       /* 3 */ }
 
+.saveLoadContainer {
+  background-color: white;
+  border: 1px solid;
+  position: absolute;
+  top: 32px;
+  z-index: 1030;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border-radius: 4px; }
+
 /**
  * 1. We want the bottom border on selected tabs to be flush with the bottom of the container.
  */
