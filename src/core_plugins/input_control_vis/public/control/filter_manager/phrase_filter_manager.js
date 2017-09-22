@@ -6,8 +6,8 @@ import { buildPhrasesFilter } from 'ui/filter_manager/lib/phrases';
 const EMPTY_VALUE = '';
 
 export class PhraseFilterManager extends FilterManager {
-  constructor(fieldName, indexPattern, queryFilter, delimiter) {
-    super(fieldName, indexPattern, queryFilter, EMPTY_VALUE);
+  constructor(fieldName, indexPattern, kbnAPI, delimiter) {
+    super(fieldName, indexPattern, kbnAPI, EMPTY_VALUE);
 
     this.delimiter = delimiter;
   }

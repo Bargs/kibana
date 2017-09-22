@@ -1,9 +1,11 @@
 export class FilterManager {
 
-  constructor(fieldName, indexPattern, queryFilter, unsetValue) {
+  constructor(fieldName, indexPattern, kbnAPI, unsetValue) {
     this.fieldName = fieldName;
     this.indexPattern = indexPattern;
-    this.queryFilter = queryFilter;
+    this.queryFilter = kbnAPI.queryFilter;
+    this.queryManager = kbnAPI.queryManager;
+    this.kuery = kbnAPI.kuery;
     this.unsetValue = unsetValue;
   }
 
