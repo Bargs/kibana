@@ -95,7 +95,7 @@ module.directive('kbnTableHeader', function (shortDotsFilter) {
             : 'asc'
         );
 
-        $scope.onChangeSortOrder(columnName, newDirection);
+        $scope.onChangeSortOrder([columnName, newDirection]);
       };
 
       $scope.getAriaLabelForColumn = function getAriaLabelForColumn(name) {

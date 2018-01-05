@@ -56,8 +56,8 @@ export class SearchEmbeddableFactory extends EmbeddableFactory {
         };
         searchScope.uiState.on('change', uiStateChangeHandler);
 
-        searchScope.setSortOrder = function setSortOrder(columnName, direction) {
-          searchScope.panel = container.updatePanel(searchScope.panel.panelIndex, { sort: [columnName, direction] });
+        searchScope.setSortOrder = function setSortOrder(sortPair) {
+          searchScope.panel = container.updatePanel(searchScope.panel.panelIndex, { sort: sortPair });
           searchScope.sort = searchScope.panel.sort;
         };
 
