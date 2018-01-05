@@ -88,14 +88,40 @@ module.directive('kbnTableHeader', function (shortDotsFilter) {
           return;
         }
 
-        const [currentColumnName, currentDirection = 'asc'] = $scope.sortOrder;
-        const newDirection = (
-          (columnName === currentColumnName && currentDirection === 'asc')
-            ? 'desc'
-            : 'asc'
-        );
+        /*
+        Cycle goes Unsorted -> Asc -> Desc -> Unsorted
 
-        $scope.onChangeSortOrder([columnName, newDirection]);
+        $scope.sortOrder is array of arrays
+        1. Loop through each pair
+        2. If any pair matches given columnName
+          2a. If Asc, flip to Desc
+          2b. If Desc, remove from array
+            2b2. If array is empty, add default sort (I think we can just pass empty array?)
+        3. If there's no match, add Asc sort to the end of array
+        */
+
+        // const [currentColumnName, currentDirection = 'asc'] = $scope.sortOrder;
+        // const newDirection = (
+        //   (columnName === currentColumnName && currentDirection === 'asc')
+        //     ? 'desc'
+        //     : 'asc'
+        // );
+
+        const sortPair = $scope.sortOrder.find((pair) => pair[0] === columnName);
+        if (sortPair === undefined) {
+          $scope.sortOrder.push([columnName, 'asc']);
+        }
+        else {
+          const currentSortDirection = sortPair[1];
+          if (currentSortDirection === 'asc') {
+            sortPair[1] = 'desc';
+          }
+          else {
+            _.remove($scope.sortOrder, (pair) => pair[0] === columnName);
+          }
+        }
+
+        $scope.onChangeSortOrder(_.cloneDeep($scope.sortOrder));
       };
 
       $scope.getAriaLabelForColumn = function getAriaLabelForColumn(name) {
