@@ -56,11 +56,12 @@ module.directive('kbnTableHeader', function (shortDotsFilter) {
       $scope.headerClass = function (column) {
         if (!$scope.isSortableColumn(column)) return;
 
-        const sortOrder = $scope.sortOrder;
         const defaultClass = ['fa', 'fa-sort', 'table-header-sortchange'];
+        const sortOrder = $scope.sortOrder || [];
+        const columnSortOrder = sortOrder.find((sortPair) => column === sortPair[0]);
 
-        if (!sortOrder || column !== sortOrder[0]) return defaultClass;
-        return ['fa', sortOrder[1] === 'asc' ? 'fa-sort-up' : 'fa-sort-down'];
+        if (!columnSortOrder) return defaultClass;
+        return ['fa', columnSortOrder[1] === 'asc' ? 'fa-sort-up' : 'fa-sort-down'];
       };
 
       $scope.moveColumnLeft = function moveLeft(columnName) {
@@ -88,40 +89,23 @@ module.directive('kbnTableHeader', function (shortDotsFilter) {
           return;
         }
 
-        /*
-        Cycle goes Unsorted -> Asc -> Desc -> Unsorted
-
-        $scope.sortOrder is array of arrays
-        1. Loop through each pair
-        2. If any pair matches given columnName
-          2a. If Asc, flip to Desc
-          2b. If Desc, remove from array
-            2b2. If array is empty, add default sort (I think we can just pass empty array?)
-        3. If there's no match, add Asc sort to the end of array
-        */
-
-        // const [currentColumnName, currentDirection = 'asc'] = $scope.sortOrder;
-        // const newDirection = (
-        //   (columnName === currentColumnName && currentDirection === 'asc')
-        //     ? 'desc'
-        //     : 'asc'
-        // );
-
         const sortPair = $scope.sortOrder.find((pair) => pair[0] === columnName);
+
+        // Cycle goes Unsorted -> Asc -> Desc -> Unsorted
         if (sortPair === undefined) {
-          $scope.sortOrder.push([columnName, 'asc']);
+          $scope.onChangeSortOrder([[columnName, 'asc'], ...$scope.sortOrder]);
+        }
+        else if (sortPair[1] === 'asc') {
+          $scope.onChangeSortOrder([[columnName, 'desc'], ...$scope.sortOrder.filter((pair) => pair[0] !== columnName)]);
+        }
+        else if (sortPair[1] === 'desc' && $scope.sortOrder.length === 1) {
+          // If we're at the end of the cycle and this is the only existing sort, we switch
+          // back to ascending sort instead of removing it.
+          $scope.onChangeSortOrder([[columnName, 'asc']]);
         }
         else {
-          const currentSortDirection = sortPair[1];
-          if (currentSortDirection === 'asc') {
-            sortPair[1] = 'desc';
-          }
-          else {
-            _.remove($scope.sortOrder, (pair) => pair[0] === columnName);
-          }
+          $scope.onChangeSortOrder($scope.sortOrder.filter((pair) => pair[0] !== columnName));
         }
-
-        $scope.onChangeSortOrder(_.cloneDeep($scope.sortOrder));
       };
 
       $scope.getAriaLabelForColumn = function getAriaLabelForColumn(name) {
