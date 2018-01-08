@@ -42,6 +42,9 @@ export class SearchEmbeddableFactory extends EmbeddableFactory {
         // been overridden in a dashboard.
         searchScope.columns = searchScope.panel.columns || searchScope.savedObj.columns;
         searchScope.sort = searchScope.panel.sort || searchScope.savedObj.sort;
+        if (searchScope.sort.length && !Array.isArray(searchScope.sort[0])) {
+          searchScope.sort = [searchScope.sort];
+        }
 
         const parsedUiState = savedObject.uiStateJSON ? JSON.parse(savedObject.uiStateJSON) : {};
         searchScope.uiState = new PersistedState({
