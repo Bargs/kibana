@@ -22,10 +22,20 @@ export function toElasticsearchQuery(node, indexPattern) {
   const fieldName = literal.toElasticsearchQuery(fieldNameArg);
   const value = !_.isUndefined(valueArg) ? literal.toElasticsearchQuery(valueArg) : valueArg;
 
+  const wildcardTerms = value.match(/\S*\*\S*/g);
+  const nonWildcardTerms = wildcardTerms.reduce((acc, wildTerm) => {
+    const termsSplitAroundWildcard = acc.map((term) => {
+      return term.split(wildTerm)
+    });
+
+    return _.flatten(termsSplitAroundWildcard).filter((term) => term.trim().length > 0);
+  }, [value]);
+
   if (fieldName === '*' && value === '*') {
     return { match_all: {} };
   }
   else if (fieldName === null) {
+    // need to split this around wildcards
     return {
       multi_match: {
         query: value,
@@ -59,6 +69,7 @@ export function toElasticsearchQuery(node, indexPattern) {
       });
     }
     else {
+      // will need to split these around wildcard
       queries.push({
         match_phrase: {
           [field.name]: value
