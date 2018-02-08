@@ -46,6 +46,13 @@ FieldListExpression
         const args = node.arguments.map(buildNodeWithField);
         return { ...list, arguments: args };
       } else {
+        if (Arrays.isArray(node)) {
+          const isNodes = node.map((value) => {
+            return buildNode('is', field, value);
+          }
+          return buildNode('or', isNodes);
+        }
+
         return buildNode('is', field, node);
       }
     }
@@ -59,8 +66,9 @@ FieldRangeExpression
 
 ValueExpression
   = value:Literal {
-    return buildNode('is', '*', value);
+    return buildNode('is', null, value);
   }
+  // add support for wildcards here
 
 OrList
   = left:AndList Or right:OrList {
@@ -82,7 +90,13 @@ NotList
 
 SubList
   = '(' Space* list:OrList Space* ')' { return list; }
+  / WildcardExpression
   / Literal
+
+WildcardExpression
+  = head:UnquotedLiteral? wildcardLiteral:WildcardLiteral tail:FieldListValueExpression? {
+    return [head, wildcardLiteral, ...tail];
+  }
 
 Or
   = Space+ 'or'i Space+
@@ -92,6 +106,11 @@ And
 
 Not
   = 'not'i Space+
+
+WildcardLiteral
+  = prefix:UnquotedLiteral? "*" suffix:UnquotedLiteral? {
+    return text();
+  }
 
 Literal
   = SingleQuotedString
