@@ -55,11 +55,11 @@ Instead of `bytes:>1000`, we omit the colon: `bytes > 1000`.
 
 `>, >=, <, <=` are all valid range operators.
 
-You may also use interval notation for bounded ranges.
+You may also use the range operators inside a grouped field query. This simplifies bounded ranges.
 
-`response: [200, 300)` will match any response greater than or equal to 200, and less than 300.
+`response:(>=200 and <300)` will match any response greater than or equal to 200, and less than 300.
 
-`[` and `] are inclusive. `(` and `)` are exclusive.
+`bytes:(<1000 or >5000)` will match any doc with bytes less than 1000 or greater than 5000.
 
 Exist queries are simple and do not require a special operator. `response:*` will find all docs where the response
 field exists.
