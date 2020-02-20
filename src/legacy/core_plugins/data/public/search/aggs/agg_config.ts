@@ -261,6 +261,7 @@ export class AggConfig {
     );
   }
 
+  // where aggConfig is turned into DSL
   /**
    * Convert this aggConfig to its dsl syntax.
    *
@@ -286,12 +287,20 @@ export class AggConfig {
       });
     }
 
+    // could nested be a parentAgg? I don't think so because parent aggs are placed at the same level as the current agg
     if (output.parentAggs) {
       const subDslLvl = configDsl.parentAggs || (configDsl.parentAggs = {});
       output.parentAggs.forEach(function nestAdhocSubAggs(subAggConfig: any) {
         subDslLvl[subAggConfig.id] = subAggConfig.toDsl(aggConfigs);
       });
     }
+
+    // Could I add a configDsl.nestedPath param and read that in agg_configs like parentAggs is, then remove it after?
+    /*
+    const field = aggConfig.getField()
+    configDsl.nestedPath = field.?subType.?nested.path;
+    This could potentially happen in the default field.ts write method instead
+     */
 
     return configDsl;
   }

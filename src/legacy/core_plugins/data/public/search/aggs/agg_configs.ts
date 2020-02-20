@@ -166,6 +166,7 @@ export class AggConfigs {
     return true;
   }
 
+  // top level toDSL function
   toDsl(hierarchical: boolean = false) {
     const dslTopLvl = {};
     let dslLvlCursor: Record<string, any>;
@@ -223,6 +224,14 @@ export class AggConfigs {
           });
         }
       });
+
+    /*
+      Here we could traverse the tree keeping track of the current nested path, adding nested and reverse
+      nested aggs as needed, based on the configDsl.nestedPath param I mentioned adding in agg_config.ts
+      After genearting the nested and reverse_nested aggs we'd remove the `nestedPath` param, just as the parent aggs
+      are removed in `removeParentAggs` below
+      parseNestedPaths();
+     */
 
     removeParentAggs(dslTopLvl);
     return dslTopLvl;
